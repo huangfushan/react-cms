@@ -88,6 +88,7 @@ export default class orderList extends React.Component {
         />
         <SelectorHeader handleSearchChange={ this.handleChange }/>
         <Table
+          _page={this.state.searchValue._page}
           list={ this.state.data.list }
           total={ this.state.data.total }
           columns={ columns }

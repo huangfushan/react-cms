@@ -8,12 +8,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table as AliTable } from 'antd';
-import { PAGE_NUMBER_C} from "../../common/constants";
+import { PAGE_NUMBER_C } from '../../common/constants';
 import './index.less';
 
 export default class Table extends React.Component {
 
   static propTypes = {
+    _page: PropTypes.number.isRequired, //页码
     list: PropTypes.array.isRequired, //商品list
     total: PropTypes.number.isRequired, //商品total
     columns: PropTypes.array.isRequired, //栏目
@@ -22,6 +23,7 @@ export default class Table extends React.Component {
   };
 
   static defaultProps = {
+    _page: PAGE_NUMBER_C.PAGE,
     list: [],
     total: 0,
     columns: [],
@@ -32,18 +34,26 @@ export default class Table extends React.Component {
     _page: PAGE_NUMBER_C.PAGE,
   };
 
-  handleTableChange = (pagination) => {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps._page) {
+      this.setState({
+        _page: nextProps._page
+      });
+    }
+  }
+
+  handleChange = (pagination) => {
     this.setState({
       _page: pagination.current,
-    },() => this.fetchData());
+    }, () => this.fetchData());
   };
 
   fetchData = () => {
     const { _page } = this.state;
-    const params = {
-      _page,
-    };
-    this.props.onChange(params);
+    const { onChange } = this.props;
+    if (onChange){
+      onChange({_page});
+    }
   };
 
   // renderExpanded = (record) => {
@@ -62,20 +72,20 @@ export default class Table extends React.Component {
   // };
 
   render() {
-    const { isFetching, list, total }  = this.props;
-    const dataSource = [ ...list ];
+    const { isFetching, list, total } = this.props;
+    const dataSource = [...list];
     dataSource.map((item, index) => {
       return item.key = index + 1;
     });
 
     let { _page } = this.state;
     const pagination = {
-      hideOnSinglePage:false,
+      hideOnSinglePage: false,
       showQuickJumper: true,
-      defaultCurrent:PAGE_NUMBER_C.PAGE,
-      pageSize:PAGE_NUMBER_C.COUNT,
+      defaultCurrent: PAGE_NUMBER_C.PAGE,
+      pageSize: PAGE_NUMBER_C.COUNT,
       total: total,
-      current:_page,
+      current: _page,
     };
 
     return (
@@ -86,9 +96,9 @@ export default class Table extends React.Component {
         columns={this.props.columns}
         loading={isFetching}
         pagination={pagination}
-        onChange={this.handleTableChange}
+        onChange={this.handleChange}
         // expandedRowRender={this.renderExpanded}
       />
-    )
+    );
   }
 }
