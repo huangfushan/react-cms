@@ -46,22 +46,22 @@ export const getBase64 = (img, callback)  => {
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
 };
-//
-// /**
-//  * 判断是否是https，http开头，如果是就返回，不是说明是base64，截取返回
-//  * @param value
-//  * @returns {*}
-//  */
-// export const isBase64 = (value) => {
-//   if (!value) {
-//     return null;
-//   }
-//   if(value.indexOf('https://') !== 0 && value.indexOf('http://') !== 0){
-//     return value.split(',')[1]
-//   }
-//   return value
-// };
-//
+
+
+//判断是否是base64， 是就返回截取后的base64
+export const isBase64 = (value) => {
+  if (!value) {
+    return null;
+  }
+  //data:image/png;base64,
+  //data:image/jpg;base64,
+  //data:image/jpeg;base64,
+  //data:image/gif;base64,
+  // const reg = /^data:image\/([a-zA-Z]*);base64,(.+)$/;
+  return /^data:image\/(\w+);base64,([\w=/+]+)$/.exec(value);
+};
+
+
 
 
 
