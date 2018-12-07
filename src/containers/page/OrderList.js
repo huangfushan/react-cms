@@ -8,13 +8,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Table from '../../components/antd/Table';
+import Tabs from '../../components/antd/Tabs';
 import SelectorHeader from '../../components/page/order/SearchHeader';
-import { PAGE_NUMBER_C, RESP_C, TIME_C } from "../../common/constants";
+import { PAGE_NUMBER_C, RESP_C, TIME_C } from '../../common/constants';
 import { error, timeFmt } from '../../utils/index';
-import orderApi from "../../api/orderApi";
-import Selector from "../../components/antd/Selector";
+import orderApi from '../../api/orderApi';
+import Selector from '../../components/antd/Selector';
 import actions from '../../redux/actions';
-// import { DragDropContext } from 'react-dnd';
 
 @connect(
   null,
@@ -40,7 +40,7 @@ export default class orderList extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchData()
+    this.fetchData();
   }
 
   fetchData = () => {
@@ -58,7 +58,7 @@ export default class orderList extends React.Component {
           this.props.signOut();
           break;
         default:
-          error(resp)
+          error(resp);
       }
     });
   };
@@ -72,6 +72,15 @@ export default class orderList extends React.Component {
     );
   };
 
+  handleChangeTag = (value) => {
+    this.handleChange({ type: value, _page: PAGE_NUMBER_C.PAGE });
+  };
+
+  handleChangeSelect = (value) => {
+    this.handleChange({ state: value.key, _page: PAGE_NUMBER_C.PAGE });
+  };
+
+
 
   render() {
     const columns = [
@@ -83,18 +92,21 @@ export default class orderList extends React.Component {
     return (
       <div>
         <Selector
-          data={ ['1', 2, { key: 3, value: '苹果' }, { id: 4, name: '栗子' }] }
-          onChange={ value => console.log(value) }
+          data={['1', 2, { key: 3, value: '苹果' }, { id: 4, name: '栗子' }]}
+          onChange={this.handleChangeSelect}
         />
-        <SelectorHeader handleSearchChange={ this.handleChange }/>
-        <Table
-          _page={this.state.searchValue._page}
-          list={ this.state.data.list }
-          total={ this.state.data.total }
-          columns={ columns }
-          onChange={ this.handleChange }
-          isFetching={ this.state.isFetching }/>
+        <SelectorHeader handleSearchChange={this.handleChange} />
+        <Tabs onChange={this.handleChangeTag} data={['1', 2, { key: 3, value: '苹果' }, { id: 4, name: '栗子' }]}>
+          <Table
+            _page={this.state.searchValue._page}
+            list={this.state.data.list}
+            total={this.state.data.total}
+            columns={columns}
+            onChange={this.handleChange}
+            isFetching={this.state.isFetching} />
+        </Tabs>
+
       </div>
-    )
+    );
   }
 }

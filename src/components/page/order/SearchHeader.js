@@ -20,8 +20,13 @@ export default class SelectorHeader extends React.Component {
       if (err) {
         return ;
       }
-      values._page = PAGE_NUMBER_C.PAGE;
-      this.props.handleSearchChange(values)
+      const params = {
+        _page: PAGE_NUMBER_C.PAGE,
+        orderNumber: values.orderNumber || undefined,
+        recipient: values.recipient || undefined,
+      };
+
+      this.props.handleSearchChange(params)
     })
   };
 
