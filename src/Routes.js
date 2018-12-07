@@ -15,12 +15,18 @@ import MyLoadingComponent from './components/common/MyLoadingComponent';
 
 
 const OrderList = Loadable({
-  loader: () => import('./containers/page/OrderList'),
+  loader: () => import('./containers/page/example/OrderList'),
   loading: MyLoadingComponent,
   delay: 100
 });
 const NotFound = Loadable({
   loader: () => import('./components/common/NotFound'),
+  loading: MyLoadingComponent,
+  delay: 100
+});
+
+const DndExample = Loadable({
+  loader: () => import('./containers/page/example/DndExample'),
   loading: MyLoadingComponent,
   delay: 100
 });
@@ -56,10 +62,10 @@ export default class Routes extends React.Component {
     return (
       <App >
         <Switch>
-          <Route exact path="/statistics" component={NotFound} />
-          <Route path="/manager/order" component={OrderList} />
-          <Route path="/manager/order/:id" component={NotFound} />
-          <Route path="/setting" component={NotFound} />
+          <Route exact path="/statistics" component={DndExample} />
+          <Route exact path="/manager/order" component={OrderList} />
+          <Route exact path="/manager/order/:id" component={NotFound} />
+          <Route exact path="/setting" component={NotFound} />
           <Route component={NotFound} />
         </Switch>
       </App>

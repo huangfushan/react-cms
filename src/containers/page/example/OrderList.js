@@ -7,14 +7,14 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import Table from '../../components/antd/Table';
-import Tabs from '../../components/antd/Tabs';
-import SelectorHeader from '../../components/page/order/SearchHeader';
-import { PAGE_NUMBER_C, RESP_C, TIME_C } from '../../common/constants';
-import { error, timeFmt } from '../../utils/index';
-import orderApi from '../../api/orderApi';
-import Selector from '../../components/antd/Selector';
-import actions from '../../redux/actions';
+import Table from '../../../components/antd/Table';
+import Tabs from '../../../components/antd/Tabs';
+import SelectorHeader from '../../../components/page/order/SearchHeader';
+import { PAGE_NUMBER_C, RESP_C, TIME_C } from '../../../common/constants';
+import { error, timeFmt } from '../../../utils/index';
+import orderApi from '../../../api/orderApi';
+import Selector from '../../../components/antd/Selector';
+import actions from '../../../redux/actions';
 
 @connect(
   null,
