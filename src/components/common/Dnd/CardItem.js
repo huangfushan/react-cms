@@ -1,5 +1,12 @@
 //相关文档查看 http://react-dnd.github.io/react-dnd/docs/api/drop-target
 //demo参考了 https://github.com/wzb0709/CardSwitch---react-dnd/tree/master/src
+/**
+ *"react": "^16.4.0",
+ "react-dnd": "^7.0.2",
+ "react-dnd-html5-backend": "^7.0.2",
+ "react-dom": "^16.4.0",
+ */
+
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { Card } from 'antd';
