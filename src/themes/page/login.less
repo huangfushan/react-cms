@@ -1,0 +1,48 @@
+@import '../common/variables';
+
+@main-padding             : 9rem 3.75rem 11rem;
+
+.page-login {
+  text-align: center;
+  color: #000;
+  //background: url(@image-bg) no-repeat center;
+  background-size: 100% 100%;
+
+  .page-content {
+    display: inline-block;
+    padding: 1.875rem;
+    vertical-align: middle;
+  }
+
+  .brand {
+    margin-bottom: 1.25rem;
+    img{
+      height: 100px;
+    }
+    &-text {
+      color: inherit;
+      font-size: 1.125rem;
+      font-weight: normal;
+    }
+  }
+
+  form {
+    margin: 1.875rem 0;
+  }
+
+  .login-form-forgot {
+    float: right;
+  }
+
+  .btn-login {
+    margin-top: 1rem;
+    display: block;
+    color: @text-color-light;
+    width: 100%;
+  }
+
+  .ant-form-item {
+    width: 21rem;
+    margin-bottom: 0.5rem;
+  }
+}

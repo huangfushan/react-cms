@@ -1,0 +1,32 @@
+#stages:
+#  - depo
+#
+#cache:
+#  paths:
+#    - node_modules
+#
+#depo-dev:
+#  only:
+#    - /^dev-.*$/
+#  script:
+#    - npm i && npm run clean
+#    - npm run dev
+#    - ssh depo@tst.dayukeji.xin 'mv /var/www/hosts/p17001.manager{,~} || echo "no such directory."'
+#    - scp -r build/. depo@tst.dayukeji.xin:/var/www/hosts/p17001.manager/
+#    - ssh depo@tst.dayukeji.xin 'rm -rf /var/www/hosts/p17001.manager~'
+#  stage: depo
+#  tags:
+#    - node
+#
+#depo-production:
+#  only:
+#    - /^v-.*$/
+#  script:
+#    - npm i && npm run clean
+#    - npm run prod
+#    - ssh depo@tst.dayukeji.xin 'mv /var/www/hosts/p17001.manager{,~} || echo "no such directory."'
+#    - scp -r build/. depo@tst.dayukeji.xin:/var/www/hosts/p18009.manager/
+#    - ssh depo@tst.dayukeji.xin 'rm -rf /var/www/hosts/p17001.manager~'
+#  stage: depo
+#  tags:
+#    - node
