@@ -5,7 +5,7 @@
  * @Project: cms
  */
 
-import { API_C } from '../common/constants';
+import { C_API } from '../common/constants';
 import http from "./http";
 import {postData} from "../utils/postData";
 
@@ -14,7 +14,7 @@ import {postData} from "../utils/postData";
  * @param params
  * @returns {Promise<*>}
  */
-const pushFile = (params) => http.post(API_C.IMAGE, postData(params));
+const pushFile = (params) => http.post(C_API.IMAGE, postData(params));
 
 export default {
   pushFile

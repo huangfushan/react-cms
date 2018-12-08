@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table as AliTable } from 'antd';
-import { PAGE_NUMBER_C } from '../../common/constants';
+import { C_PAGE_NUMBER } from '../../common/constants';
 import './index.less';
 
 export default class Table extends React.Component {
@@ -23,7 +23,7 @@ export default class Table extends React.Component {
   };
 
   static defaultProps = {
-    _page: PAGE_NUMBER_C.PAGE,
+    _page: C_PAGE_NUMBER.PAGE,
     list: [],
     total: 0,
     columns: [],
@@ -31,7 +31,7 @@ export default class Table extends React.Component {
   };
 
   state = {
-    _page: PAGE_NUMBER_C.PAGE,
+    _page: C_PAGE_NUMBER.PAGE,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -82,8 +82,8 @@ export default class Table extends React.Component {
     const pagination = {
       hideOnSinglePage: false,
       showQuickJumper: true,
-      defaultCurrent: PAGE_NUMBER_C.PAGE,
-      pageSize: PAGE_NUMBER_C.COUNT,
+      defaultCurrent: C_PAGE_NUMBER.PAGE,
+      pageSize: C_PAGE_NUMBER.COUNT,
       total: total,
       current: _page,
     };

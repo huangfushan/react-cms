@@ -1,8 +1,7 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Row, Col, Button, Divider, Input} from 'antd';
-import {PAGE_NUMBER_C} from "../../../common/constants";
+import { Form, Row, Col, Button, Divider, Input } from 'antd';
+import { C_PAGE_NUMBER } from '../../../common/constants';
 
 const FormItem = Form.Item;
 
@@ -18,23 +17,23 @@ export default class SelectorHeader extends React.Component {
     this.props.form.validateFields((err, values) => {
 
       if (err) {
-        return ;
+        return;
       }
       const params = {
-        _page: PAGE_NUMBER_C.PAGE,
+        _page: C_PAGE_NUMBER.PAGE,
         orderNumber: values.orderNumber || undefined,
         recipient: values.recipient || undefined,
       };
 
-      this.props.handleSearchChange(params)
-    })
+      this.props.handleSearchChange(params);
+    });
   };
 
   handleReset = () => {
     this.props.form.setFieldsValue({
       orderNumber: undefined,
       recipient: undefined,
-    })
+    });
   };
 
   render() {
@@ -48,7 +47,7 @@ export default class SelectorHeader extends React.Component {
               {getFieldDecorator('orderNumber', {
                 initialValue: undefined
               })(
-                <Input placeholder="请输入订单编号"/>
+                <Input placeholder="请输入订单编号" />
               )}
             </FormItem>
           </Col>
@@ -57,22 +56,22 @@ export default class SelectorHeader extends React.Component {
               {getFieldDecorator('recipient', {
                 initialValue: undefined
               })(
-                <Input placeholder="请输入收件人"/>
+                <Input placeholder="请输入收件人" />
               )}
             </FormItem>
           </Col>
-          <Col span={8} style={{textAlign: 'right'}}>
+          <Col span={8} style={{ textAlign: 'right' }}>
             <Button
               type="primary"
               htmlType="submit"
             >
               搜索
             </Button>
-            <Divider type="vertical"/>
+            <Divider type="vertical" />
             <Button type="dashed" onClick={this.handleReset}>重置</Button>
           </Col>
         </Row>
       </Form>
-    )
+    );
   }
 }

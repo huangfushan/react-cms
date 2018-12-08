@@ -5,38 +5,38 @@
  * @Project: cms
  */
 import { message } from 'antd';
-import {removeStorage} from "./storage";
-import {STORAGE_C} from "../common/constants";
+import { removeStorage } from './storage';
+import { C_STORAGE } from '../common/constants';
 
 /**
  * 后端返回状态码错误处理
  */
 export const error = (err) => {
-  if (err.notice){
-    message.error(err.notice)
+  if (err.notice) {
+    message.error(err.notice);
   }
   if (err.status === 401) {
-    removeStorage(STORAGE_C.KEY_SESSION);
+    removeStorage(C_STORAGE.KEY_SESSION);
     const errorMessage = '登录失效，请重新登录';
     console.error(errorMessage);
-    return ;
+    return;
   }
   if (err.status === 404) {
     const errorMessage = '接口404';
     console.error(errorMessage);
-    return ;
+    return;
   }
   if (err.status === 500) {
     const errorMessage = '服务异常';
     console.error(errorMessage);
-    return ;
+    return;
   }
   console.error(err);
 };
 
 
 // import {removeStorage} from "./storage";
-// import {STORAGE_C} from "../common/constants";
+// import {C_STORAGE} from "../common/constants";
 //
 // /**
 //  * 后端返回状态码错误处理
@@ -49,7 +49,7 @@ export const error = (err) => {
 //       console.error(err.notice)
 //     }
 //     if (err.status === 401) {
-//       removeStorage(STORAGE_C.KEY_SESSION);
+//       removeStorage(C_STORAGE.KEY_SESSION);
 //       const errorMessage = '登录失效，请重新登录';
 //       console.error(errorMessage);
 //       return ;

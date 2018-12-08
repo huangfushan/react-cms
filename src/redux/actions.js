@@ -5,10 +5,9 @@
  * @Project: cms
  */
 import { isEmpty, merge } from 'lodash';
-
 import { createActions } from 'redux-actions';
 import authApi from '../api/authApi';
-import { RESP_C, STORAGE_C } from '../common/constants';
+import { C_RESP, C_STORAGE } from '../common/constants';
 import { error, removeStorage, setStorage } from '../utils';
 import http from '../api/http';
 
@@ -26,8 +25,8 @@ const Actions = createActions({
       ...auth,
       isAuthenticated: !isEmpty(auth)
     }),
-    signOut: () => {
-      removeStorage(STORAGE_C.KEY_SESSION);
+    clearAuth: () => {
+      removeStorage(C_STORAGE.KEY_AUTH);
       return {
         session: null,
         isAuthenticated: false
@@ -38,9 +37,9 @@ const Actions = createActions({
 
 const AsyncActions = {
   signIn: params => dispatch => authApi.signIn(params).then(resp => {
-    if (resp.status === RESP_C.OK) {
-      http.setHeader(STORAGE_C.KEY_SESSION, resp.data.session);
-      setStorage(STORAGE_C.KEY_SESSION, resp.data.session);
+    if (resp.status === C_RESP.OK) {
+      http.setHeader(C_STORAGE.KEY_SESSION, resp.data.session);
+      setStorage(C_STORAGE.KEY_AUTH, resp.data); //session
       dispatch(Actions.auth.updateAuth(resp.data));
     } else {
       error(resp);
@@ -49,11 +48,11 @@ const AsyncActions = {
   }),
   signOut: () => dispatch => authApi.signOut().then(resp => {
     switch (resp.status){
-      case RESP_C.OK :
-        dispatch(Actions.auth.signOut());
+      case C_RESP.OK :
+        dispatch(Actions.auth.clearAuth());
         break;
-      case RESP_C.ERR_INVALID:
-        dispatch(Actions.auth.signOut());
+      case C_RESP.ERR_INVALID:
+        dispatch(Actions.auth.clearAuth());
         break;
       default:
         error(resp)

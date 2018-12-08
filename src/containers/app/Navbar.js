@@ -1,13 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {STORAGE_C, PROJECT_NAME_C} from '../../common/constants';
-import { Layout, Icon, Tag, Popover } from 'antd';
-import { getStorage } from '../../utils';
+import { C_PROJECT_NAME} from '../../common/constants';
+import { Layout, Icon, Tag } from 'antd';
 
 const { Header } = Layout;
 
+@connect(
+  state => ({
+    name: state.auth.name
+  })
+)
 export default class Navbar extends React.Component {
   static propTypes = {
+    name: PropTypes.string,
     collapsed: PropTypes.bool.isRequired,
     handleClick: PropTypes.func.isRequired,
   };
@@ -17,10 +23,6 @@ export default class Navbar extends React.Component {
 
   handleLogout = () => {
     this.props.signOut()
-  };
-
-  renderOverlay = () => {
-    return <Tag  color='red' onClick={this.handleLogout}>退出</Tag>
   };
 
   render() {
@@ -33,18 +35,12 @@ export default class Navbar extends React.Component {
               type={this.props.collapsed ? 'menu-unfold': 'menu-fold'}
               onClick={this.props.handleClick}
             />
-            <span>{PROJECT_NAME_C}</span>
+            <span>{C_PROJECT_NAME}</span>
           </div>
-          <Popover
-            placement="bottom" title={null} content={this.renderOverlay()}
-          >
-            <a>
-              <Icon
-                type="user"
-              />
-              <span>{getStorage(STORAGE_C.KEY_USER)}</span>
-            </a>
-          </Popover>
+          <div>
+            <span style={{marginRight: 20}}>{this.props.name}</span>
+            <Tag  color='red' onClick={this.handleLogout}>退出</Tag>
+          </div>
         </nav>
       </Header>
     )

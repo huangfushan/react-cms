@@ -6,12 +6,12 @@
  */
 
 import React from 'react';
-import { AUTHOR_C } from '../../common/constants';
+import { C_AUTHOR } from '../../common/constants';
 
 export default function Copyright() {
   return (
     <footer style={style} className="flex-center">
-      Copyright &copy; {AUTHOR_C.TIME} &nbsp;&nbsp; <a href={AUTHOR_C.PATH} target="view_window" style={style.a}>{AUTHOR_C.NAME}</a>
+      Copyright &copy; {C_AUTHOR.TIME} &nbsp;&nbsp; <a href={C_AUTHOR.PATH} target="view_window" style={style.a}>{C_AUTHOR.NAME}</a>
     </footer>
   )
 }

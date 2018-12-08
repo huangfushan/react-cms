@@ -10,7 +10,7 @@ import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import { Upload, Icon } from 'antd';
 import { beforeUpload, getBase64 } from "../../utils/image";
-import { API_C } from "../../common/constants";
+import { C_API } from "../../common/constants";
 import './index.less';
 
 @connect (
@@ -89,7 +89,7 @@ export default class Uploader extends React.Component {
         name="file"
         listType="picture-card"
         className="avatar-uploader"
-        action={`${API_C.IMAGE}`}
+        action={`${C_API.IMAGE}`}
         showUploadList={false}
         beforeUpload={this.beforeUpload}
         onChange={this.handleChange}

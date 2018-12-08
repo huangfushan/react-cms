@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Form, Input, Button, Spin } from 'antd';
+import { Form, Input, Button } from 'antd';
 import Copyright from '../../components/common/Copyright';
 import PropTypes from 'prop-types';
-import { PROJECT_NAME_C, RESP_C, STORAGE_C } from '../../common/constants';
+import { C_PROJECT_NAME, C_RESP } from '../../common/constants';
 import { common } from '../../images/images';
 import actions from '../../redux/actions';
-import { getStorage } from '../../utils/storage';
+// import { getStorage } from '../../utils/storage';
 
 const FormItem = Form.Item;
 
@@ -32,9 +32,9 @@ export default class Login extends React.Component {
   };
 
   componentWillMount() {
-    const username = getStorage(STORAGE_C.KEY_USER);
-    const password = getStorage(STORAGE_C.KEY_PASSWORD);
-    this.setState({ username, password });
+    // const username = getStorage(C_STORAGE.KEY_USER);
+    // const password = getStorage(C_STORAGE.KEY_PASSWORD);
+    // this.setState({ username, password });
   }
 
   handleSubmit = (e) => {
@@ -46,8 +46,8 @@ export default class Login extends React.Component {
       }
       this.setState({ isFetching: true });
       this.props.signIn(values).then(resp => {
-          if (resp.status !== RESP_C.OK){
-            this.setState({ isFetching: false })
+          if (resp.status !== C_RESP.OK) {
+            this.setState({ isFetching: false });
           }
         }
       );
@@ -69,7 +69,7 @@ export default class Login extends React.Component {
         <div className="page-content vertical-align-middle">
           <div className="brand">
             <img src={ common.logo } alt="..."/>
-            <h2 className="brand-text">{ PROJECT_NAME_C }</h2>
+            <h2 className="brand-text">{ C_PROJECT_NAME }</h2>
           </div>
           <Form style={ { textAlign: 'left' } } onSubmit={ this.handleSubmit }>
             <FormItem>
@@ -95,7 +95,7 @@ export default class Login extends React.Component {
             <FormItem>
               <Button className="btn-login" type="primary" htmlType="submit">
                 {
-                  this.state.isFetching ? <div><Spin/>登录中..</div>: '登录'
+                  this.state.isFetching ? <div>登录中..</div>: '登录'
                 }
               </Button>
             </FormItem>

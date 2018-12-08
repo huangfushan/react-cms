@@ -7,7 +7,7 @@
 
 import ApiSauce from 'apisauce'
 import { message } from 'antd';
-import {API_C, X_CLIENT_TOKEN_C} from "../common/constants";
+import {C_API, C_X_CLIENT_TOKEN} from "../common/constants";
 
 const filterResponse = (resp) => {
   if (resp.ok) {
@@ -77,10 +77,10 @@ class HTTP {
 
 
 const http = new HTTP(
-    process.env.NODE_ENV === 'production' ? API_C.HOST : '',
+    process.env.NODE_ENV === 'production' ? C_API.HOST : '',
   {
     headers: {
-      'X-Client-Token': X_CLIENT_TOKEN_C,
+      'X-Client-Token': C_X_CLIENT_TOKEN,
     }
   }
 );

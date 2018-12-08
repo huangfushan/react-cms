@@ -11,7 +11,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import commonApi from "../../../api/commonApi";
 import {beforeUpload} from "../../../utils/image";
-import { RESP_C } from "../../../common/constants";
+import { C_RESP } from "../../../common/constants";
 import {error} from "../../../utils";
 import './index.less';
 
@@ -68,7 +68,7 @@ export default class Index extends React.Component {
   // 上传到服务端
   saveToServer = (file) =>{
     commonApi.pushFile({file}).then(resp => {
-      if (resp.status === RESP_C.OK) {
+      if (resp.status === C_RESP.OK) {
         this.insertToEditor(resp.data[0] && resp.data[0].webPath)
       }else {
         error(resp)

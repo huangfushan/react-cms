@@ -5,11 +5,17 @@ import { connect } from 'react-redux';
 import Loadable from 'react-loadable';
 import MyLoadingComponent from './components/common/Loading';
 import { getStorage } from './utils';
-import { STORAGE_C } from './common/constants';
+import { C_STORAGE } from './common/constants';
 import http from './api/http';
 import actions from './redux/actions';
 import 'normalize.css';
 import './themes/index.less';
+
+//登录
+const Login = Loadable({
+  loader: () => import('./containers/page/Login'),
+  loading: MyLoadingComponent
+});
 
 const Routes = Loadable({
   loader: () => import('./Routes'),
@@ -17,10 +23,6 @@ const Routes = Loadable({
   delay: 100
 });
 
-const Login = Loadable({
-  loader: () => import('./containers/page/Login'),
-  loading: MyLoadingComponent
-});
 
 @connect(
   null,
@@ -35,10 +37,10 @@ export default class Routers extends React.Component {
   };
 
   componentWillMount() {
-    const session = getStorage(STORAGE_C.KEY_SESSION);
-    if (session) {
-      http.setHeader(STORAGE_C.KEY_SESSION, session);
-      this.props.updateAuth({ session });
+    const auth = JSON.parse(getStorage(C_STORAGE.KEY_AUTH));
+    if (auth && auth.session) {
+      http.setHeader(C_STORAGE.KEY_SESSION, auth.session);
+      this.props.updateAuth(auth);
     }
   }
 
@@ -46,7 +48,7 @@ export default class Routers extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route path="/login" component={ Login }/>
+          <Route exact path="/login" component={ Login }/>
           <Route component={ Routes }/>
         </Switch>
       </Router>

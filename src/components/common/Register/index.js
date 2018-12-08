@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { message, Button } from 'antd';
 import Rules from '../../../utils/validate/rules';
-import { RESP_C } from '../../../common/constants';
+import { C_RESP } from '../../../common/constants';
 import { error } from '../../../utils';
 import './index.less';
 
@@ -112,7 +112,7 @@ export default class Register extends React.Component {
     }
     this.setState({ captchaFetching: true });
     this.props.fetchCaptcha(phone).then(resp => {
-      if (resp.status === RESP_C.OK) {
+      if (resp.status === C_RESP.OK) {
         message.success('发送成功');
         this.sendCaptcha();
       } else {

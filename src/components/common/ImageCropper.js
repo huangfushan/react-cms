@@ -11,7 +11,7 @@ import { Icon } from 'antd';
 import Cropper from 'react-cropper';
 import { beforeUpload, getBase64, isBase64 } from '../../utils/image';
 import { error } from '../../utils';
-import { RESP_C } from '../../common/constants';
+import { C_RESP } from '../../common/constants';
 import commonApi from '../../api/commonApi';
 import Modal from '../antd/Modal';
 import 'cropperjs/dist/cropper.css';
@@ -116,10 +116,10 @@ export default class ImageCropper extends React.Component {
     commonApi.pushBase64(params).then(resp => {
       this.setState({ confirmLoading: false });
       switch (resp.status) {
-        case RESP_C.OK:
+        case C_RESP.OK:
           this.handleSuccess(resp.data.url);
           break;
-        case RESP_C.ERR_INVALID:
+        case C_RESP.ERR_INVALID:
           break;
         default:
           error(resp);

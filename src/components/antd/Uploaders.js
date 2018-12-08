@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Upload, Icon, message } from 'antd';
 import {beforeUpload} from "../../utils/image";
 import {connect} from "react-redux";
-import { API_C } from "../../common/constants";
+import { C_API } from "../../common/constants";
 
 @connect (
   state => ({
@@ -131,7 +131,7 @@ export default class Uploaders extends React.Component {
         headers={session}
         listType="picture-card"
         className="avatar-uploader"
-        action={`${API_C.IMAGE}`}
+        action={`${C_API.IMAGE}`}
         fileList={imageUrls}
         beforeUpload={this.beforeUpload}
         onChange={this.handleImageChange}

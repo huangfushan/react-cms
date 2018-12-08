@@ -15,5 +15,5 @@ const INITIAL_STATE = Immutable({
 
 export default handleActions({
   [Actions.auth.updateAuth]: (state, {payload: user}) => state.merge(user),
-  [Actions.auth.signOut]: (state, {payload: user}) => state.merge(user),
+  [Actions.auth.clearAuth]: (state, {payload: user}) => state.merge(user),
 }, INITIAL_STATE);

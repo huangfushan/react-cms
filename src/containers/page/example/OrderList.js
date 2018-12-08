@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import Table from '../../../components/antd/Table';
 import Tabs from '../../../components/antd/Tabs';
 import SelectorHeader from '../../../components/page/order/SearchHeader';
-import { PAGE_NUMBER_C, RESP_C, TIME_C } from '../../../common/constants';
+import { C_PAGE_NUMBER, C_RESP, C_TIME } from '../../../common/constants';
 import { error, timeFmt } from '../../../utils/index';
 import orderApi from '../../../api/orderApi';
 import Selector from '../../../components/antd/Selector';
@@ -19,7 +19,7 @@ import actions from '../../../redux/actions';
 @connect(
   null,
   {
-    signOut: actions.auth.signOut
+    clearAuth: actions.auth.clearAuth
   }
 )
 
@@ -34,8 +34,8 @@ export default class orderList extends React.Component {
       state: undefined,
       orderNumber: undefined,
       recipient: undefined,
-      _page: PAGE_NUMBER_C.PAGE,
-      _count: PAGE_NUMBER_C.COUNT
+      _page: C_PAGE_NUMBER.PAGE,
+      _count: C_PAGE_NUMBER.COUNT
     }
   };
 
@@ -49,13 +49,13 @@ export default class orderList extends React.Component {
     orderApi.fetchOrderList(searchValue).then(resp => {
       this.setState({ isFetching: false });
       switch (resp.status) {
-        case RESP_C.OK:
+        case C_RESP.OK:
           this.setState({
             data: resp.data
           });
           break;
-        case RESP_C.ERR_INVALID:
-          this.props.signOut();
+        case C_RESP.ERR_INVALID:
+          this.props.clearAuth();
           break;
         default:
           error(resp);
@@ -73,11 +73,11 @@ export default class orderList extends React.Component {
   };
 
   handleChangeTag = (value) => {
-    this.handleChange({ type: value, _page: PAGE_NUMBER_C.PAGE });
+    this.handleChange({ type: value, _page: C_PAGE_NUMBER.PAGE });
   };
 
   handleChangeSelect = (value) => {
-    this.handleChange({ state: value.key, _page: PAGE_NUMBER_C.PAGE });
+    this.handleChange({ state: value.key, _page: C_PAGE_NUMBER.PAGE });
   };
 
 
@@ -85,7 +85,7 @@ export default class orderList extends React.Component {
   render() {
     const columns = [
       { title: '序列', dataIndex: 'key', key: 'key' },
-      { title: '下单时间', dataIndex: 'time', render: text => timeFmt(text, TIME_C.D) },
+      { title: '下单时间', dataIndex: 'time', render: text => timeFmt(text, C_TIME.D) },
       { title: '实付金额(¥)', dataIndex: 'total', key: 'total' },
       { title: '操作', dataIndex: 'remark', render: text => '无' }
     ];

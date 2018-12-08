@@ -2,7 +2,7 @@
 React后台项目：react + react-router4 + apisauce + less + redux + prop-types + babel + webpack + antd
 
 ### 技术栈
-1. react 16.2.0
+1. react 16.4.0
 2. react-router-dom 4.2.2 (react-router 4)
 3. redux （react-redux, redux-thunk中间件, redux-logger日志， 用redux-action封装了action事件）
 4. apisauce
@@ -10,6 +10,7 @@ React后台项目：react + react-router4 + apisauce + less + redux + prop-types
 6. es6 + babel ( 配了babel-plugin-transform-decorator-legacy 装饰器)
 7. webpack 3.8.1
 7. antd 3.1.0
+8. react-dnd 7.0.2
 
 ### 环境
 * 搭建时间 2018年11月23日
