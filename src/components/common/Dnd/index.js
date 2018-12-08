@@ -1,3 +1,11 @@
+/**
+ * 拖拽组件，需要版本兼容
+ *"react": "^16.4.0",
+ "react-dnd": "^7.0.2",
+ "react-dnd-html5-backend": "^7.0.2",
+ "react-dom": "^16.4.0",
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardItem from './CardItem';
@@ -29,11 +37,11 @@ export default class Dnd extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    if ('data' in nextProps){
+  componentWillReceiveProps(nextProps) {
+    if ('data' in nextProps) {
       this.setState({
         data: nextProps.data
-      })
+      });
     }
   }
 
@@ -46,8 +54,8 @@ export default class Dnd extends React.Component {
       data
     });
     const { onChange } = this.props;
-    if (onChange){
-      onChange(data)
+    if (onChange) {
+      onChange(data);
     }
   };
 
