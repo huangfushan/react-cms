@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 //引入promise，fetch，object.assign三种常用方法。
 //package.json中被我移除了 promise，whatwg-fetch，raf依赖，暂时没发现用处
 
