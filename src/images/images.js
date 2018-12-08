@@ -17,7 +17,6 @@ const bg = {
 
 const common = {
     logo: require('./common/logo.jpg'),
-    loading: require('./common/logo.jpg'),
     bg: require('./common/bg.png')
 };
 

@@ -24,19 +24,20 @@ export default class Index extends React.Component {
       MODULES: {
         toolbar: {
           container: [
-            ['bold', 'italic', 'underline', 'strike'],        // 加粗、斜体、下划线、中划线
+            // ['bold', 'italic', 'underline', 'strike'],        // 加粗、斜体、下划线、中划线
+            ['bold', 'italic', 'underline'],        // 加粗、斜体、下划线
             [{ 'align': [] }],                                // 字体方向，左对齐，右对齐，居中等
-            [{ 'color': [] }, { 'background': [] }],          // 字体颜色，字体背景
+            // [{ 'color': [] }, { 'background': [] }],          // 字体颜色，字体背景
             // [{ 'font': [] }],                                 // 字体类型
-            [{ 'size': ['small', false, 'large', 'huge'] }],  // 字体大小
-            [{ 'header': 1 },{ 'header': 2 }, { 'header': [1, 2, 3, 4, 5, 6, false] }],        // 标题
+            // [{ 'size': ['small', false, 'large', 'huge'] }],  // 字体大小
+            // [{ 'header': 1 },{ 'header': 2 }, { 'header': [1, 2, 3, 4, 5, 6, false] }],        // 标题
+            [{ 'header': [1, 2, 3, 4, false] }],        // 标题
             [{ 'list': 'ordered'}, { 'list': 'bullet' }],     // 清单，类似ul，li
-            [{ 'indent': '-1'}, { 'indent': '+1' }],          // 缩进，不过是整体锁进
+            // [{ 'indent': '-1'}, { 'indent': '+1' }],          // 缩进，不过是整体锁进
             // [{ 'direction': 'rtl' }],                         // 文字方向
-            ['blockquote', 'code-block'],                     // 代码块
-
+            // ['blockquote', 'code-block'],                     // 代码块
             ['image'],                                        // 图片
-            ['video'],                                        // 视频
+            // ['video'],                                        // 视频
             ['clean'],                                        // 删除格式
           ],
           handlers: {
@@ -91,7 +92,7 @@ export default class Index extends React.Component {
     });
     const onChange = this.props.onChange;
     if (onChange) {
-      this.props.onChange(value)
+      onChange(value)
     }
   };
 

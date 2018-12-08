@@ -77,7 +77,8 @@ class HTTP {
 
 
 const http = new HTTP(
-    process.env.NODE_ENV === 'production' ? C_API.HOST : '',
+    // process.env.NODE_ENV === 'production' ? C_API.HOST : '',
+  C_API.HOST,
   {
     headers: {
       'X-Client-Token': C_X_CLIENT_TOKEN,
