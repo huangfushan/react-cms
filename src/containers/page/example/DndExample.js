@@ -21,6 +21,7 @@ const cardList= [{ //定义卡片内容
   id: 3,
   content: 'this is Third Card'
 }];
+
 export default class DndExample extends React.Component {
 
   handleChange = (value) => {
@@ -29,9 +30,10 @@ export default class DndExample extends React.Component {
 
   render() {
     return (
-      <div style={{width: 300}}>
-        <Dnd data={cardList} onChange={this.handleChange}/>
-      </div>
+        <div style={{width: 300, backgroundColor: 'red'}}>
+          <Dnd data={cardList} onChange={this.handleChange}>
+          </Dnd>
+        </div>
     );
   }
 }

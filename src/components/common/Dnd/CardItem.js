@@ -7,12 +7,12 @@
  "react-dom": "^16.4.0",
  */
 
-import React, { Component } from 'react';
+import React  from 'react';
 import { findDOMNode } from 'react-dom';
 import { Card } from 'antd';
 import { DragSource, DropTarget, } from 'react-dnd';
+import ItemTypes from './ItemTypes'
 
-const Types = { CARD: 'CARD' };
 const specSource = {
   /**
    * 组件发生拖拽时调用，返回的内容是有关拖动源的放置目标可用的唯一信息
@@ -104,10 +104,10 @@ const collectTarget = (connect, monitor) => {
  * spec：必填（对象）。描述了放置目标如何对拖放事件做出操作反应
  * collect：必填，收集功能。应该返回一个普通的道具对象注入你的组件，接收两个参数：connect和monitor
  */
-@DragSource(Types.CARD, specSource, collectSource) //包裹组件使其可拖动
-@DropTarget(Types.CARD, specTarget, collectTarget) //将组件包裹起来，提供对组件的拖动，悬停或掉落的兼容项目做出反应。
+@DragSource(ItemTypes.CARD, specSource, collectSource) //包裹组件使其可拖动
+@DropTarget(ItemTypes.CARD, specTarget, collectTarget) //将组件包裹起来，提供对组件的拖动，悬停或掉落的兼容项目做出反应。
 
-export default class CardItem extends Component {
+export default class CardItem extends React.Component {
 
   render() {
     const { isDragging, connectDragSource, connectDropTarget } = this.props;
