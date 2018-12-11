@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
+import md5 from 'md5';
 import Copyright from '../../components/common/Copyright';
 import PropTypes from 'prop-types';
 import { C_PROJECT_NAME, C_RESP } from '../../common/constants';
@@ -24,7 +25,8 @@ const FormItem = Form.Item;
 export default class Login extends React.Component {
   state = {
     username: '',
-    password: ''
+    password: '',
+    isFetching: false
   };
 
   static propTypes = {
@@ -44,8 +46,12 @@ export default class Login extends React.Component {
       if (err) {
         return;
       }
+      const params = {
+        username: values.username,
+        password: md5(values.password)
+      };
       this.setState({ isFetching: true });
-      this.props.signIn(values).then(resp => {
+      this.props.signIn(params).then(resp => {
           if (resp.status !== C_RESP.OK) {
             this.setState({ isFetching: false });
           }
