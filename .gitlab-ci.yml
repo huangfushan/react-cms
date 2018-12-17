@@ -1,32 +1,53 @@
-#stages:
-#  - depo
-#
-#cache:
-#  paths:
-#    - node_modules
-#
-#depo-dev:
-#  only:
-#    - /^dev-.*$/
-#  script:
-#    - npm i && npm run clean
-#    - npm run dev
-#    - ssh depo@tst.dayukeji.xin 'mv /var/www/hosts/p17001.manager{,~} || echo "no such directory."'
-#    - scp -r build/. depo@tst.dayukeji.xin:/var/www/hosts/p17001.manager/
-#    - ssh depo@tst.dayukeji.xin 'rm -rf /var/www/hosts/p17001.manager~'
-#  stage: depo
-#  tags:
-#    - node
-#
-#depo-production:
-#  only:
-#    - /^v-.*$/
-#  script:
-#    - npm i && npm run clean
-#    - npm run prod
-#    - ssh depo@tst.dayukeji.xin 'mv /var/www/hosts/p17001.manager{,~} || echo "no such directory."'
-#    - scp -r build/. depo@tst.dayukeji.xin:/var/www/hosts/p18009.manager/
-#    - ssh depo@tst.dayukeji.xin 'rm -rf /var/www/hosts/p17001.manager~'
-#  stage: depo
-#  tags:
-#    - node
+variables:
+  PROJECT_CODE: p18011
+  PROJECT_NAME: manager
+  PROJECT_VERSION: "0.0.0"
+  TEST_HOST: test.dayukeji.xin
+  DEV_HOST: tst.dayukeji.xin
+  PROD_HOST: ''
+
+stages:
+ - depo
+
+cache:
+ paths:
+   - node_modules
+
+depo-dev:
+ only:
+   - /^dev-\d+\.\d+\.\d+$/
+ script:
+   - npm i && npm run clean
+   - npm run dev
+   - ssh depo@${DEV_HOST} 'mv /var/www/hosts/${PROJECT_CODE}.${PROJECT_NAME}{,~} || echo "no such directory."'
+   - scp -r build/. depo@${DEV_HOST}:/var/www/hosts/${PROJECT_CODE}.${PROJECT_NAME}/
+   - ssh depo@${DEV_HOST} 'rm -rf /var/www/hosts/${PROJECT_CODE}.${PROJECT_NAME}~'
+ stage: depo
+ tags:
+   - node
+
+depo-test:
+ only:
+   - /^test-\d+\.\d+\.\d+$/
+ script:
+   - npm i && npm run clean
+   - npm run test
+   - ssh depo@${TEST_HOST} 'mv /var/www/hosts/${PROJECT_CODE}.${PROJECT_NAME}{,~} || echo "no such directory."'
+   - scp -r build/. depo@${TEST_HOST}:/var/www/hosts/${PROJECT_CODE}.${PROJECT_NAME}/
+   - ssh depo@${TEST_HOST} 'rm -rf /var/www/hosts/${PROJECT_CODE}.${PROJECT_NAME}~'
+ stage: depo
+ tags:
+   - node
+
+depo-prod:
+ only:
+   - /^v-\d+\.\d+\.\d+$/
+ script:
+   - npm i && npm run clean
+   - npm run prod
+   - ssh depo@${PROD_HOST} 'mv /var/www/hosts/${PROJECT_CODE}.${PROJECT_NAME}{,~} || echo "no such directory."'
+   - scp -r build/. depo@${PROD_HOST}:/var/www/hosts/${PROJECT_CODE}.${PROJECT_NAME}/
+   - ssh depo@${PROD_HOST} 'rm -rf /var/www/hosts/${PROJECT_CODE}.${PROJECT_NAME}~'
+ stage: depo
+ tags:
+   - node

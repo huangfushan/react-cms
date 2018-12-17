@@ -6,7 +6,7 @@
  */
 
 import http from './http';
-const url = `/merchant/auth`;
+const url = `/service/auth`;
 
 /**
  * 登录

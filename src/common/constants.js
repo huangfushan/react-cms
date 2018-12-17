@@ -1,17 +1,19 @@
 const path = require('./config');
 const env = (env) => {
   switch (env){
-    case 'dev': //测试服
-      return `${path.PROJECT_HOST_DEV}/${path.PROJECT_CODE}/api`;
+    case 'dev': //开发服
+      return `${path.PROJECT_HOST_DEV}${path.PROJECT_CODE}/api`;
+    case 'test': //测试服
+      return `${path.PROJECT_HOST_TEST}${path.PROJECT_CODE}/api`;
     case 'prod': //正式服
-      return `${path.PROJECT_HOST_PROD}/${path.PROJECT_CODE}/api`;
+      return `${path.PROJECT_HOST_PROD}/api`; //商家提供域名的话，就没有code
     default: //其他，如本地
-      return '';
+      return ``;
   }
 };
 
 export const C_PROJECT_NAME = `${path.PROJECT_NAME}`;
-export const C_X_CLIENT_TOKEN = `${path.PROJECT_CODE}:manager:merchant`; //token
+export const C_X_CLIENT_TOKEN = `${path.PROJECT_CODE}:manager`; //token
 export const C_PROJECT_HOST = env(process.env.PRODUCTION_ENV); //当前运行环境对应的host
 
 /**
@@ -28,10 +30,10 @@ export const C_AUTHOR = {
  * @type {{HOST: string, PATH: string}}
  */
 export const C_API = {
-  HOST: C_PROJECT_HOST,
-  PATH_NAME: `/merchant`,
+  HOST: `${C_PROJECT_HOST}`,
+  PATH_NAME: `${path.PROJECT_PORT}`,
   IMAGE: `${C_PROJECT_HOST}/common/file`,//图片路径
-  ADDRESS: `${C_PROJECT_HOST}/static/address`,//三级联动地址路径
+  ADDRESS: `${path.PROJECT_HOST_PROD}/static${path.PROJECT_CODE}/address`,//静态资源api
 };
 
 /**

@@ -16,6 +16,15 @@ import {postData} from "../utils/postData";
  */
 const pushFile = (params) => http.post(C_API.IMAGE, postData(params));
 
+/**
+ * 上传图片base64
+ * @param params
+ * @return {*}
+ */
+const pushBase64 = (params) => http.post(`${C_API.IMAGE}/base64`, params);
+
+
 export default {
-  pushFile
+  pushFile,
+  pushBase64
 }
