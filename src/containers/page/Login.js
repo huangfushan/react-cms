@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import { C_PROJECT_NAME, C_RESP } from '../../common/constants';
 import { common } from '../../images/images';
 import actions from '../../redux/actions';
-// import { getStorage } from '../../utils/storage';
 
 const FormItem = Form.Item;
 
@@ -32,12 +31,6 @@ export default class Login extends React.Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
   };
-
-  componentWillMount() {
-    // const username = getStorage(C_STORAGE.KEY_USER);
-    // const password = getStorage(C_STORAGE.KEY_PASSWORD);
-    // this.setState({ username, password });
-  }
 
   handleSubmit = (e) => {
     e.preventDefault();
