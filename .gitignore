@@ -22,4 +22,7 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 
-#src/i18n/
+# 测试用的，不能上传到gitlab
+/src/routerConfig.js
+/src/ROUTE.js
+/src/i18n/*

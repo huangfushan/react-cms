@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Loadable from 'react-loadable';
-import MyLoadingComponent from './components/common/Loading';
+import LoadingComponent from './components/common/LoadingComponent';
 import { getStorage } from './utils';
 import { C_STORAGE } from './common/constants';
 import http from './api/http';
@@ -14,12 +14,12 @@ import './themes/index.less';
 //登录
 const Login = Loadable({
   loader: () => import('./containers/page/Login'),
-  loading: MyLoadingComponent
+  loading: LoadingComponent
 });
 
 const Routes = Loadable({
   loader: () => import('./Routes'),
-  loading: MyLoadingComponent,
+  loading: LoadingComponent,
   delay: 100
 });
 

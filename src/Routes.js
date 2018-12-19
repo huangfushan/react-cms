@@ -11,23 +11,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import App from './containers/app/App';
 import Loadable from 'react-loadable';
-import MyLoadingComponent from './components/common/MyLoadingComponent';
+import LoadingComponent from './components/common/LoadingComponent';
 
 
 const OrderList = Loadable({
   loader: () => import('./containers/page/example/OrderList'),
-  loading: MyLoadingComponent,
+  loading: LoadingComponent,
   delay: 100
 });
 const NotFound = Loadable({
   loader: () => import('./components/common/NotFound'),
-  loading: MyLoadingComponent,
+  loading: LoadingComponent,
   delay: 100
 });
 
 const DndExample = Loadable({
   loader: () => import('./containers/page/example/DndExample'),
-  loading: MyLoadingComponent,
+  loading: LoadingComponent,
   delay: 100
 });
 
