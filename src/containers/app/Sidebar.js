@@ -102,9 +102,8 @@ export default class Sidebar extends React.Component {
     this.setState({
       current: key
     });
-    // console.log(e)
     // this.props.updateBadge({
-    //   badge: { ...this.props.badge, setting: 1 }
+    // badge: { ...this.props.badge, [e.keyPath[0].split('/')[e.keyPath.length]]: 0 }
     // });
   };
 
