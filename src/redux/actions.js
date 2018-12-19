@@ -33,6 +33,9 @@ const Actions = createActions({
       }
     }
   },
+  common: {
+    updateBadge: badge => badge
+  }
 });
 
 const AsyncActions = {
@@ -60,4 +63,8 @@ const AsyncActions = {
   })
 };
 
-export default merge(Actions, AsyncActions);
+// export default merge(Actions, AsyncActions);
+export {
+  Actions,
+  AsyncActions
+}

@@ -7,7 +7,7 @@ import LoadingComponent from './components/common/LoadingComponent';
 import { getStorage } from './utils';
 import { C_STORAGE } from './common/constants';
 import http from './api/http';
-import actions from './redux/actions';
+import { Actions } from './redux/actions';
 import 'normalize.css';
 import './themes/index.less';
 
@@ -27,7 +27,7 @@ const Routes = Loadable({
 @connect(
   null,
   {
-    updateAuth: actions.auth.updateAuth
+    updateAuth: Actions.auth.updateAuth
   }
 )
 
@@ -48,8 +48,8 @@ export default class Routers extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/login" component={ Login }/>
-          <Route component={ Routes }/>
+          <Route exact path="/login" component={Login} />
+          <Route component={Routes} />
         </Switch>
       </Router>
     );

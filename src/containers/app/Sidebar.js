@@ -1,35 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Layout, Icon, Menu, Switch } from 'antd'
 import SidebarLogo from '../../components/common/SidebarLogo';
 import sidebarMenus from '../../menu';
+import { Actions } from '../../redux/actions';
 import '../../components/antd/index.less';
 
 const { Sider } = Layout;
 const { Item } = Menu;
 const SubMenu = Menu.SubMenu;
 
+@connect(
+  state => ({
+    badge: state.common.badge
+  }),
+  {
+    updateBadge: Actions.common.updateBadge
+  }
+)
+
 export default class Sidebar extends React.Component {
   static propTypes = {
     collapsed: PropTypes.bool.isRequired,
+    badge: PropTypes.object.isRequired,
+    updateBadge: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    badge: {}
   };
 
   state = {
-    current: '0',
+    current: undefined,
     light: false
   };
 
-  componentWillMount() {
-    this.menuRender(sidebarMenus)
-  }
-
   /**
    * 遍历bav栏
-   * @param menus
    */
-  menuRender = (menus) => {
-    const menu = menus.map(item => {
+  menuRender = () => {
+    const menu = sidebarMenus.map(item => {
       const url = `/${item.key}`;
       if (item.child) {
         return (
@@ -50,7 +62,7 @@ export default class Sidebar extends React.Component {
         )
       }
     });
-    this.menu = menu;
+    return menu;
   };
 
   /**
@@ -89,7 +101,11 @@ export default class Sidebar extends React.Component {
     const key = e.key;
     this.setState({
       current: key
-    })
+    });
+    // console.log(e)
+    // this.props.updateBadge({
+    //   badge: { ...this.props.badge, setting: 1 }
+    // });
   };
 
   handleChange = (value) =>{
@@ -118,7 +134,7 @@ export default class Sidebar extends React.Component {
             defaultSelectedKeys={[`${window.location.hash}`.split('#')[1]]}
             onClick={this.handleClick}
           >
-            {this.menu}
+            {this.menuRender()}
           </Menu>
         </div>
 

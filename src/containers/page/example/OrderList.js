@@ -14,12 +14,12 @@ import { C_PAGE_NUMBER, C_RESP, C_TIME } from '../../../common/constants';
 import { error, timeFmt } from '../../../utils/index';
 import orderApi from '../../../api/orderApi';
 import Selector from '../../../components/antd/Selector';
-import actions from '../../../redux/actions';
+import { Actions } from '../../../redux/actions';
 
 @connect(
   null,
   {
-    clearAuth: actions.auth.clearAuth
+    clearAuth: Actions.auth.clearAuth
   }
 )
 
@@ -79,7 +79,6 @@ export default class orderList extends React.Component {
   handleChangeSelect = (value) => {
     this.handleChange({ state: value.key, _page: C_PAGE_NUMBER.PAGE });
   };
-
 
 
   render() {

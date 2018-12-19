@@ -30,6 +30,11 @@ const DndExample = Loadable({
   loading: LoadingComponent,
   delay: 100
 });
+const Statistics = Loadable({
+  loader: () => import('./containers/page/example/Statistics'),
+  loading: LoadingComponent,
+  delay: 100
+});
 
 
 @connect(
@@ -62,7 +67,8 @@ export default class Routes extends React.Component {
     return (
       <App >
         <Switch>
-          <Route exact path="/statistics" component={DndExample} />
+          <Route exact path="/" component={DndExample} />
+          <Route exact path="/statistics" component={Statistics} />
           <Route exact path="/manager/order" component={OrderList} />
           <Route exact path="/manager/order/:id" component={NotFound} />
           <Route exact path="/setting" component={NotFound} />
