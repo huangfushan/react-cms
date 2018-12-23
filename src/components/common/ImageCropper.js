@@ -41,9 +41,9 @@ export default class ImageCropper extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
-      this.setState({value:nextProps.value})
+      this.setState({ value: nextProps.value });
     }
   }
 
@@ -139,7 +139,7 @@ export default class ImageCropper extends React.Component {
         <div>
           {
             this.state.value ? (
-              <img src={this.state.value} alt='' style={style.image} onClick={this.selectImage}/>
+              <img src={this.state.value} alt='' style={style.image} onClick={this.selectImage} />
             ) : (
               <div style={style.image} className="flex-center" onClick={this.selectImage}>
                 <Icon type={this.state.loading ? 'loading' : 'plus'}>上传</Icon>
@@ -157,8 +157,8 @@ export default class ImageCropper extends React.Component {
           confirmLoading={this.state.confirmLoading}
         >
           <Cropper
-            style={{ height: 600, width: '100%' }}
-            aspectRatio={this.props.aspectRatio || NaN}
+            style={{ height: 300, width: '100%' }}
+            aspectRatio={this.props.aspectRatio}
             viewMode={2}
             dragMode='move'
             guides={true}

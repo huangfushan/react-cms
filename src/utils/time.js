@@ -4,10 +4,11 @@
  * @Date: 2018-10-27
  * @Project: cms
  */
+import { C_TIME } from '../common/constants';
 
 
 //格式化日期
-export const timeFmt = (time, fmt ) => {
+export const timeFmt = (time, fmt = C_TIME.D ) => {
   const date = new Date(time || new Date()) ;
   const value = {
     "M+": date.getMonth()+1,                 //月份

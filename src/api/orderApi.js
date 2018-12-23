@@ -5,10 +5,9 @@
  * @Project: web-manager
  */
 
-import {C_API} from '../common/constants';
 import http from "../api/http";
 
-const order_url = `${C_API.PATH_NAME}/order`;
+const order_url = `/order`;
 
 /**
  * 分页获取商品列表

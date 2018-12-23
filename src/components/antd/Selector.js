@@ -31,33 +31,33 @@ export default class Selector extends React.Component {
 
   handleChange = (value) => {
     this.setState({ value });
-    const {onChange, keyExtractor, data} = this.props;
+    const {onChange} = this.props;
     if (onChange) {
-      onChange(data.find(n => keyExtractor(n) === value))
+      onChange(value)
     }
   };
 
   render() {
-    const { keyExtractor, data, valueExtractor } = this.props;
+    const { keyExtractor, data, valueExtractor, mode, notFoundContent } = this.props;
     return (
       <Select
+        mode={mode}
         showSearch
-        style={{ width: this.props.width || 100 }}
+        notFoundContent={notFoundContent || '无匹配内容'}
+        style={{ width: this.props.width || '100%' }}
         placeholder={this.props.placeholder || '请选择'}
         value={this.state.value || this.props.value}
         optionFilterProp="children"
         onChange={this.handleChange}
-        filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
         getPopupContainer={triggerNode => triggerNode.parentNode}
       >
         {
           data && data.map((item, index) => (
-            <Option key={index} value={keyExtractor(item)}>
+            <Option key={index} value={mode && mode === 'tags' ? `${keyExtractor(item)}` : keyExtractor(item)}>
               {valueExtractor(item)}
             </Option>
           ))
         }
-
       </Select>
     )
   }

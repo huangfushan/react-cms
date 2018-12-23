@@ -51,8 +51,8 @@ export default class Table extends React.Component {
   fetchData = () => {
     const { _page } = this.state;
     const { onChange } = this.props;
-    if (onChange){
-      onChange({_page});
+    if (onChange) {
+      onChange({ _page });
     }
   };
 
@@ -91,7 +91,7 @@ export default class Table extends React.Component {
     return (
 
       <AliTable
-        rowKey={record => record.key}
+        rowKey={record => record.id}
         dataSource={dataSource}
         columns={this.props.columns}
         loading={isFetching}
