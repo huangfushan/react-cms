@@ -12,6 +12,7 @@ import hide from './hide';
 import { postData }  from './postData';
 import { beforeUpload }  from './image';
 import { error }  from './error';
+import { getDiffObj, Converter, objToArr }  from './data';
 
 export {
   timeFmt,
@@ -24,5 +25,8 @@ export {
   hide,
   postData,
   beforeUpload,
-  error
+  error,
+  getDiffObj,
+  Converter,
+  objToArr
 }

@@ -16,22 +16,50 @@ const getDiffObj = (oldValue, newValue) => {
   return value
 };
 
-
-//通过key，拿到value
-//这个方法写的不好，应该把data数组改成对象，然后返回对象中key对应的值
-//下个项目做需求的时候需要改
-const getKeyValue = (key, data) => {
-  let STATE ;
-  data.forEach(item => {
-    if (key === item.key)
-    {
-      STATE = item.value
-    }
-  });
-  return STATE
+const Converter = {
+  replay: key => (value, dest) => {
+    dest[key] = value;
+    return dest
+  },
+  exposure: (key) => (value, dest) => {
+    dest[key] = value[key];
+    return dest
+  },
+  detail: key => (value, dest) => {
+    dest.detail.push({key, value});
+    return dest;
+  },
+  enum: (key, map) => (value, dest) => {
+    dest.detail.push({key, value: map[value]});
+    return dest;
+  },
+  map: (src, map) => {
+    return Object.entries(map).reduce((dest, [k, fn]) => {
+      if (fn) {
+        return fn(src[k], dest);
+      } else {
+        dest[k] = src[k];
+      }
+      return dest;
+    }, {detail: []});
+  }
 };
+
+
+const objToArr = (obj) => {
+  let newArr = [];
+  Object.keys(obj).forEach(item => {
+    newArr.push({
+      key: item,
+      value: obj[item]
+    })
+  });
+  return newArr
+};
+
 
 export {
   getDiffObj,
-  getKeyValue
+  Converter,
+  objToArr
 }

@@ -68,7 +68,7 @@
     "prod": "node scripts/build.js prod",
     "clean": "rimraf build/*"
   },
-  "proxy": "https://test.dayukeji.xin/wubohui/api",
+  "proxy": "https://www.wubotianxia.top/api",
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,mjs}"

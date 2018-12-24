@@ -14,9 +14,14 @@ import Loadable from 'react-loadable';
 import LoadingComponent from './components/common/LoadingComponent';
 
 
+const GoodsList = Loadable({
+  loader: () => import('./containers/page/example/GoodsList'),
+  loading: LoadingComponent,
+  delay: 100
+});
 const OrderList = Loadable({
   loader: () => import('./containers/page/example/OrderList'),
-  loading: LoadingComponent,
+loading: LoadingComponent,
   delay: 100
 });
 const NotFound = Loadable({
@@ -69,6 +74,7 @@ export default class Routes extends React.Component {
         <Switch>
           <Route exact path="/" component={DndExample} />
           <Route exact path="/statistics" component={Statistics} />
+          <Route exact path="/manager/goods" component={GoodsList} />
           <Route exact path="/manager/order" component={OrderList} />
           <Route exact path="/manager/order/:id" component={NotFound} />
           <Route exact path="/setting" component={NotFound} />
