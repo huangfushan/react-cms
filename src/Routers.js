@@ -14,7 +14,8 @@ import './themes/index.less';
 //登录
 const Login = Loadable({
   loader: () => import('./containers/page/Login'),
-  loading: LoadingComponent
+  loading: LoadingComponent,
+  delay: 100
 });
 
 const Routes = Loadable({

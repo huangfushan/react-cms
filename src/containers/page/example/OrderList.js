@@ -9,7 +9,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Table from '../../../components/antd/Table';
 import Tabs from '../../../components/antd/Tabs';
-import SelectorHeader from '../../../components/page/order/SearchHeader';
+import SearchHeader from '../../../components/page/order/SearchHeader';
 import { C_PAGE_NUMBER, C_RESP, C_TIME } from '../../../common/constants';
 import { error, timeFmt } from '../../../utils/index';
 import orderApi from '../../../api/orderApi';
@@ -94,7 +94,7 @@ export default class orderList extends React.Component {
           data={['1', 2, { key: 3, value: '苹果' }, { id: 4, name: '栗子' }]}
           onChange={this.handleChangeSelect}
         />
-        <SelectorHeader handleSearchChange={this.handleChange} />
+        <SearchHeader handleSearchChange={this.handleChange} />
         <Tabs onChange={this.handleChangeTag} data={['1', 2, { key: 3, value: '苹果' }, { id: 4, name: '栗子' }]}>
           <Table
             _page={this.state.searchValue._page}

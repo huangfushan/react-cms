@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Form, Row, Col, Button, Divider, Input } from 'antd';
+import { Form, Row, Col, Button, Input } from 'antd';
 import { C_PAGE_NUMBER } from '../../../common/constants';
 
 const FormItem = Form.Item;
 
 @Form.create()
-export default class SelectorHeader extends React.Component {
+export default class SearchHeader extends React.Component {
   static propTypes = {
     handleSearchChange: PropTypes.func.isRequired
   };
@@ -20,21 +21,18 @@ export default class SelectorHeader extends React.Component {
         return;
       }
       const params = {
-        _page: C_PAGE_NUMBER.PAGE,
-        orderNumber: values.orderNumber || undefined,
-        recipient: values.recipient || undefined,
+        filter: values.filter || undefined,
+        _page: C_PAGE_NUMBER.PAGE
       };
-
       this.props.handleSearchChange(params);
     });
   };
 
-  handleReset = () => {
-    this.props.form.setFieldsValue({
-      orderNumber: undefined,
-      recipient: undefined,
-    });
-  };
+  // handleReset = () => {
+  //   this.props.form.setFieldsValue({
+  //     search: undefined,
+  //   });
+  // };
 
   render() {
     const { form } = this.props;
@@ -42,33 +40,31 @@ export default class SelectorHeader extends React.Component {
     return (
       <Form className="form-search" onSubmit={this.handleSubmit}>
         <Row gutter={24}>
-          <Col span={8}>
-            <FormItem label="订单编号：">
-              {getFieldDecorator('orderNumber', {
+          {/*<Col span={16}>*/}
+            {/*<Link to={{ pathname: `/merchant/add` }}>*/}
+              {/*<Button type="primary">添加店铺</Button>*/}
+            {/*</Link>*/}
+          {/*</Col>*/}
+          <Col span={6}>
+            <FormItem>
+              {getFieldDecorator('filter', {
                 initialValue: undefined
               })(
-                <Input placeholder="请输入订单编号" />
+                <Input placeholder="请输入门店/联系人姓名搜索" style={{width: '100%'}}/>
               )}
             </FormItem>
           </Col>
-          <Col span={8}>
-            <FormItem label="收件人：">
-              {getFieldDecorator('recipient', {
-                initialValue: undefined
-              })(
-                <Input placeholder="请输入收件人" />
-              )}
+          <Col span={2}>
+            <FormItem>
+              <Button
+                type="primary"
+                htmlType="submit"
+              >
+                搜索
+              </Button>
             </FormItem>
-          </Col>
-          <Col span={8} style={{ textAlign: 'right' }}>
-            <Button
-              type="primary"
-              htmlType="submit"
-            >
-              搜索
-            </Button>
-            <Divider type="vertical" />
-            <Button type="dashed" onClick={this.handleReset}>重置</Button>
+            {/*<Divider type="vertical" />*/}
+            {/*<Button type="dashed" onClick={this.handleReset}>重置</Button>*/}
           </Col>
         </Row>
       </Form>

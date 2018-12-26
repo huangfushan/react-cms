@@ -38,7 +38,7 @@ export default class Navbar extends React.Component {
             <span>{C_PROJECT_NAME}</span>
           </div>
           <div>
-            <span style={{marginRight: 20}}>{this.props.name}</span>
+            <span style={{marginRight: 20}}>{this.props.name || 'Admin'}</span>
             <Tag  color='red' onClick={this.handleLogout}>退出</Tag>
           </div>
         </nav>
