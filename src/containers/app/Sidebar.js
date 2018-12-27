@@ -137,7 +137,7 @@ export default class Sidebar extends React.Component {
           </Menu>
         </div>
 
-        <div className="flex-center-around theme-switch">
+        <div className="flex-around theme-switch">
           <span>主题定义</span>
           <Switch checkedChildren="Dark" unCheckedChildren="Light" onChange={this.handleChange} defaultChecked/>
         </div>

@@ -28,7 +28,7 @@ export default class Navbar extends React.Component {
   render() {
     return (
       <Header style={style.header}>
-        <nav className="flex-center-between" style={style.nav}>
+        <nav className="flex-between" style={style.nav}>
           <div>
             <Icon
               style={style.cursor}
