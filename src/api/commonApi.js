@@ -5,7 +5,6 @@
  * @Project: cms
  */
 
-import { C_API } from '../common/constants';
 import http from "./http";
 import {postData} from "../utils/postData";
 
@@ -14,15 +13,14 @@ import {postData} from "../utils/postData";
  * @param params
  * @returns {Promise<*>}
  */
-const pushFile = (params) => http.post(C_API.IMAGE, postData(params));
+const pushFile = (params) => http.post(`/common/file`, postData(params));
 
 /**
  * 上传图片base64
  * @param params
  * @return {*}
  */
-const pushBase64 = (params) => http.post(`${C_API.IMAGE}/base64`, params);
-
+const pushBase64 = (params) => http.post(`/common/file/base64`, params);
 
 export default {
   pushFile,

@@ -5,6 +5,10 @@
  * @Project: web-service
  */
 
+//https://www.npmjs.com/package/react-cropper
+//https://github.com/fengyuanchen/cropperjs#aspectratio
+//版本1.0.1
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from 'antd';
@@ -15,9 +19,6 @@ import { C_RESP } from '../../common/constants';
 import commonApi from '../../api/commonApi';
 import Modal from '../antd/Modal';
 import 'cropperjs/dist/cropper.css';
-
-//https://www.npmjs.com/package/react-cropper
-//https://github.com/fengyuanchen/cropperjs#aspectratio
 
 export default class ImageCropper extends React.Component {
 
