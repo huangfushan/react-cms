@@ -142,8 +142,10 @@ export default class ImageCropper extends React.Component {
             this.state.value ? (
               <img src={this.state.value} alt='' style={style.image} onClick={this.selectImage} />
             ) : (
-              <div style={style.image} className="flex-center" onClick={this.selectImage}>
-                <Icon type={this.state.loading ? 'loading' : 'plus'}>上传</Icon>
+              <div style={this.props.style || style.image} className="flex-center" onClick={this.selectImage}>
+                {
+                  this.props.children || <Icon type={this.state.loading ? 'loading' : 'plus'}>上传</Icon>
+                }
               </div>
             )
           }

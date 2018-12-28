@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Pagination } from 'antd';
-import Card from '../antd/Card';
+import Card from '../antd/Card/Card';
 import { Converter } from '../../utils';
 
 export default class Cards extends React.Component {
@@ -48,20 +48,20 @@ export default class Cards extends React.Component {
   };
 
   componentWillReceiveProps(nextprops) {
-    if (nextprops.pagination){
+    if (nextprops.pagination) {
       const pagination = Object.assign({}, this.state.pagination, nextprops.pagination);
       this.setState({
         pagination
-      })
+      });
     }
   }
 
   handlePageChange = (_page) => {
-    const pagination = Object.assign({}, this.state.pagination, {_page});
-    this.setState({pagination});
+    const pagination = Object.assign({}, this.state.pagination, { _page });
+    this.setState({ pagination });
     const { onChange } = this.props;
-    if (onChange){
-      onChange({_page})
+    if (onChange) {
+      onChange({ _page });
     }
   };
 
@@ -69,20 +69,33 @@ export default class Cards extends React.Component {
     const { map, action, data, columns } = this.props;
     const { pagination } = this.state;
 
+    const name = (item, value) => {
+      if (item.name[Object.keys(item.name)] === undefined && value[Object.keys(item.name)] === undefined) return item.name;
+      if (item.name[Object.keys(item.name)] === undefined) return 'error';
+      if (value[Object.keys(item.name)] === undefined) return 'error';
+      return item.name[Object.keys(item.name)][value[Object.keys(item.name)]] || 'error';
+    };
+
+    const Action = (action, value) => action.map(item => {
+      return {
+        name: name(item, value),
+        onClick: item.onClick
+      };
+    });
     return (
-      data.list && data.list.length  ? (
+      data.list && data.list.length ? (
         <div>
           <Row gutter={24} style={{ margin: 16 }}>
             {
               data.list && data.list.map((item, index) => (
                 <Col
-                  span={24/columns}
+                  span={24 / columns}
                   key={index}
-                  style={{padding: 10}}
+                  style={{ padding: 10 }}
                 >
                   <Card
-                    value={{oldData: item, ...Converter.map(item, map)}}
-                    action={action}
+                    value={{ oldData: item, ...Converter.map(item, map) }}
+                    action={Action(action, item)}
                   />
                 </Col>
               ))
@@ -103,8 +116,8 @@ export default class Cards extends React.Component {
             ) : null
           }
         </div>
-      )  : (
-        <div style={{margin: 10, textAlign: 'center', padding: 10}}>
+      ) : (
+        <div style={{ margin: 10, textAlign: 'center', padding: 10 }}>
           暂无数据
         </div>
       )

@@ -73,7 +73,7 @@ export default class Uploaders extends React.Component {
         url: item.url || item.thumbUrl
       };
       if (item.response && item.response.status === 0){
-        value_item.url = item.response.data[0].webPath
+        value_item.url = item.response.data[0].url
       }
       return value_item
 

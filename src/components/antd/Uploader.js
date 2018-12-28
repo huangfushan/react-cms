@@ -63,7 +63,7 @@ export default class Uploader extends React.Component {
   onChangeImage = (info) => {
     let url;
     if (info.file.response && info.file.response.status === 0){
-      url = info.file.response.data[0].webPath
+      url = info.file.response.data[0].url
     }
     const onChange = this.props.onChange;
     if (onChange) {
