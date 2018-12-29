@@ -102,3 +102,11 @@ export const C_EDUCATION = {
   MASTER: '硕士',
   DOCTOR: '博士',
 };
+//
+// 'WX_MINI', 微信小程序
+// 'WX_APP',微信app
+// 'WX_H5',微信h5
+// 'WX_MP',微信公众号
+// 'ALI_MINI',支付宝小程序
+// 'ALI_H5',支付宝h5
+// 'ALI_APP'支付宝app

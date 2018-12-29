@@ -39,6 +39,7 @@ export default class Login extends React.Component {
       if (err) {
         return;
       }
+      if (this.state.isFetching) return;
       const params = {
         username: values.username,
         password: md5(values.password)
