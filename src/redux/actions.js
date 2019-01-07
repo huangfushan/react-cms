@@ -4,7 +4,7 @@
  * @Date: 2018-11-12
  * @Project: cms
  */
-import { isEmpty, merge } from 'lodash';
+import { isEmpty } from 'lodash';
 import { createActions } from 'redux-actions';
 import authApi from '../api/authApi';
 import { C_RESP, C_STORAGE } from '../common/constants';

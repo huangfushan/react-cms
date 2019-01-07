@@ -29,17 +29,17 @@ const NotFound = Loadable({
   loading: LoadingComponent,
   delay: 100
 });
-
-const DndExample = Loadable({
-  loader: () => import('./containers/page/example/DndExample'),
-  loading: LoadingComponent,
-  delay: 100
-});
-const Statistics = Loadable({
-  loader: () => import('./containers/page/example/Statistics'),
-  loading: LoadingComponent,
-  delay: 100
-});
+//
+// const DndExample = Loadable({
+//   loader: () => import('./containers/page/example/DndExample'),
+//   loading: LoadingComponent,
+//   delay: 100
+// });
+// const Statistics = Loadable({
+//   loader: () => import('./containers/page/example/Statistics'),
+//   loading: LoadingComponent,
+//   delay: 100
+// });
 
 
 @connect(
@@ -72,8 +72,8 @@ export default class Routes extends React.Component {
     return (
       <App >
         <Switch>
-          <Route exact path="/" component={DndExample} />
-          <Route exact path="/statistics" component={Statistics} />
+          {/*<Route exact path="/" component={DndExample} />*/}
+          {/*<Route exact path="/statistics" component={Statistics} />*/}
           <Route exact path="/manager/goods" component={GoodsList} />
           <Route exact path="/manager/order" component={OrderList} />
           <Route exact path="/manager/order/:id" component={NotFound} />

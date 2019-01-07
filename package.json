@@ -17,6 +17,7 @@
   "dependencies": {
     "antd": "^3.1.0",
     "apisauce": "^1.0.0",
+    "babel-polyfill": "^6.26.0",
     "dotenv": "4.0.0",
     "fs-extra": "3.0.1",
     "lodash": "^4.17.5",

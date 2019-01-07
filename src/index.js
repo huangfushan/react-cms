@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { LocaleProvider } from 'antd';
+import 'babel-polyfill';
 import * as serviceWorker from './serviceWorker';
 import Routers from './Routers';
 import store from './redux';

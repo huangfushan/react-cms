@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table as AliTable } from 'antd';
-import { C_PAGE_NUMBER } from '../../common/constants';
+import { C_PAGE_NUMBER } from '../../../common/constants';
 import './index.less';
 
 export default class Table extends React.Component {

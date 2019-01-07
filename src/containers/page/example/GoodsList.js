@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { message, Spin, Button } from 'antd';
+import { Spin, Button } from 'antd';
 import { connect } from 'react-redux';
 import orderApi from '../../../api/orderApi';
 import { Actions } from '../../../redux/actions';
