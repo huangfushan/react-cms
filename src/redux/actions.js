@@ -40,20 +40,14 @@ const Actions = createActions({
 
 const AsyncActions = {
   signIn: params => dispatch => authApi.signIn(params).then(resp => {
-    const res = {
-      status: 0,
-      data: {
-          session: '4353543535354'
-      }
-    };
-    if (res.status === C_RESP.OK) {
-      http.setHeader(C_STORAGE.KEY_SESSION, res.data.session);
-      setStorage(C_STORAGE.KEY_AUTH, res.data); //session
-      dispatch(Actions.auth.updateAuth(res.data));
+    if (resp.status === C_RESP.OK) {
+      http.setHeader(C_STORAGE.KEY_SESSION, resp.data.session);
+      setStorage(C_STORAGE.KEY_AUTH, resp.data); //session
+      dispatch(Actions.auth.updateAuth(resp.data));
     } else {
-      error(res);
+      error(resp);
     }
-    return res;
+    return resp;
   }),
   signOut: () => dispatch => authApi.signOut().then(resp => {
     switch (resp.status){
