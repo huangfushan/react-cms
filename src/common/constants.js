@@ -30,9 +30,9 @@ export const C_AUTHOR = {
  * @type {{HOST: string, PATH: string}}
  */
 export const C_API = {
-  HOST: `${C_PROJECT_HOST}`,
+  HOST: C_PROJECT_HOST,
   IMAGE: `/common/file`,//图片路径
-  ADDRESS: `${path.PROJECT_HOST_PROD}/static${path.PROJECT_CODE}/address`,//静态资源api
+  // ADDRESS: `${path.PROJECT_HOST_PROD}/static${path.PROJECT_CODE}/address`,//静态资源api
 };
 
 /**

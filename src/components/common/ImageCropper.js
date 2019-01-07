@@ -1,31 +1,30 @@
 /**
- * 图片裁剪上传组件，通过base64
+ * 图片上传组件，通过base64
  * @Author: huangfs
  * @Date: 2018-12-03
  * @Project: web-service
  */
 
-//https://www.npmjs.com/package/react-cropper
-//https://github.com/fengyuanchen/cropperjs#aspectratio
-//版本1.0.1
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from 'antd';
 import Cropper from 'react-cropper';
-import { beforeUpload, getBase64, isBase64 } from '../../utils/image';
+import 'cropperjs/dist/cropper.css';
+import { base64toFile, beforeUpload, getBase64, isBase64 } from '../../utils/image';
 import { error } from '../../utils';
 import { C_RESP } from '../../common/constants';
 import commonApi from '../../api/commonApi';
 import Modal from '../antd/Modal';
-import 'cropperjs/dist/cropper.css';
+
+//https://www.npmjs.com/package/react-cropper
+//https://github.com/fengyuanchen/cropperjs#aspectratio
 
 export default class ImageCropper extends React.Component {
 
   static propTypes = {
     onChange: PropTypes.func,
     aspectRatio: PropTypes.number,
-    value: PropTypes.string,
+    // value: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -94,6 +93,7 @@ export default class ImageCropper extends React.Component {
   handleCancel = () => {
     this.setState({
       visible: false,
+      confirmLoading: false
     });
   };
 
@@ -102,23 +102,24 @@ export default class ImageCropper extends React.Component {
     if (!canvas || !canvas.toDataURL()) return;
     const base64 = isBase64(canvas.toDataURL());
     if (!base64) return;
-    const params = {
-      content: base64[2],
-      suffix: base64[1],
-    };
-    this.saveToServer(params, base64[0]);
+    const file = base64toFile(base64[0], `image.${base64[1]}`); //base64转文件
+    // const params = {
+    //   content: base64[2],
+    //   suffix: base64[1],
+    // };
+    this.saveToServer(file);
   };
 
   /**
    * 上传到服务端
    */
-  saveToServer = (params) => {
+  saveToServer = (file) => {
     this.setState({ confirmLoading: true });
-    commonApi.pushBase64(params).then(resp => {
+    commonApi.pushFile({ file }).then(resp => {
       this.setState({ confirmLoading: false });
       switch (resp.status) {
         case C_RESP.OK:
-          this.handleSuccess(resp.data.url);
+          this.handleSuccess(resp.data[0].url);
           break;
         case C_RESP.ERR_INVALID:
           break;
@@ -142,10 +143,9 @@ export default class ImageCropper extends React.Component {
             this.state.value ? (
               <img src={this.state.value} alt='' style={style.image} onClick={this.selectImage} />
             ) : (
-              <div style={this.props.style || style.image} className="flex-center" onClick={this.selectImage}>
-                {
-                  this.props.children || <Icon type={this.state.loading ? 'loading' : 'plus'}>上传</Icon>
-                }
+              <div style={style.image} className="column" onClick={this.selectImage}>
+                <Icon type={this.state.loading ? 'loading' : 'plus'} />
+                <span>上传</span>
               </div>
             )
           }

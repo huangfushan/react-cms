@@ -1,25 +1,11 @@
+/**
+ * 关于图片的操作
+ */
+
 import { message } from 'antd';
 
-// export const imageType = (file) => {
-//   const picture_type = file.type;
-//
-//   if (picture_type  === 'image/jpeg' || picture_type  === 'image/png' || picture_type  === 'image/gif') {
-//
-//     return true ;
-//   }
-//   message.error('仅支持jpg，png，gif格式');
-// };
-//
-//
-// export const imageSize = (file) => {
-//   const picture_size = file.size / 1024 / 1024 < 10;
-//   if (!picture_size) {
-//     message.error('图片不能大于10MB');
-//   }
-//   return picture_size;
-// };
-
-export const beforeUpload = (file,allType = ['jpg','png','jpeg', 'gif'],maxSize= 5, type) =>  {
+//图片上传前判断大小和类型
+export const beforeUpload = (file, allType = ['jpg', 'png', 'jpeg', 'gif'], maxSize = 5, type) => {
   let fileType = file.type;
   let { name } = file;
   if (!fileType) {
@@ -37,18 +23,30 @@ export const beforeUpload = (file,allType = ['jpg','png','jpeg', 'gif'],maxSize=
     message.error(`上传图片必须小于${maxSize}M!`);
     return false;
   }
-  return  isJPG && isSize;
+  return isJPG && isSize;
 };
 
-
-export const getBase64 = (img, callback)  => {
+//图片转base64
+export const getBase64 = (img, callback) => {
   const reader = new FileReader();
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
 };
 
+//base64转文件
+export const base64toFile = (base64, filename) => { //将base64转换为文件
+  const arr = base64.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, { type: mime });
+};
 
-//判断是否是base64， 是就返回截取后的base64
+//判断是否是base64， 是就返回截取后的base64信息数组
 export const isBase64 = (value) => {
   if (!value) {
     return null;
@@ -60,7 +58,6 @@ export const isBase64 = (value) => {
   // const reg = /^data:image\/([a-zA-Z]*);base64,(.+)$/;
   return /^data:image\/(\w+);base64,([\w=/+]+)$/.exec(value);
 };
-
 
 
 
