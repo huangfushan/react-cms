@@ -20,7 +20,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
 
 # 测试用的，不能上传到gitlab
 /src/routerConfig.js
