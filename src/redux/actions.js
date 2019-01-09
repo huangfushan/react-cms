@@ -30,7 +30,7 @@ const Actions = createActions({
       return {
         session: null,
         isAuthenticated: false
-      }
+      };
     }
   },
   common: {
@@ -40,14 +40,20 @@ const Actions = createActions({
 
 const AsyncActions = {
   signIn: params => dispatch => authApi.signIn(params).then(resp => {
-    if (resp.status === C_RESP.OK) {
-      http.setHeader(C_STORAGE.KEY_SESSION, resp.data.session);
-      setStorage(C_STORAGE.KEY_AUTH, resp.data); //session
-      dispatch(Actions.auth.updateAuth(resp.data));
+    const res = {
+      status: 0,
+      data: {
+          session: '4353543535354'
+      }
+    };
+    if (res.status === C_RESP.OK) {
+      http.setHeader(C_STORAGE.KEY_SESSION, res.data.session);
+      setStorage(C_STORAGE.KEY_AUTH, res.data); //session
+      dispatch(Actions.auth.updateAuth(res.data));
     } else {
-      error(resp);
+      error(res);
     }
-    return resp;
+    return res;
   }),
   signOut: () => dispatch => authApi.signOut().then(resp => {
     switch (resp.status){

@@ -48,7 +48,7 @@ React后台项目：react + react-router4 + apisauce + less + redux + prop-types
 ***│   ├── redux                           // redux ***
 ***│   ├── themes                          // 存放项目的一些资源和LESS样式文件 ***
 ***│   ├── utils                           // 封装的一些常用工具 ***
-***│   ├── Routes.js                       // 页面路由 ***
+***│   ├── router.js                       // 页面路由 ***
 ***│   ├── index.js                        // 程序入口文件 ***
 ***├── .babelrc                            // babel配置文件 ***
 ***├── .editorconfig                       // webstore代码规范配置文件 ***

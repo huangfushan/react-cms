@@ -2,7 +2,7 @@
  * Tabs
  * @Author: huangfs
  * @Date: 2018-11-03
- * @Project: web-manager
+ * @Project: cms
  */
 
 import React from 'react';

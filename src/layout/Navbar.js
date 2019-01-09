@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { C_PROJECT_NAME} from '../../common/constants';
+import { C_PROJECT_NAME} from '../common/constants';
 import { Layout, Icon, Tag } from 'antd';
 
 const { Header } = Layout;

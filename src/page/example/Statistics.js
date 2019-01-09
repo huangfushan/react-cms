@@ -2,13 +2,13 @@
  * statistics
  * @Author: huangfs
  * @Date: 2018-12-18
- * @Project: web-brand
+ * @Project: cms
  */
 
 import React from 'react';
-import Pie from '../../../components/chart/Pie';
-import Bar from '../../../components/chart/Bar';
-import Tabs from '../../../components/antd/Tabs';
+import Pie from '../../components/chart/Pie';
+import Bar from '../../components/chart/Bar';
+import Tabs from '../../components/antd/Tabs';
 
 const option = {
   legend: ['邮件营销', '联盟广告', '视频广告', '天使'],

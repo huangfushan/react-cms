@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 import md5 from 'md5';
-import Copyright from '../../components/common/Copyright';
+import Copyright from '../components/common/Copyright';
 import PropTypes from 'prop-types';
-import { C_PROJECT_NAME, C_RESP } from '../../common/constants';
-import { common } from '../../images/images';
-import { Actions, AsyncActions } from '../../redux/actions';
+import { C_PROJECT_NAME, C_RESP } from '../common/constants';
+import { common } from '../images/images';
+import { Actions, AsyncActions } from '../redux/actions';
 
 const FormItem = Form.Item;
 

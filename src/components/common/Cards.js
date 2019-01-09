@@ -2,7 +2,7 @@
  * 类似商品卡片式列表
  * @Author: huangfs
  * @Date: 2018-11-02
- * @Project: web-manager
+ * @Project: cms
  */
 
 import React from 'react';

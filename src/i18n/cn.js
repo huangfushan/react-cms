@@ -1,5 +1,5 @@
 /**
- * en
+ * 中文
  * @Author: huangfs
  * @Date: 2018-12-17
  * @Project: cms
@@ -27,15 +27,14 @@ export default {
     REMOVE: "关闭",
     ADD_RELATIONS: "添加关联",
     DEL_RELATIONS: "删除关联",
-    DATE: "日期"
+    DATE: "日期",
+    WELCOME: '欢迎您'
  },
-  SIDEBAR: {
-    MENU: "菜单",
-    ADMIN: "管理",
-    USER_ADMIN: "用户管理",
-  },
-  HEADER: {
-    SIGN_OUT: "注销",
+  AUTHOR: {
+    LOGIN: "登录",
+    SIGN_OUT: "退出",
+    LOGGING_IN: "登录中...",
+    REGISTER: "立即注册",
     TOGGLE_NAVIGATION: "切换导航",
     CHANGE_PASSWORD: "修改密码",
     CURRENT_PASSWORD: "当前密码",

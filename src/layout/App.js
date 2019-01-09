@@ -11,11 +11,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SideBar from './Sidebar';
 import Navbar from './Navbar';
-import { Actions, AsyncActions } from '../../redux/actions';
-import Copyright from '../../components/common/Copyright';
+import { Actions, AsyncActions } from '../redux/actions';
+import Copyright from '../components/common/Copyright';
 
 @connect(
-  null,
+  state => ({
+    isAuthenticated: state.auth.isAuthenticated
+  }),
   {
     signOut: AsyncActions.signOut,
     updateBadge: Actions.common.updateBadge,
@@ -34,7 +36,7 @@ export default class App extends React.Component {
   };
 
   //需要获取网络请求，拿到badge
-  componentDidMount() {
+  componentWillMount() {
     this.props.updateBadge({ badge: {} });
   }
 

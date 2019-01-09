@@ -1,8 +1,8 @@
 /**
- * 图片上传组件，通过base64
+ * 图片上传组件，通过图片裁剪后转为文件再上传
  * @Author: huangfs
  * @Date: 2018-12-03
- * @Project: web-service
+ * @Project: cms
  */
 
 import React from 'react';

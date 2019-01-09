@@ -12,31 +12,28 @@
 
 // 定义siderbar菜单
 const sidebarMenus = [
+  { path: '', name: '统计', icon: 'global' },
   {
-    key: 'statistics',
-    name: '统计',
-    icon: 'global'
-  }, {
-    key: 'manager',// route时url中的值
-    name: '管理', // 在菜单中显示的名称
-    icon: 'share-alt', // 图标是可选的
+    path: 'manager',
+    name: '管理',
+    icon: 'share-alt',
     child: [
       {
-        key: 'order',
+        path: 'order',
         name: '订单管理'
       }, {
-        key: 'goods',
+        path: 'goods',
         name: '商品管理'
       }, {
-        key: 'category',
+        path: 'category',
         name: '分类管理',
       }, {
-        key: 'merchant',
+        path: 'merchant',
         name: '店铺管理',
       }
     ]
   }, {
-    key: 'setting',
+    path: 'setting',
     name: '设置',
     icon: 'trophy'
   }

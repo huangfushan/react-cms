@@ -22,6 +22,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # 测试用的，不能上传到gitlab
-/src/routerConfig.js
 /src/ROUTE.js
-/src/i18n/*
+/src/i18n/Demo.js
