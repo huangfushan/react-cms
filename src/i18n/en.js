@@ -26,14 +26,13 @@ export default {
     REMOVE: "关闭",
     ADD_RELATIONS: "Add Relations",
     DEL_RELATIONS: "Add Relations",
-    DATE: "Date"
- },
-  SIDEBAR: {
-    MENU: "Menu",
-    ADMIN: "Admin",
-    USER_ADMIN: "User Admin",
+    DATE: "Date",
+    WELCOME: 'Welcome'
   },
-  HEADER: {
+  ACCOUNT: {
+    LOGIN: "Login",
+    LOGGING_IN: "Logging In...",
+    REGISTER: "Register",
     SIGN_OUT: "Sign out",
     TOGGLE_NAVIGATION: "Toggle Navigation",
     CHANGE_PASSWORD: "Change password",

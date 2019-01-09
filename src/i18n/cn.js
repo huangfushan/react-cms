@@ -30,7 +30,7 @@ export default {
     DATE: "日期",
     WELCOME: '欢迎您'
  },
-  AUTHOR: {
+  ACCOUNT: {
     LOGIN: "登录",
     SIGN_OUT: "退出",
     LOGGING_IN: "登录中...",
@@ -39,6 +39,10 @@ export default {
     CHANGE_PASSWORD: "修改密码",
     CURRENT_PASSWORD: "当前密码",
     NEW_PASSWORD: "新的密码",
-    CONFIRM_PASSWORD: "确认密码"
+    CONFIRM_PASSWORD: "确认密码",
+    PASSWORD: '密码',
+    ACCOUNT: '账号',
+    ENTER_ACCOUNT: '请输入账号',
+    ENTER_PASSWORD: '请输入密码',
   },
 };

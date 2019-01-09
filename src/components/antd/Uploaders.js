@@ -131,7 +131,7 @@ export default class Uploaders extends React.Component {
         headers={session}
         listType="picture-card"
         className="avatar-uploader"
-        action={`${C_API.IMAGE}`}
+        action={`${C_API.HOST}/common/file`}
         fileList={imageUrls}
         beforeUpload={this.beforeUpload}
         onChange={this.handleImageChange}

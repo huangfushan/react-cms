@@ -10,7 +10,7 @@ import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import { Upload, Icon } from 'antd';
 import { beforeUpload, getBase64 } from "../../utils/image";
-import { C_API } from "../../common/constants";
+import { C_API, C_PROJECT_HOST } from '../../common/constants';
 import './index.less';
 
 @connect (
@@ -82,14 +82,13 @@ export default class Uploader extends React.Component {
     const session = {
       session:this.props.session
     };
-
     return (
       <Upload
         headers={session}
         name="file"
         listType="picture-card"
         className="avatar-uploader"
-        action={`${C_API.IMAGE}`}
+        action={`${C_API.HOST}/common/file`}
         showUploadList={false}
         beforeUpload={this.beforeUpload}
         onChange={this.handleChange}

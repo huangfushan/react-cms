@@ -16,10 +16,10 @@ import { C_STORAGE } from './common/constants';
 import http from './api/http';
 import { Actions } from './redux/actions';
 import App from './layout/App';
-import 'normalize.css';
-import './themes/index.less';
 import routerConfig from './routerConfig';
 import PrivateRoute from './components/common/privateRoute';
+import 'normalize.css';
+import './themes/index.less';
 
 //登录
 const Login = Loadable({

@@ -12,6 +12,13 @@ const languages = { cn, en };
 
 const I18nContext = React.createContext();
 
+/**
+ * 这个方法提供两个参数
+ * @param key：如果key不存在，则获取全部，key存在则拿到对应的obj
+ * @param custom：组件自身的多语言，更多是一次性的会定义在组件里面
+ * @return {function(*): {new(): {render(): *}, prototype: {render(): *}}}
+ * @constructor
+ */
 export const I18nConsumer = (key, custom) => {
   return Component => {
     return class extends React.Component {
