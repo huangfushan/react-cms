@@ -34,7 +34,7 @@ const Actions = createActions({
     }
   },
   common: {
-    updateBadge: badge => badge
+    update: value => value
   }
 });
 

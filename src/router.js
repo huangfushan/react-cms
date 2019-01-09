@@ -7,17 +7,16 @@
 
 import React from 'react';
 import { Route, Switch, HashRouter as Router } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { LocaleProvider } from 'antd';
 import Loadable from 'react-loadable';
 import LoadingComponent from './components/common/LoadingComponent';
-import { getStorage } from './utils';
-import { C_STORAGE } from './common/constants';
-import http from './api/http';
 import { Actions } from './redux/actions';
 import App from './layout/App';
 import routerConfig from './routerConfig';
 import PrivateRoute from './components/common/privateRoute';
+import zhCN from 'antd/lib/locale-provider/zh_CN';
+import { I18nProvider } from './i18n/I18nConfig';
 import 'normalize.css';
 import './themes/index.less';
 
@@ -44,48 +43,48 @@ const NotFound = Loadable({
   delay: 100
 });
 
+
 @connect(
   state => ({
-    isAuthenticated: state.auth.isAuthenticated
+    language: state.common.language
   }),
   {
-    updateAuth: Actions.auth.updateAuth
+    updateLanguage: Actions.common.update,
   }
 )
 export default class Routers extends React.Component {
-  static propTypes = {
-    updateAuth: PropTypes.func.isRequired,
-  };
 
-  componentWillMount() {
-    const auth = JSON.parse(getStorage(C_STORAGE.KEY_AUTH));
-    if (auth && auth.session) {
-      http.setHeader(C_STORAGE.KEY_SESSION, auth.session);
-      this.props.updateAuth(auth);
-    }
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.updateLanguage({language: 'en'})
+    }, 1000);
   }
 
   render() {
     return (
-      <Router>
-        <Switch>
-          <Route exact path="/login" component={Login} />
-          <App>
+      <LocaleProvider locale={zhCN}>
+        <I18nProvider currentLanguage={this.props.language}>
+          <Router>
             <Switch>
-              {/*<Route exact path="/" component={DndExample} />*/}
-              {/*<Route exact path="/statistics" component={Statistics} />*/}
-              {/*<Route exact path="/manager/goods" component={GoodsList} />*/}
-              {/*<Route exact path="/manager/order" component={OrderList} />*/}
-              {/*<Route exact path="/manager/order/:id" component={NotFound} />*/}
-              {/*<Route exact path="/setting" component={NotFound} />*/}
-              {
-                routerConfig.map((item, index) => <PrivateRoute exact key={index} path={item.path} component={item.component} />)
-              }
-              <Route component={NotFound} />
+              <Route exact path="/login" component={Login} />
+              <App>
+                <Switch>
+                  {/*<Route exact path="/" component={DndExample} />*/}
+                  {/*<Route exact path="/statistics" component={Statistics} />*/}
+                  {/*<Route exact path="/manager/goods" component={GoodsList} />*/}
+                  {/*<Route exact path="/manager/order" component={OrderList} />*/}
+                  {/*<Route exact path="/manager/order/:id" component={NotFound} />*/}
+                  {/*<Route exact path="/setting" component={NotFound} />*/}
+                  {
+                    routerConfig.map((item, index) => <PrivateRoute exact key={index} path={item.path} component={item.component} />)
+                  }
+                  <Route component={NotFound} />
+                </Switch>
+              </App>
             </Switch>
-          </App>
-        </Switch>
-      </Router>
+          </Router>
+        </I18nProvider>
+      </LocaleProvider>
     );
   }
 }

@@ -13,6 +13,9 @@ import SideBar from './Sidebar';
 import Navbar from './Navbar';
 import { Actions, AsyncActions } from '../redux/actions';
 import Copyright from '../components/common/Copyright';
+import http from '../api/http';
+import { C_STORAGE } from '../common/constants';
+import { getStorage } from '../utils';
 
 @connect(
   state => ({
@@ -20,7 +23,8 @@ import Copyright from '../components/common/Copyright';
   }),
   {
     signOut: AsyncActions.signOut,
-    updateBadge: Actions.common.updateBadge,
+    updateBadge: Actions.common.update,
+    updateAuth: Actions.auth.updateAuth,
   }
 )
 
@@ -28,6 +32,7 @@ export default class App extends React.Component {
   static propTypes = {
     signOut: PropTypes.func.isRequired,
     updateBadge: PropTypes.func.isRequired,
+    updateAuth: PropTypes.func.isRequired,
   };
 
   state = {
@@ -37,6 +42,11 @@ export default class App extends React.Component {
 
   //需要获取网络请求，拿到badge
   componentWillMount() {
+    const auth = JSON.parse(getStorage(C_STORAGE.KEY_AUTH));
+    if (auth && auth.session) {
+      http.setHeader(C_STORAGE.KEY_SESSION, auth.session);
+      this.props.updateAuth(auth);
+    }
     this.props.updateBadge({ badge: {} });
   }
 

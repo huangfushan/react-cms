@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Layout, Icon, Menu, Switch } from 'antd';
+import { Layout, Icon, Menu, Switch, Badge } from 'antd';
 import SidebarLogo from '../components/common/SidebarLogo';
 import sidebarMenus from '../menuConfig';
-import { Actions } from '../redux/actions';
+// import { Actions } from '../redux/actions';
 import '../components/antd/index.less';
 
 const { Sider } = Layout;
@@ -16,16 +16,16 @@ const SubMenu = Menu.SubMenu;
   state => ({
     badge: state.common.badge
   }),
-  {
-    updateBadge: Actions.common.updateBadge
-  }
+  // {
+  //   updateBadge: Actions.common.update
+  // }
 )
 
 export default class Sidebar extends React.Component {
   static propTypes = {
     collapsed: PropTypes.bool.isRequired,
     badge: PropTypes.object.isRequired,
-    updateBadge: PropTypes.func.isRequired,
+    // updateBadge: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -56,7 +56,9 @@ export default class Sidebar extends React.Component {
           <Item key={path}>
             <Link to={path}>
               <Icon type={item.icon || 'smile'} />
-              <span>{item.name}</span>
+              <Badge dot={this.props.badge[item.key] ? true : false}>
+                <span>{item.name}</span>
+              </Badge>
             </Link>
           </Item>
         );
@@ -95,7 +97,9 @@ export default class Sidebar extends React.Component {
           <Item key={path}>
             <Link to={path}>
               {item.icon ? <Icon type={item.icon} /> : null}
-              <span>{item.name}</span>
+              <Badge dot={this.props.badge[item.key] ? true : false}>
+                <span>{item.name}</span>
+              </Badge>
             </Link>
           </Item>
         );
