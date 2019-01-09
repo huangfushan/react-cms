@@ -7,13 +7,11 @@
 
 import React from 'react';
 
-export default class Error extends React.Component {
+export default function Error() {
 
-    render() {
-        return (
-            <div style={style}>error</div>
-        )
-    }
+  return (
+    <div style={style}>Sorry, there was a problem loading the page.</div>
+  )
 }
 
 const style = {

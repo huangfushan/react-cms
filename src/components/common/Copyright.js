@@ -24,6 +24,7 @@ const style = {
   marginTop: 0,
   marginBottom: 0,
   minHeight: 40,
+  color: '#999',
 
   a: {
     fontSize: '12px',

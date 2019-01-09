@@ -6,11 +6,12 @@
  */
 
 import React from 'react';
+import Error from './Error';
 import Loading from './Loading';
 
 const LoadingComponent = (props) => {
   if (props.error) {
-    return <div>Sorry, there was a problem loading the page.</div>
+    return <Error />
   } else if (props.pastDelay) {
     //300ms之后显示
     return <Loading />
