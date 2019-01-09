@@ -30,12 +30,14 @@ export const I18nConsumer = (key, custom) => {
               if (context.hasOwnProperty(key)) {
                 props = { [key]: context[key] };
               } else {
-                props = { i18n: context };
+                props = { ...context };
               }
               if (custom) {
-                Object.assign(props.i18n, custom[context.currentLanguage]);
+                props = Object.assign({}, { ...props }, custom[context.currentLanguage]);
               }
-              return <Component {...this.props} {...props} />;
+              console.log(props);
+
+              return <Component {...this.props} i18n={props} />;
             }}
           </I18nContext.Consumer>
         );
