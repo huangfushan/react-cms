@@ -13,6 +13,7 @@ import { postData }  from './postData';
 import { beforeUpload }  from './image';
 import { error }  from './error';
 import { getDiffObj, Converter, objToArr }  from './data';
+import { RegExp }  from './RegExp';
 
 export {
   timeFmt,
@@ -27,6 +28,7 @@ export {
   beforeUpload,
   error,
   getDiffObj,
+  RegExp,
   Converter,
   objToArr
 }

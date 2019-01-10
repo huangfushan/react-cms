@@ -14,7 +14,7 @@ import LoadingComponent from './components/common/LoadingComponent';
 import { Actions } from './redux/actions';
 import App from './layout/App';
 import routerConfig from './routerConfig';
-import PrivateRoute from './components/common/privateRoute';
+import PrivateRoute from './components/common/PrivateRoute';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import { I18nProvider } from './i18n/I18nConfig';
 import 'normalize.css';

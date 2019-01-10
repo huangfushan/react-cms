@@ -101,6 +101,19 @@ export const C_EDUCATION = {
   MASTER: '硕士',
   DOCTOR: '博士',
 };
+
+/**
+ * 相关验证码操作的时候需要
+ * @type {{REGISTER: string, LOGIN: string, ALTER_PASSWORD: string, ALTER_PHONE: string, BIND: string}}
+ */
+export const C_SCENE = {
+  REGISTER: "REGISTER", //注册时的验证码
+  LOGIN: 'LOGIN', //验证码登录
+  ALTER_PASSWORD: 'ALTER_PASSWORD', //通过旧密码，修改密码
+  ALTER_PHONE: 'ALTER_PHONE', //修改手机号
+  FORGET_PASSWORD: 'FORGET_PASSWORD', //忘记密码时，修改密码
+  BIND: 'BIND', //绑定
+};
 //
 // 'WX_MINI', 微信小程序
 // 'WX_APP',微信app

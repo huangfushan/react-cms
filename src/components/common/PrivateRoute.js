@@ -8,7 +8,8 @@ import { Route, withRouter, Redirect } from 'react-router-dom';
     isAuthenticated: state.auth.isAuthenticated
   })
 )
-class PrivateRoute extends Component {
+@withRouter
+export default class PrivateRoute extends Component {
 
   render() {
     let { component: Component, isAuthenticated, ...rest } = this.props;
@@ -19,5 +20,3 @@ class PrivateRoute extends Component {
     );
   }
 }
-
-export default withRouter(PrivateRoute);
