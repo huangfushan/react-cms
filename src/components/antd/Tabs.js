@@ -45,9 +45,9 @@ export default class Tabs extends React.Component {
     const { data, keyExtractor, valueExtractor } = this.props;
     return (
       <AliTabs
-        // defaultActiveKey="activeKey"
+        // defaultActiveKey={null}
         onChange={this.handleChange}
-        animated={false}
+        animated={this.props.animated || false}
       >
         {
           data && data.map(item => (

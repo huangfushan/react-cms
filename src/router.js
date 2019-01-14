@@ -19,6 +19,9 @@ import zhCN from 'antd/lib/locale-provider/zh_CN';
 import { I18nProvider } from './i18n/I18nConfig';
 import 'normalize.css';
 import './themes/index.less';
+import { getStorage } from './utils';
+import { C_STORAGE } from './common/constants';
+import http from './api/http';
 
 //登录
 const Login = Loadable({
@@ -49,10 +52,21 @@ const NotFound = Loadable({
     language: state.common.language
   }),
   {
+    updateAuth: Actions.auth.updateAuth,
     updateLanguage: Actions.common.update,
   }
 )
 export default class Routers extends React.Component {
+
+
+  //需要获取网络请求，拿到badge
+  componentWillMount() {
+    const auth = JSON.parse(getStorage(C_STORAGE.KEY_AUTH));
+    if (auth && auth.session) {
+      http.setHeader(C_STORAGE.KEY_SESSION, auth.session);
+      this.props.updateAuth(auth);
+    }
+  }
 
   componentDidMount() {
     setTimeout(() => {

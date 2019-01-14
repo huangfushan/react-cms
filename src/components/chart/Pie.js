@@ -20,7 +20,7 @@ const getSeriesData = (option) => {
     seriesData.push({
       name: index,
       type: 'pie',
-      radius: ['30%', '60%'],
+      radius: ['20%', '40%'],
       center: [`${(2 * index + 1) / (2 * option.value.length) * 100}%`, `${(1 / 2) * 100}%`],
       label: {
         normal: {

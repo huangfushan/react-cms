@@ -20,21 +20,36 @@ const getSeriesData = (option) => {
     seriesData.push({
       data: item,
       type: 'bar',
+      stack: '总量',
+      barMaxWidth: '40%',
       name: option.legend[index],
-      // label: {
-      //   normal: {
-      //     formatter: '{c}',
-      //     show: true,
-      //     position: 'insideRight'
-      //   }
-      // }
+      label: {
+        normal: {
+          formatter: '{c}',
+          show: true,
+          position: 'insideRight'
+        }
+      }
     });
   });
-  return seriesData
+  if (option.line) {
+    seriesData.push({
+      name: option.line.name,
+      type: 'line',
+      label: {
+        normal: {
+          formatter: '{c}',
+          show: true,
+        },
+      },
+      data: option.line.data
+    });
+  }
+  return seriesData;
 };
 
 const getOption = (props) => {
-  const { title, option = {}, horizontal=false } = props;
+  const { title, option = {}, horizontal = false } = props;
 
   const yAxis = {
     type: 'value'
@@ -55,7 +70,7 @@ const getOption = (props) => {
     },
     toolbox: {
       feature: {
-        magicType: {type: ['line', 'bar']}, // 切换直方图/线性图
+        magicType: { type: ['line', 'bar'] }, // 切换直方图/线性图
         saveAsImage: {
           title: '保存',
           pixelRatio: 2
@@ -63,7 +78,7 @@ const getOption = (props) => {
       }
     },
     legend: {
-      data: option.legend
+      data: option.legend,
     },
     yAxis: horizontal ? xAxis : yAxis,
     xAxis: horizontal ? yAxis : xAxis,

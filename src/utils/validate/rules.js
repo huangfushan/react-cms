@@ -4,6 +4,7 @@
  * @Date: 2018-10-30
  * @Project: cms
  */
+import { RegExp } from '../RegExp';
 
 export default class Rules {
     /**
@@ -46,7 +47,7 @@ export default class Rules {
     }
     //密码校验，字母开头，允许允许字母数字下划线，6-16位
     static password = (password) => {
-        return /^[a-zA-Z][a-zA-Z0-9_]{5,15}$/.test(password);
+        return RegExp.password.test(password);
     };
     /**
      * 验证身份证号码

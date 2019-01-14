@@ -35,12 +35,14 @@ export default {
     }
   },
   grid: {
-    left: '3%',
-    right: '2%',
-    bottom: '8%',
+    left: '5%',
+    right: '5%',
+    bottom: '10%',
+    top: 80,
     containLabel: true
   },
   legend: {
-    orient: 'horizontal'
+    orient: 'horizontal',
+    top: 20
   },
 }
