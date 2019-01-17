@@ -23,6 +23,7 @@ const Actions = createActions({
   auth: {
     updateAuth: auth => ({
       ...auth,
+      username: auth.username,
       isAuthenticated: !isEmpty(auth)
     }),
     clearAuth: () => {

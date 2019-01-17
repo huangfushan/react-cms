@@ -8,12 +8,12 @@ const { Header } = Layout;
 
 @connect(
   state => ({
-    name: state.auth.name
+    username: state.auth.username
   })
 )
 export default class Navbar extends React.Component {
   static propTypes = {
-    name: PropTypes.string,
+    username: PropTypes.string,
     collapsed: PropTypes.bool.isRequired,
     handleClick: PropTypes.func.isRequired,
   };
@@ -38,7 +38,7 @@ export default class Navbar extends React.Component {
             <span>{C_PROJECT_NAME}</span>
           </div>
           <div>
-            <span style={{marginRight: 20}}>{this.props.name || 'Admin'}</span>
+            <span style={{marginRight: 20}}>{this.props.username || 'Admin'}</span>
             <Tag  color='red' onClick={this.handleLogout}>退出</Tag>
           </div>
         </nav>
