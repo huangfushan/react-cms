@@ -10,11 +10,12 @@ import PropTypes from 'prop-types';
 import { Row, Col, Pagination } from 'antd';
 import Card from '../antd/Card/Card';
 import { Converter } from '../../utils';
+import Nothing from './Nothing';
 
 export default class Cards extends React.Component {
 
   static propTypes = {
-    onChange: PropTypes.func.isRequired, //页码改变触发
+    onChange: PropTypes.func, //页码改变触发
     pagination: PropTypes.shape({
       _page: PropTypes.number, // 当前页码
       _count: PropTypes.number, //每页条数
@@ -117,9 +118,7 @@ export default class Cards extends React.Component {
           }
         </div>
       ) : (
-        <div style={{ margin: 10, textAlign: 'center', padding: 10 }}>
-          暂无数据
-        </div>
+        <Nothing />
       )
     );
   }

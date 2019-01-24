@@ -11,7 +11,7 @@ import { icon } from '../../images/images';
 const Nothing = () => {
   return (
     <div className="text-align-center">
-      <img  src={icon.none} alt=''/>
+      <img  src={icon.nothing} alt=''/>
       <p>暂无数据</p>
     </div>
   )

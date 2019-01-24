@@ -18,7 +18,7 @@ export default class Table extends React.Component {
     list: PropTypes.array.isRequired, //商品list
     total: PropTypes.number.isRequired, //商品total
     columns: PropTypes.array.isRequired, //栏目
-    onChange: PropTypes.func.isRequired, //订单列表获取方法
+    onChange: PropTypes.func, //订单列表获取方法
     isFetching: PropTypes.bool.isRequired, //订单类别获取状态
   };
 
@@ -34,22 +34,25 @@ export default class Table extends React.Component {
     _page: C_PAGE_NUMBER.PAGE,
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps._page) {
-      this.setState({
-        _page: nextProps._page
-      });
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps !== prevState) {
+      return nextProps;
     }
+    return null;
+  }
+
+  shouldComponentUpdate(prevProps, prevState) {
+    if (prevProps !== this.props) {
+      return true;
+    }
+    return false;
   }
 
   handleChange = (pagination) => {
-    this.setState({
-      _page: pagination.current,
-    }, () => this.fetchData());
+    this.setState({ _page: pagination._page }, () => this.fetchData(pagination.current));
   };
 
-  fetchData = () => {
-    const { _page } = this.state;
+  fetchData = (_page) => {
     const { onChange } = this.props;
     if (onChange) {
       onChange({ _page });
@@ -73,14 +76,13 @@ export default class Table extends React.Component {
 
   render() {
     const { isFetching, list, total } = this.props;
-    const dataSource = [...list];
-    dataSource.map((item, index) => {
-      return item.key = index + 1;
+    const dataSource = [];
+    [...list].forEach((item, index) => {
+      dataSource.push({ ...item, key: index + 1 });
     });
-
     let { _page } = this.state;
     const pagination = {
-      hideOnSinglePage: false,
+      // hideOnSinglePage: total ? false : true,
       showQuickJumper: true,
       defaultCurrent: C_PAGE_NUMBER.PAGE,
       pageSize: C_PAGE_NUMBER.COUNT,
@@ -89,13 +91,13 @@ export default class Table extends React.Component {
     };
 
     return (
-
       <AliTable
+        defaultExpandAllRows={true}
         rowKey={record => record.id}
         dataSource={dataSource}
         columns={this.props.columns}
         loading={isFetching}
-        pagination={pagination}
+        pagination={total ? pagination : false}
         onChange={this.handleChange}
         // expandedRowRender={this.renderExpanded}
       />

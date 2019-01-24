@@ -12,16 +12,16 @@ import { LocaleProvider } from 'antd';
 import Loadable from 'react-loadable';
 import LoadingComponent from './components/common/LoadingComponent';
 import { Actions } from './redux/actions';
-import App from './layout/App';
+import Layout from './layout/App';
 import routerConfig from './routerConfig';
 import PrivateRoute from './components/common/PrivateRoute';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import { I18nProvider } from './i18n/I18nConfig';
-import 'normalize.css';
-import './themes/index.less';
 import { getStorage } from './utils';
 import { C_STORAGE } from './common/constants';
 import http from './api/http';
+import 'normalize.css';
+import './themes/index.less';
 
 //登录
 const Login = Loadable({
@@ -81,7 +81,7 @@ export default class Routers extends React.Component {
           <Router>
             <Switch>
               <Route exact path="/login" component={Login} />
-              <App>
+              <Layout>
                 <Switch>
                   {/*<Route exact path="/" component={DndExample} />*/}
                   {/*<Route exact path="/statistics" component={Statistics} />*/}
@@ -94,7 +94,7 @@ export default class Routers extends React.Component {
                   }
                   <Route component={NotFound} />
                 </Switch>
-              </App>
+              </Layout>
             </Switch>
           </Router>
         </I18nProvider>

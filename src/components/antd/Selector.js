@@ -25,12 +25,7 @@ export default class Selector extends React.Component {
     valueExtractor: item => (typeof item === 'string' || typeof item === 'number') ? item : (item.name || item.value)
   };
 
-  state = {
-    value: undefined, //选中的值
-  };
-
   handleChange = (value) => {
-    this.setState({ value });
     const {onChange} = this.props;
     if (onChange) {
       onChange(value)
@@ -46,7 +41,7 @@ export default class Selector extends React.Component {
         notFoundContent={notFoundContent || '无匹配内容'}
         style={{ width: this.props.width || '100%' }}
         placeholder={this.props.placeholder || '请选择'}
-        value={this.state.value || this.props.value}
+        value={this.props.value}
         optionFilterProp="children"
         onChange={this.handleChange}
         getPopupContainer={triggerNode => triggerNode.parentNode}
