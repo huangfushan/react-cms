@@ -1,3 +1,10 @@
+/**
+ * 居中布局 （内容 + 底部）
+ * @Author: huangfs
+ * @Date: 2019-02-26
+ * @Project: cms
+ */
+
 import React, { Component } from 'react';
 import Loadable from 'react-loadable';
 import { Switch, Route } from 'react-router-dom';

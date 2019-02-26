@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Layout, Icon, Menu } from 'antd';
 import { sidebarMenus } from '../../menuConfig';
-import { common } from '../../images/images';
 
 const { Item } = Menu;
 const SubMenu = Menu.SubMenu;

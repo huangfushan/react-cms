@@ -1,7 +1,7 @@
 /**
- * AdideLayout
+ * 左侧栏 + 右侧（头部 + 内容 + 底部）
  * @Author: huangfs
- * @Date: 2018-11-12
+ * @Date: 2019-02-26
  * @Project: cms
  */
 
