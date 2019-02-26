@@ -21,7 +21,7 @@ export const C_PROJECT_HOST = env(process.env.PRODUCTION_ENV); //当前运行环
  * @type {{NAME: string, PATH: string}}
  */
 export const C_AUTHOR = {
-  TIME: '2018',
+  TIME: '2019',
   NAME: '大愚科技提供技术支持',
   PATH: 'https://www.dayukeji.xin'
 };

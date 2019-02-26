@@ -23,7 +23,7 @@ const Actions = createActions({
   auth: {
     updateAuth: auth => ({
       ...auth,
-      username: auth.username,
+      username: auth.username || '',
       isAuthenticated: !isEmpty(auth)
     }),
     clearAuth: () => {
@@ -33,6 +33,9 @@ const Actions = createActions({
         isAuthenticated: false
       };
     }
+  },
+  env: {
+    update: value => value
   },
   common: {
     update: value => value

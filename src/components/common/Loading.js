@@ -8,26 +8,23 @@
 import React from 'react';
 import { icon } from '../../images/images';
 
-const Loading = () => {
+export default () => {
   return (
-    <div style={style} >
-      <img src={icon.loading} style={style.loading} alt=''/>
+    <div style={style.loading}>
+      <img src={icon.loading} style={style.img} alt='' />
       <p>LOADING</p>
     </div>
-  )
+  );
 };
-
-export default Loading;
 
 const style = {
   textAlign: 'center',
   position: 'absolute',
-  top:'50%',
-  left:'50%',
+  top: '50%',
+  left: '50%',
   transform: 'translate(-50%,-50%)',
 
-
-  loading: {
+  img: {
     width: 40,
     height: 40,
     margin: 'auto',

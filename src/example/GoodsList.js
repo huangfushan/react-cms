@@ -8,11 +8,11 @@
 import React from 'react';
 import { Spin, Button } from 'antd';
 import { connect } from 'react-redux';
-import orderApi from '../../api/orderApi';
-import { Actions } from '../../redux/actions';
-import { C_PAGE_NUMBER } from '../../common/constants';
-import Cards from '../../components/common/Cards';
-import { Converter, error } from '../../utils/index';
+import orderApi from '../api/orderApi';
+import { Actions } from '../redux/actions';
+import { C_PAGE_NUMBER } from '../common/constants';
+import Cards from '../components/common/Cards';
+import { Converter, error } from '../utils/index';
 
 @connect(
   state => ({

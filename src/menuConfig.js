@@ -12,33 +12,39 @@
 
 // 定义siderbar菜单
 const sidebarMenus = [
-  { path: '', name: '统计', icon: 'global' },
+  { path: '/', name: '统计', icon: 'global' },
   {
-    path: 'manager',
+    path: '',
     name: '管理',
     icon: 'share-alt',
-    child: [
+    children: [
       {
-        path: 'order',
+        path: '/order',
         name: '订单管理'
       }, {
-        path: 'goods',
+        path: '/goods',
         name: '商品管理'
       }, {
-        path: 'category',
+        path: '/category',
         name: '分类管理',
       }, {
-        path: 'merchant',
+        path: '/merchant',
         name: '店铺管理',
+        children: [
+          {
+            path: '/order',
+            name: '订单管理'
+          }
+        ]
       }
     ]
   }, {
-    path: 'setting',
+    path: '/setting',
     name: '设置',
     icon: 'trophy'
   }
 ];
 
-export default sidebarMenus;
+export { sidebarMenus };
 
 

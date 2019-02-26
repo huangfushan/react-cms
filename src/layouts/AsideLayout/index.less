@@ -1,0 +1,62 @@
+.aside-layout {
+  display: flex;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #eee;
+
+  .dt-sidebar {
+
+    &-header {
+      box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+      border-left: 1px solid #eee;
+      box-sizing: border-box;
+      text-align: center;
+      height: 60px;
+
+      img {
+        height: 40px;
+        margin: 10px;
+      }
+    }
+
+    &-body {
+      padding: 20px 0;
+    }
+  }
+
+  &-content {
+    width: 100%;
+
+    header {
+      background: #fff;
+      height: 60px;
+      line-height: 60px;
+      padding: 0 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+
+      .name {
+        span {
+          padding: 0 10px;
+        }
+      }
+    }
+
+    .body {
+      position: relative;
+      background: #fff;
+      margin: 10px 10px 0 10px;
+      min-height: calc(100% - 60px - 40px - 10px);
+    }
+  }
+
+  footer {
+    .copyright, .copyright a {
+      text-align: center;
+      font-size: .75rem;
+      color: #999;
+      height: 40px;
+      line-height: 40px;
+    }
+  }
+}

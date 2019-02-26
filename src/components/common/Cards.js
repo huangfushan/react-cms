@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, Pagination } from 'antd';
 import Card from '../antd/Card/Card';
 import { Converter } from '../../utils';
-import Nothing from './Nothing';
+import Nothing from './NoData';
 
 export default class Cards extends React.Component {
 

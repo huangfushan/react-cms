@@ -1,0 +1,60 @@
+@import "../../themes/common/flex";
+
+.header-aside-layout {
+  display: flex;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #eee;
+
+  header {
+    .flex-between;
+    background: #fff;
+    height: 60px;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+
+    img {
+      height: 40px;
+      margin: 10px;
+    }
+  }
+
+  .dt-sidebar {
+      padding: 20px 0;
+  }
+
+  &-content {
+    width: 100%;
+    display: flex;
+    padding-top: 60px;
+
+    .body {
+      width: 100%;
+      padding: 10px 10px 0 10px;
+      position: relative;
+      //margin: 10px 10px 0 10px;
+      //min-height: calc(100% - 60px);
+
+      &-content {
+        background: #fff;
+        min-height: calc(100% - 40px);
+      }
+
+      footer {
+        .copyright, .copyright a {
+          text-align: center;
+          font-size: .75rem;
+          color: #999;
+          height: 40px;
+          line-height: 40px;
+        }
+      }
+    }
+  }
+}

@@ -11,13 +11,13 @@ import Loading from './Loading';
 
 const LoadingComponent = (props) => {
   if (props.error) {
-    return <Error />
+    return <Error />;
   } else if (props.pastDelay) {
     //300ms之后显示
-    return <Loading />
+    return <Loading />;
   } else {
-    return null
+    return null;
   }
 };
 
-export default LoadingComponent
+export default LoadingComponent;

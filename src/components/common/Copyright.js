@@ -8,26 +8,11 @@
 import React from 'react';
 import { C_AUTHOR } from '../../common/constants';
 
-export default function Copyright() {
+export default () => {
   return (
-    <footer style={style} className="flex-center">
-      Copyright &copy; {C_AUTHOR.TIME} &nbsp;&nbsp; <a href={C_AUTHOR.PATH} target="view_window" style={style.a}>{C_AUTHOR.NAME}</a>
-    </footer>
-  )
+    <div className="copyright">
+      Copyright &copy; {C_AUTHOR.TIME} &nbsp;&nbsp;
+      <a href={C_AUTHOR.PATH} target="view_window">{C_AUTHOR.NAME}</a>
+    </div>
+  );
 }
-
-const style = {
-  textAlign: 'center',
-  fontSize: '12px',
-  paddingTop: 20,
-  paddingBottom: 20,
-  marginTop: 0,
-  marginBottom: 0,
-  minHeight: 40,
-  color: '#999',
-
-  a: {
-    fontSize: '12px',
-    color: '#999'
-  }
-};

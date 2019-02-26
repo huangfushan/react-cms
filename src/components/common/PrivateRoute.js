@@ -1,7 +1,10 @@
+/**
+ * 自定义必须是已经登录的route
+ */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, withRouter, Redirect } from 'react-router-dom';
-
 
 @connect(
   state => ({

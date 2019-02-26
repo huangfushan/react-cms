@@ -9,10 +9,10 @@ import Immutable from 'seamless-immutable';
 import { Actions } from "../actions";
 
 const INITIAL_STATE = Immutable({
-  session: null,
-  phone: null,
-  account: null,
-  username: null,
+  session: '',
+  phone: '',
+  account: '',
+  username: '',
   isAuthenticated: false
 });
 

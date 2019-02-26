@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 import md5 from 'md5';
-import Copyright from '../components/common/Copyright';
 import PropTypes from 'prop-types';
-import { C_PROJECT_NAME, C_RESP } from '../common/constants';
-import { common } from '../images/images';
-import { Actions, AsyncActions } from '../redux/actions';
+import { C_PROJECT_NAME, C_RESP } from '../../common/constants';
+import { common } from '../../images/images';
+import { Actions, AsyncActions } from '../../redux/actions';
+import './login.less';
 
 const FormItem = Form.Item;
 
@@ -59,16 +59,11 @@ export default class Login extends React.Component {
     const { form } = this.props;
     const { getFieldDecorator } = form;
     const { username, password } = this.state;
-    return this.props.isAuthenticated ? (
-      <Redirect
-        to={{
-          pathname: `/`
-        }}
-      />) : (
+    return this.props.isAuthenticated ? <Redirect to='/' /> : (
       <div className="page page-login vertical-align">
         <div className="page-content vertical-align-middle">
           <div className="brand">
-            <img src={common.logo} alt="..." />
+            <img src={common.logo} alt="logos" />
             <h2 className="brand-text">{C_PROJECT_NAME}</h2>
           </div>
           <Form style={{ textAlign: 'left' }} onSubmit={this.handleSubmit}>
@@ -100,7 +95,6 @@ export default class Login extends React.Component {
               </Button>
             </FormItem>
           </Form>
-          <Copyright className="page-copyright-inverse" />
         </div>
       </div>
     );

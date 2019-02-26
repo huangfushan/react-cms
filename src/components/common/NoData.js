@@ -8,13 +8,11 @@
 import React from 'react';
 import { icon } from '../../images/images';
 
-const Nothing = () => {
+export default () => {
   return (
     <div className="text-align-center">
-      <img  src={icon.nothing} alt=''/>
+      <img src={icon.nothing} alt='' />
       <p>暂无数据</p>
     </div>
-  )
+  );
 };
-
-export default Nothing;

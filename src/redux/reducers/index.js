@@ -7,9 +7,11 @@
 
 import { combineReducers } from 'redux';
 import auth from './auth';
+import env from './env';
 import common from './common';
 
 export default combineReducers({
   auth,
+  env,
   common
 });
