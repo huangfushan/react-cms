@@ -20,7 +20,8 @@
     "babel-polyfill": "^6.26.0",
     "dotenv": "4.0.0",
     "fs-extra": "3.0.1",
-    "lodash": "^4.17.5",
+    "lodash.isempty": "^4.4.0",
+    "lodash.merge": "^4.6.1",
     "md5": "^2.2.1",
     "normalize.css": "^8.0.0",
     "prop-types": "^15.6.0",
@@ -79,7 +80,40 @@
     "prod": "node scripts/build.js prod",
     "clean": "rimraf build/*"
   },
-  "proxy": "https://www.wubotianxia.top/api",
+  "proxy": {
+    "/dev": {
+      "target": "https://tst.dayukeji.xin/p10000/api",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/dev": ""
+      }
+    },
+    "/test": {
+      "target": "https://tst.dayukeji.xin/p10000/api",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/test": ""
+      }
+    },
+    "/prod": {
+      "target": "https://production.dayukeji.xin/p10000/api",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/prod": ""
+      }
+    },
+    "/postman": {
+      "target": "https://d19e4300-a3d5-4259-adb1-7b6f25a2c82e.mock.pstmn.io",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/postman": ""
+      }
+    }
+  },
   "eslintConfig": {
     "extends": "react-app"
   }

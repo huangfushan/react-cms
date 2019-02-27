@@ -5,9 +5,9 @@
  * @Project: cms
  */
 
-import ApiSauce from 'apisauce'
+import ApiSauce from 'apisauce';
 import { message } from 'antd';
-import {C_API, C_X_CLIENT_TOKEN} from "../common/constants";
+import { C_API, C_X_CLIENT_TOKEN } from '../common/constants';
 
 const filterResponse = (resp) => {
   if (resp.ok) {
@@ -23,7 +23,7 @@ const filterResponse = (resp) => {
       case ApiSauce.TIMEOUT_ERROR:
         data.message = '网络请求超时';
         message.warn(data.message);
-        break
+        break;
       case ApiSauce.CONNECTION_ERROR:
       case ApiSauce.CLIENT_ERROR:
       case ApiSauce.SERVER_ERROR:
@@ -36,10 +36,10 @@ const filterResponse = (resp) => {
 
 
 class HTTP {
-  constructor(host, config) {
+  constructor(host, timeout, config) {
     this._agent = ApiSauce.create({
       baseURL: host,
-      timeout: 10000, // 10 seconds default.
+      timeout: timeout,
       ...config,
     });
   }
@@ -54,8 +54,8 @@ class HTTP {
     this._agent.deleteHeader(key);
   };
 
-  get = (url, params = {} ) => {
-    return this._agent.get(url, params ).then(filterResponse);
+  get = (url, params = {}) => {
+    return this._agent.get(url, params).then(filterResponse);
   };
 
   post = (uri, params) => {
@@ -77,8 +77,8 @@ class HTTP {
 
 
 const http = new HTTP(
-    // process.env.NODE_ENV === 'production' ? C_API.HOST : '',
-  C_API.HOST,
+  `${C_API.HOST}${C_API.DEBUG}`,
+  C_API.TIMEOUT,
   {
     headers: {
       'X-Client-Token': C_X_CLIENT_TOKEN,
@@ -86,4 +86,4 @@ const http = new HTTP(
   }
 );
 
-export default http
+export default http;

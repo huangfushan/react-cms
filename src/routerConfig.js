@@ -20,7 +20,7 @@ const Login = Loadable({
 const NotFound = Loadable({
   loader: () => import('./components/common/NotFound'),
   loading: LoadingComponent,
-  delay: 100
+  delay: 0
 });
 
 /**

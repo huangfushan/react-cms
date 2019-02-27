@@ -7,7 +7,7 @@
 
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
-import lodash from 'lodash';
+import merge from 'lodash.merge';
 import service from './service';
 import './index.less';
 
@@ -53,7 +53,7 @@ const getSeriesData = (option) => {
 
 const getOption = (props) => {
   const { title, option = {} } = props;
-  const result = lodash.merge({}, service, {
+  const result = merge({}, service, {
     title: {
       text: title
     },

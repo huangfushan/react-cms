@@ -1,20 +1,7 @@
 const path = require('./config');
-const env = (env) => {
-  switch (env){
-    case 'dev': //开发服
-      return `${path.PROJECT_HOST_DEV}/${path.PROJECT_CODE}`;
-    case 'test': //测试服
-      return `${path.PROJECT_HOST_TEST}/${path.PROJECT_CODE}`;
-    case 'prod': //正式服
-      return `${path.PROJECT_HOST_PROD}`; //商家提供域名的话，就没有code
-    default: //其他，如本地
-      return ``;
-  }
-};
 
-export const C_PROJECT_NAME = path.PROJECT_NAME;
-export const C_X_CLIENT_TOKEN = `${path.PROJECT_CODE}:${path.PROJECT_PORT}`; //token
-export const C_PROJECT_HOST = env(process.env.PRODUCTION_ENV); //当前运行环境对应的host
+export const C_PROJECT_NAME = path.PROJECT_NAME; //项目名称
+export const C_X_CLIENT_TOKEN = path.X_CLIENT_TOKEN; //x-client-token
 
 /**
  * 技术支持
@@ -25,13 +12,15 @@ export const C_AUTHOR = {
   NAME: '大愚科技提供技术支持',
   PATH: 'https://www.dayukeji.xin'
 };
+
 /**
  * API请求路径
  * @type {{HOST: string, PATH: string}}
  */
 export const C_API = {
-  HOST: `${C_PROJECT_HOST}/api`,
-  // ADDRESS: `${path.PROJECT_HOST_PROD}/static${path.PROJECT_CODE}/address`,//静态资源api
+  HOST: path.env(), //当前运行环境对应的host
+  TIMEOUT: 15000, //api请求超时时间
+  DEBUG: path.debug(), // 本地环境调试需要的接口映射
 };
 
 /**
@@ -65,10 +54,9 @@ export const C_TIME = {
  * @type {{KEY_SESSION: string, KEY_USER: string}}
  */
 export const C_STORAGE = {
-  KEY_AUTH: 'auth', //账户信息，是对象
+  KEY_AUTH: {}, //账户信息，是对象
   KEY_SESSION: 'session', //session
 };
-
 
 /**
  * 页码
@@ -79,18 +67,14 @@ export const C_PAGE_NUMBER = {
   COUNT: 10,
 };
 
-export const C_ORDER = {
-  ALL: '全部订单',
-  UNSHIP: '待发货',
-  SHIPED: '待收货',
-  COMPLETE: '已完成'
-};
-
-
-export const  C_GENDER = {
+/**
+ * 性别
+ * @type {{MAN: string, WOMEN: string, UNKNOWN: string}}
+ */
+export const C_GENDER = {
   MAN: '男',
   WOMEN: '女',
-  UNKNOW: '未知'
+  UNKNOWN: '未知'
 };
 
 export const C_EDUCATION = {
@@ -107,18 +91,35 @@ export const C_EDUCATION = {
  * @type {{REGISTER: string, LOGIN: string, ALTER_PASSWORD: string, ALTER_PHONE: string, BIND: string}}
  */
 export const C_SCENE = {
-  REGISTER: "REGISTER", //注册时的验证码
+  REGISTER: 'REGISTER', //注册时的验证码
   LOGIN: 'LOGIN', //验证码登录
   ALTER_PASSWORD: 'ALTER_PASSWORD', //通过旧密码，修改密码
   ALTER_PHONE: 'ALTER_PHONE', //修改手机号
   FORGET_PASSWORD: 'FORGET_PASSWORD', //忘记密码时，修改密码
   BIND: 'BIND', //绑定
 };
-//
-// 'WX_MINI', 微信小程序
-// 'WX_APP',微信app
-// 'WX_H5',微信h5
-// 'WX_MP',微信公众号
-// 'ALI_MINI',支付宝小程序
-// 'ALI_H5',支付宝h5
-// 'ALI_APP'支付宝app
+
+/**
+ * 支付类型
+ * @type {{WX_MINI: string, WX_APP: string, WX_H5: string, WX_MP: string, ALI_MINI: string, ALI_H5: string, ALI_APP: string}}
+ */
+export const C_PAY = {
+  WX_MINI: 'WX_MINI', //微信小程序
+  WX_APP: 'WX_APP', //微信app
+  WX_H5: 'WX_H5', //微信h5
+  WX_MP: 'WX_MP', //微信公众号
+  ALI_MINI: 'ALI_MINI', //支付宝小程序
+  ALI_H5: 'ALI_H5', //支付宝h5
+  ALI_APP: 'ALI_APP', //支付宝app
+};
+
+/**
+ * oss存储路径
+ * @type {{VIDEO: string, AUDIO: string, IMAGE: string, FILE: string}}
+ */
+export const C_OSS = {
+  VIDEO: `${path.PROJECT_CODE}/${process.env.PRODUCTION_ENV || 'dev'}/${path.PROJECT_PORT}/video`,
+  AUDIO: `${path.PROJECT_CODE}/${process.env.PRODUCTION_ENV || 'dev'}/${path.PROJECT_PORT}/audio`,
+  IMAGE: `${path.PROJECT_CODE}/${process.env.PRODUCTION_ENV || 'dev'}/${path.PROJECT_PORT}/image`,
+  FILE: `${path.PROJECT_CODE}/${process.env.PRODUCTION_ENV || 'dev'}/${path.PROJECT_PORT}/file`,
+};

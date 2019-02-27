@@ -8,9 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { message, Button } from 'antd';
-import Rules from '../../../utils/validate/rules';
 import { C_RESP } from '../../../common/constants';
-import { error } from '../../../utils';
+import { error, RegExp } from '../../../utils';
 import './index.less';
 
 export default class Register extends React.Component {
@@ -40,7 +39,7 @@ export default class Register extends React.Component {
   //提交表单
   handleSubmit = () => {
     const { phone, captcha } = this.state;
-    if (!Rules.tel(phone)) {
+    if (!RegExp.phone.test(phone)) {
       this.setState({
         phoneHint: '请输入正确的手机号码',
       });
@@ -97,13 +96,12 @@ export default class Register extends React.Component {
     }, 1000);
   };
 
-
   /**
    * 获取验证码
    */
   fetchCaptcha = () => {
     const { phone } = this.state;
-    if (!Rules.tel(phone)) {
+    if (!RegExp.phone.test(phone)) {
       this.setState({ phoneHint: '请输入正确的手机号码' });
       return;
     }
@@ -130,26 +128,32 @@ export default class Register extends React.Component {
         <div className="captcha">
           <div className="flex-center form-row">
             <p className="title">手机</p>
-            <input type="text" maxLength={ 11 } className="phone" placeholder="请输入您的手机号"
-                   onChange={ this.handleChangePhone }/>
+            <input
+              type="text"
+              maxLength={11}
+              className="phone"
+              placeholder="请输入您的手机号"
+              onChange={this.handleChangePhone} />
           </div>
-          <div className="status-warning form-hint">{ this.state.phoneHint }</div>
+          <div className="status-warning form-hint">{this.state.phoneHint}</div>
           <div className="flex-center form-row">
             <p className="title">验证码</p>
-            <input type="text" maxLength={ 55 } placeholder="请输入您的验证码" name="code" value={ this.state.captcha }
-                   onChange={ this.handleChangeCaptcha }/>
-            <span className={ `code code-${this.state.time}` }
-                  onClick={ this.fetchCaptcha }>{ this.state.captchaText }</span>
+            <input
+              type="text"
+              maxLength={6}
+              placeholder="请输入您的验证码"
+              name="code"
+              value={this.state.captcha}
+              onChange={this.handleChangeCaptcha} />
+            <span
+              className={`code code-${this.state.time}`}
+              onClick={this.fetchCaptcha}>{this.state.captchaText}</span>
           </div>
-          <div className="status-warning form-hint">{ this.state.captchaHint }</div>
-          { /*<div className="flex-center">*/ }
-          { /*<span>首次登录将自动注册得道科技技账户且同意</span>*/ }
-          { /*<Link style={{color: 'blue'}} to={'/provision'} target="_blank">《得道科技》</Link>*/ }
-          { /*</div>*/ }
+          <div className="status-warning form-hint">{this.state.captchaHint}</div>
           <div className="captcha-footer flex-center form-row">
-            <Button className="btn-login" type="primary" onClick={ this.handleSubmit }>{this.props.text || '下一步'}</Button>
+            <Button className="btn-login" type="primary" onClick={this.handleSubmit}>{this.props.text || '确定'}</Button>
           </div>
-          <div className="status-warning form-hint">{ `${this.state.errorHint}` }</div>
+          <div className="status-warning form-hint">{`${this.state.errorHint}`}</div>
         </div>
       </div>
     );

@@ -51,7 +51,6 @@ export default class Login extends React.Component {
           }
         }
       );
-
     });
   };
 

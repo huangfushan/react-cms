@@ -8,10 +8,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Table from '../components/antd/Table/index';
 import Tabs from '../components/antd/Tabs';
-import SearchHeader from '../components/page/order/SearchHeader';
+import SearchHeader from './components/order/SearchHeader';
 import { C_PAGE_NUMBER, C_RESP, C_TIME } from '../common/constants';
 import { error, timeFmt } from '../utils/index';
-import orderApi from '../api/orderApi';
+import orderApi from './api/orderApi';
 import Selector from '../components/antd/Selector';
 import { Actions } from '../redux/actions';
 
@@ -21,7 +21,6 @@ import { Actions } from '../redux/actions';
     clearAuth: Actions.auth.clearAuth
   }
 )
-
 export default class orderList extends React.Component {
 
   state = {

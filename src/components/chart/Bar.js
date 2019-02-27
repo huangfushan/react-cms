@@ -8,7 +8,7 @@
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 import service from './service';
-import lodash from 'lodash';
+import merge from 'lodash.merge';
 import './index.less';
 
 /**
@@ -58,7 +58,7 @@ const getOption = (props) => {
     type: 'category',
     data: option.xAxis
   };
-  const result = lodash.merge({}, service, {
+  const result = merge({}, service, {
     title: {
       text: title
     },

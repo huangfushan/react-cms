@@ -12,17 +12,17 @@ export const setStorage = (name, content) => {
   if (typeof content !== 'string') {
     content = JSON.stringify(content)
   }
-  sessionStorage.setItem(name, content)
+  localStorage.setItem(name, content)
 };
 
 //获取缓存
 export const getStorage = name => {
   if (!name) return ;
-  return sessionStorage.getItem(name)
+  return localStorage.getItem(name)
 };
 
 //清除缓存
 export const removeStorage = name => {
   if (!name) return ;
-  return sessionStorage.removeItem(name)
+  return localStorage.removeItem(name)
 };

@@ -14,17 +14,16 @@ export default class Modal extends React.Component {
     title: PropTypes.string,
     handleCancel: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    width: PropTypes.number.isRequired,
     visible: PropTypes.bool.isRequired,
     confirmLoading: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
+    title: '',
     visible: false,
+    width: 0,
     confirmLoading: false,
-  };
-
-  state = {
-    modalWidth: undefined
   };
 
   handleCancel = () => {
@@ -35,36 +34,23 @@ export default class Modal extends React.Component {
     this.props.handleSubmit(e);
   };
 
-  changeMode = (value) => {
-    this.setState({
-      modalWidth: !value
-    })
-  };
-
   render() {
     return (
       <AliModal
         maskClosable={false}
         visible={this.props.visible}
         title={
-          <div>
-            <span>{this.props.title || '编辑'}</span>
-            {
-              ('mode' in this.props && !this.props.mode) ? null : (
-                <Button style={{marginLeft: 10}} size='small' onClick={() => this.changeMode(this.state.modalWidth)}>切换模式</Button>
-              )
-            }
-          </div>
+          <span>{this.props.title || '编辑'}</span>
         }
         okText="确定"
         cancelText="取消"
-        width={this.state.modalWidth ? '80%' : 800}
+        width={this.props.width || 800}
         confirmLoading={this.props.confirmLoading}
         onCancel={this.handleCancel}
         onOk={this.handleSubmit}
       >
         {this.props.children}
       </AliModal>
-    )
+    );
   }
 }

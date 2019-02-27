@@ -6,28 +6,9 @@
  */
 
 import http from './http';
-const url = `/service/auth`;
-
-/**
- * 登录
- * @param params
- * @returns {Promise<*>}
- */
-const signIn = (params) => http.post(url, params);
-
-/**
- * 登出
- * @returns {*}
- */
-const signOut = () => http.delete(url);
-
-/**
- * 获取用户信息
- */
-const getUser = () => http.get(url);
 
 export default {
-  signIn,
-  signOut,
-  getUser,
+  signIn: params => http.post(`/manager/auth`, params), // 登录
+  signOut: () => http.delete(`/manager/auth`), // 登出
+  getUser: () => http.get(`/manager/auth`), //获取用户信息
 }

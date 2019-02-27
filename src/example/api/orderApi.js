@@ -5,7 +5,7 @@
  * @Project: cms
  */
 
-import http from "../api/http";
+import http from "../../api/http";
 
 const order_url = `/order`;
 

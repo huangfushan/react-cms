@@ -5,46 +5,51 @@
  * @Project: cms
  */
 
+/**
+ * 有aspectRatio字段：代表可以裁剪，如果有比例会按照比例裁剪，没有比例则自定义裁剪，
+ * onChange，提供onChange方法，
+ * oss：用到ali oss文件上传服务，
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Icon } from 'antd';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
-import { base64toFile, beforeUpload, getBase64, isBase64 } from '../../utils/image';
-import { error } from '../../utils';
+import { base64toFile, imageBeforeUpload, getBase64, isBase64 } from '../../utils/image';
 import { C_RESP } from '../../common/constants';
 import commonApi from '../../api/commonApi';
 import Modal from '../antd/Modal';
+import { Actions } from '../../redux/actions';
+import { pushAliOss } from '../../utils/aliOSS';
+import { error } from '../../utils';
 
 //https://www.npmjs.com/package/react-cropper
 //https://github.com/fengyuanchen/cropperjs#aspectratio
 
-export default class ImageCropper extends React.Component {
+@connect(
+  null,
+  {
+    clearAuth: Actions.auth.clearAuth
+  }
+)
+export default class ImageUpload extends React.Component {
 
   static propTypes = {
     onChange: PropTypes.func,
-    aspectRatio: PropTypes.number,
-    // value: PropTypes.string.isRequired,
-  };
-
-  static defaultProps = {
-    // value: '', // 初始图片
+    value: PropTypes.string,
   };
 
   constructor(props) {
     super(props);
     this.state = {
+      base64: '',
       visible: false, //弹窗可不可见
       confirmLoading: false, //弹窗确认中
-      value: this.props.value, //当前的图片地址value
+      value: '', //当前的图片地址value
       currentValue: '' // 弹窗内到值
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if ('value' in nextProps) {
-      this.setState({ value: nextProps.value });
-    }
   }
 
   //选中图片
@@ -52,22 +57,22 @@ export default class ImageCropper extends React.Component {
     if (image) {
       const input = document.createElement('input');
       input.setAttribute('type', 'file');
+      input.setAttribute('accept', 'image/png,image/gif,image/jpg,image/jpeg');
       input.click();
       input.onchange = () => {
         const file = input.files[0];
-        if (beforeUpload(file)) {
+        if (imageBeforeUpload(file)) {
+          if (!this.props.aspectRatio) { //如果不裁剪，直接上传
+            this.fetchOssAccessKey(file);
+            return;
+          }
           //获取base64
           getBase64(file, base64 => {
             this.setState({ currentValue: base64 });
           });
-          //获取base64
-          // const reader = new FileReader();
-          // reader.onload = () => {
-          //   console.log(reader.result)
-          //   this.setState({ currentValue: reader.result });
-          // };
-          // reader.readAsDataURL(file);
           this.handleOpenModal();
+        } else {
+          alert('图片错误，请重新添加，图片仅支持jpg，png，gif，jpeg格式');
         }
       };
     }
@@ -79,10 +84,11 @@ export default class ImageCropper extends React.Component {
     });
   };
 
-  handleSuccess = (value) => {
+  handleSuccess = (value, base64) => {
     this.setState({
       visible: false,
-      value
+      value,
+      base64
     });
     const { onChange } = this.props;
     if (onChange) {
@@ -103,54 +109,37 @@ export default class ImageCropper extends React.Component {
     const base64 = isBase64(canvas.toDataURL());
     if (!base64) return;
     const file = base64toFile(base64[0], `image.${base64[1]}`); //base64转文件
-    // const params = {
-    //   content: base64[2],
-    //   suffix: base64[1],
-    // };
-    this.saveToServer(file);
+    this.pushAliOss(file, 'image', base64[0]);
   };
 
-  /**
-   * 上传到服务端
-   */
-  saveToServer = (file) => {
+  pushAliOss = (file, type, base64) => {
     this.setState({ confirmLoading: true });
-    commonApi.pushFile({ file }).then(resp => {
-      this.setState({ confirmLoading: false });
-      switch (resp.status) {
-        case C_RESP.OK:
-          this.handleSuccess(resp.data[0].url);
-          break;
-        case C_RESP.ERR_INVALID:
-          break;
-        default:
+    commonApi.fetchOssAccessKey().then(resp => {
+      pushAliOss(resp, type, file).then((resp) => {
+        this.setState({ confirmLoading: false });
+        if (resp.status === C_RESP.OK) {
+          this.handleSuccess(resp.url, base64); //上传成功后的逻辑
+        } else {
           error(resp);
-      }
+        }
+      });
     });
   };
 
-  // useDefaultImage = () => {
-  //   this.setState({
-  //     value: this.props.value,
-  //   });
-  // };
-
   render() {
+    const { aspectRatio } = this.props;
     return (
       <div>
-        <div>
-          {
-            this.state.value ? (
-              <img src={this.state.value} alt='' style={style.image} onClick={this.selectImage} />
-            ) : (
-              <div style={style.image} className="column" onClick={this.selectImage}>
-                <Icon type={this.state.loading ? 'loading' : 'plus'} />
-                <span>上传</span>
-              </div>
-            )
-          }
-        </div>
-        {/*<button onClick={this.useDefaultImage}>上一张</button>*/}
+        {
+          this.props.value ? (
+            <img src={this.state.base64 || this.props.value} alt='' style={style.image} onClick={this.selectImage} />
+          ) : (
+            <div style={style.image} className="column" onClick={this.selectImage}>
+              <Icon type={this.state.confirmLoading ? 'loading' : 'plus'} />
+              <span>上传</span>
+            </div>
+          )
+        }
         <Modal
           mode={false}
           title="裁剪"
@@ -161,7 +150,7 @@ export default class ImageCropper extends React.Component {
         >
           <Cropper
             style={{ height: 300, width: '100%' }}
-            aspectRatio={this.props.aspectRatio}
+            aspectRatio={(aspectRatio && typeof aspectRatio !== 'boolean' && aspectRatio) || 0}
             viewMode={2}
             dragMode='move'
             guides={true}
@@ -181,7 +170,8 @@ export default class ImageCropper extends React.Component {
 const style = {
   image: {
     margin: '0 10px 10px 0',
-    width: 100,
+    minWidth: 100,
+    minHeight: 100,
     height: 100,
     borderRadius: 4,
     border: '1px solid #eee',
