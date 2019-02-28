@@ -1,46 +1,37 @@
 @import '../../themes/default/variables';
+@import "../../themes/style/index";
 
 .page-login {
   text-align: center;
-  //background: url(@image-bg) no-repeat center;
-  //background-size: 100% 100%;
+  width: 500px;
 
   .page-content {
     display: inline-block;
-    padding: 1.875rem;
+    padding-top: 2rem;
     vertical-align: middle;
   }
 
-  .brand {
-    margin-bottom: 1.5rem;
+  form {
+    //margin: 1.875rem 0;
+    text-align: left;
 
-    img{
-      height: 6rem;
+    .btn-login {
+      display: block;
+      color: @text-color-light;
+      width: 100%;
     }
-    &-text {
-      font-size: 1.5rem;
-      font-weight: normal;
-      margin: 1rem;
+
+    .ant-form-item {
+      width: 320px;
+      margin-bottom: .5rem;
+    }
+
+    .ant-input-prefix{
+      color: @text-color-secondary;
     }
   }
 
-  //form {
-  //  margin: 1.875rem 0;
-  //}
-
-  .login-form-forgot {
-    float: right;
-  }
-
-  .btn-login {
-    margin-top: 1rem;
-    display: block;
-    color: @text-color-light;
-    width: 100%;
-  }
-
-  .ant-form-item {
-    width: 21rem;
-    margin-bottom: 0.5rem;
+  .page-footer {
+    padding: 1rem;
   }
 }
