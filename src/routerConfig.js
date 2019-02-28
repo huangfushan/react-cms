@@ -11,7 +11,6 @@ import CenterLayout from './layouts/CenterLayout';
 import AsideLayout from './layouts/AsideLayout';
 import NormalLayout from './layouts/NormalLayout';
 import HeaderAsideLayout from './layouts/HeaderAsideLayout';
-import Register from './components/common/Register';
 
 const Login = Loadable({
   loader: () => import('./pages/login'),
@@ -50,15 +49,23 @@ const routerConfig = [
     path: '/setting',
     component: NotFound,
     exact: true,
-    breadcrumb: '未找到',
+    breadcrumb: '首页',
+    isAuthenticated: true,
     layout: HeaderAsideLayout
   }, {
-    path: '/',
-    component: Register,
+    path: '/home',
+    component: NotFound,
     exact: true,
     breadcrumb: '首页',
     isAuthenticated: true,
     layout: AsideLayout
+  },{
+    path: '/',
+    component: NotFound,
+    exact: true,
+    breadcrumb: '404',
+    isAuthenticated: true,
+    layout: CenterLayout
   },
 ];
 

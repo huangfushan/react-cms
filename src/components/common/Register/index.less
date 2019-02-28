@@ -1,14 +1,12 @@
 @import '../../../themes/default/variables';
 
 .register {
-  width: 100%;
   margin: auto;
-  max-width: 400px;
-  padding-top: 20px;
-  //height: 200px;
+  width: 500px;
+  padding: 40px 20px;
 
   .form-row {
-    padding-top: 20px;
+    padding-top: 1rem;
 
     .title {
       width: 80px;
@@ -19,7 +17,7 @@
     input {
       flex: 1;
       border: 0;
-      background: #F1F2F7;
+      background: @background-color-base;
       height: 40px;
       padding: 0 10px;
     }
@@ -46,11 +44,9 @@
     line-height: 1rem;
     padding-top: 4px;
     margin-left: 80px;
-    //display: none;
   }
   .forget {
     text-align: right;
-    color: blue;
+    color: @primary-color;
   }
-
 }

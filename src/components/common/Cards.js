@@ -111,7 +111,7 @@ export default class Cards extends React.Component {
                 onChange={this.handlePageChange}
                 style={{
                   textAlign: 'center',
-                  marginTop: '30px'
+                  marginTop: '2rem'
                 }}
               />
             ) : null

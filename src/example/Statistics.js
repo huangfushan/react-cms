@@ -25,7 +25,7 @@ export default class Statistics extends React.Component {
   render() {
     return (
       <div>
-        <div className="flex-between" style={{ background: '#eee', padding: '0 10px', margin: ' 10px' }}>
+        <div className="flex-between" style={{ background: '#eee', padding: '0 .625rem', margin: ' .625rem' }}>
           <h3>消费情况</h3>
           <Tabs
             onChange={(value) => console.log(value)}
@@ -38,7 +38,7 @@ export default class Statistics extends React.Component {
           <Pie title="消费金额" option={pieOption} />
           <Pie title="消费人次" option={pieOption} />
         </div>
-        <div className="flex-between" style={{ background: '#eee', padding: '0 10px', margin: ' 10px' }}>
+        <div className="flex-between" style={{ background: '#eee', padding: '0 .625rem', margin: ' .625rem' }}>
           <div className="flex-center">
             <h3>售卡情况</h3>
             <span>{`剩余会员卡：${312}张`}</span>

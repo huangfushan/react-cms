@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, Icon } from 'antd';
 import md5 from 'md5';
 import PropTypes from 'prop-types';
@@ -127,7 +127,7 @@ export default class Login extends React.Component {
           </Form>
         </div>
         <div className="page-footer">
-          <a className="normal-color">立即注册</a>
+          <Link to="/register" className="normal-color">立即注册</Link>
         </div>
       </div>
     );

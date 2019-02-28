@@ -169,7 +169,7 @@ export default class ImageUpload extends React.Component {
 
 const style = {
   image: {
-    margin: '0 10px 10px 0',
+    margin: '0 .625rem .625rem 0',
     minWidth: 100,
     minHeight: 100,
     height: 100,
