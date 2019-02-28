@@ -1,13 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, Icon } from 'antd';
 import md5 from 'md5';
-import PropTypes from 'prop-types';
 import { C_RESP, C_STORAGE } from '../../common/constants';
 import { Actions, AsyncActions } from '../../redux/actions';
-import './login.less';
 import { getStorage, removeStorage, setStorage } from '../../utils';
+import './login.less';
 
 const FormItem = Form.Item;
 
