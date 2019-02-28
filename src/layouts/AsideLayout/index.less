@@ -1,52 +1,55 @@
+@import "../../themes/default/variables";
+
 .aside-layout {
   display: flex;
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: #eee;
+  //background: @background-color-base;
 
   .dt-sidebar {
 
     &-header {
-      box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-      border-left: 1px solid #eee;
+      box-shadow: @box-shadow-base;
+      border-left: @border;
       box-sizing: border-box;
       text-align: center;
-      height: 60px;
+      height: 4rem;
 
       img {
-        height: 40px;
-        margin: 10px;
+        height: 3rem;
+        margin: .5rem;
       }
     }
 
     &-body {
-      padding: 20px 0;
+      padding: 1.5rem 0;
     }
   }
 
   &-content {
     width: 100%;
+    background: @background-color-base;
 
     header {
-      background: #fff;
-      height: 60px;
-      line-height: 60px;
-      padding: 0 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+      background: @background-color-light;
+      height: 4rem;
+      padding: 0 2rem;
+      box-shadow: @box-shadow-base;
 
       .name {
         span {
-          padding: 0 10px;
+          padding: 0 1rem;
         }
       }
     }
 
     .body {
       position: relative;
-      background: #fff;
-      margin: 10px 10px 0 10px;
-      min-height: calc(100% - 60px - 40px - 10px);
+      background: @background-color-light;
+      margin: .625rem .625rem 0 .625rem;
+      padding: .625rem;
+      min-height: calc(100% - 4rem - 3rem - .625rem);
     }
   }
 
@@ -54,9 +57,9 @@
     .copyright, .copyright a {
       text-align: center;
       font-size: .75rem;
-      color: #999;
-      height: 40px;
-      line-height: 40px;
+      color: @text-color-secondary;
+      height: 3rem;
+      line-height: 3rem;
     }
   }
 }

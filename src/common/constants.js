@@ -54,7 +54,7 @@ export const C_TIME = {
  * @type {{KEY_SESSION: string, KEY_USER: string}}
  */
 export const C_STORAGE = {
-  KEY_AUTH: {}, //账户信息，是对象
+  KEY_AUTH: 'auth', //账户信息，是对象
   KEY_SESSION: 'session', //session
 };
 

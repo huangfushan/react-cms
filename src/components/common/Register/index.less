@@ -1,6 +1,6 @@
-@import '../../../themes/common/variables';
+@import '../../../themes/default/variables';
 
-.captcha {
+.register {
   width: 100%;
   margin: auto;
   max-width: 400px;
@@ -12,8 +12,9 @@
 
     .title {
       width: 80px;
-      color: @text-color-dark;
+      color: @text-color;
       font-size: 1rem;
+      margin: 0;
     }
     input {
       flex: 1;
@@ -24,15 +25,15 @@
     }
     .code {
       cursor: pointer;
-      background: @color-gray;
+      background: @text-color;
       height: 40px;
-      color: @text-color-gray;
+      color: @text-color-secondary-light;
       text-align: center;
       line-height: 40px;
       width: 100px;
 
       &-59 {
-        background-color: @color-blue;
+        background-color: @primary-color;
       }
     }
     .code:hover {
@@ -42,7 +43,8 @@
   .form-hint {
     font-size: .875rem;
     height: 20px;
-    line-height: .875rem;
+    line-height: 1rem;
+    padding-top: 4px;
     margin-left: 80px;
     //display: none;
   }

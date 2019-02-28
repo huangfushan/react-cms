@@ -15,7 +15,7 @@ const bg = {};
 
 const common = {
   logo: require('./common/logo.png'),
-  bg: require('./common/bg.png')
+  bg: require('./common/bg.jpg')
 };
 
 export {

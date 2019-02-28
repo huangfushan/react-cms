@@ -11,6 +11,7 @@ import CenterLayout from './layouts/CenterLayout';
 import AsideLayout from './layouts/AsideLayout';
 import NormalLayout from './layouts/NormalLayout';
 import HeaderAsideLayout from './layouts/HeaderAsideLayout';
+import Register from './components/common/Register';
 
 const Login = Loadable({
   loader: () => import('./pages/login'),
@@ -53,7 +54,7 @@ const routerConfig = [
     layout: HeaderAsideLayout
   }, {
     path: '/',
-    component: NotFound,
+    component: Register,
     exact: true,
     breadcrumb: '首页',
     isAuthenticated: true,

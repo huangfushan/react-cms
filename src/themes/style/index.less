@@ -1,0 +1,38 @@
+@import "./base";
+@import "./overflow";
+@import "./flex";
+
+.text-align-center {
+  text-align: center;
+}
+
+.primary-color {
+  color: @primary-color;
+}
+.success-color {
+  color: @success-color;
+}
+.warn-color {
+  color: @warn-color;
+}
+.error-color {
+  color: @error-color;
+}
+
+.vertical-align {
+  font-size: 0;
+
+  &::before {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    content: "";
+  }
+
+  &-middle {
+    display: inline-block;
+    font-size: 1rem;
+    max-width: 100%;
+    vertical-align: middle;
+  }
+}

@@ -1,4 +1,5 @@
-@import "../../themes/common/flex";
+@import "../../themes/style/flex";
+@import "../../themes/default/variables";
 
 .normal-layout {
   position: relative;
@@ -7,36 +8,36 @@
 
   header {
     .flex-between;
-    background: #fff;
-    height: 60px;
-    padding: 0 20px;
+    background: @background-color-light;
+    height: 4rem;
+    padding: 0 2rem;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    box-shadow: @box-shadow-base;
 
     img {
-      height: 40px;
-      margin: 10px;
+      height: 3rem;
+      margin: .5rem;
     }
   }
 
   &-content {
-    min-height: calc(100vh - 40px - 1px);
-    border-bottom: 1px solid #eee;
-    background: #eee;
-    padding-top: 60px;
+    min-height: calc(100% - 3rem);
+    border-bottom: @border;
+    background: @background-color-base;
+    padding-top: 4rem;
   }
 
   footer {
     .copyright, .copyright a {
       text-align: center;
       font-size: .75rem;
-      color: #999;
-      height: 40px;
-      line-height: 40px;
+      color: @text-color-secondary;
+      height: 3rem;
+      line-height: 3rem;
     }
   }
 }

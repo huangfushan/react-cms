@@ -1,58 +1,58 @@
-@import "../../themes/common/flex";
+@import "../../themes/default/variables";
+@import "../../themes/style/flex";
 
 .header-aside-layout {
   display: flex;
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: #eee;
+  background: @background-color-base;
 
   header {
     .flex-between;
-    background: #fff;
-    height: 60px;
-    padding: 0 20px;
+    background: @white;
+    height: 4rem;
+    padding: 0 2rem;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    box-shadow: @box-shadow-base;
 
     img {
-      height: 40px;
-      margin: 10px;
+      height: 3rem;
+      margin: .5rem;
     }
   }
 
   .dt-sidebar {
-      padding: 20px 0;
+    padding: 1.5rem 0;
   }
 
   &-content {
     width: 100%;
     display: flex;
-    padding-top: 60px;
+    padding-top: 4rem;
 
     .body {
       width: 100%;
-      padding: 10px 10px 0 10px;
+      padding: .625rem .625rem 0 .625rem;
       position: relative;
-      //margin: 10px 10px 0 10px;
-      //min-height: calc(100% - 60px);
 
       &-content {
-        background: #fff;
-        min-height: calc(100% - 40px);
+        background: @background-color-light;
+        padding: .625rem;
+        min-height: calc(100% - 3rem);
       }
 
       footer {
         .copyright, .copyright a {
           text-align: center;
           font-size: .75rem;
-          color: #999;
-          height: 40px;
-          line-height: 40px;
+          color: @text-color-secondary;
+          height: 3rem;
+          line-height: 3rem;
         }
       }
     }

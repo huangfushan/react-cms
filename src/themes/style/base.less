@@ -1,0 +1,133 @@
+//@import './variables';
+
+html, body {
+  //height: 100%;
+}
+
+html {
+  font-size: @font-size-sm;
+  color: @text-color;
+}
+
+@media (min-width: @screen-sm) {
+  html {
+    font-size: @font-size-sm;
+  }
+}
+
+@media (min-width: @screen-md) {
+  html {
+    font-size: @font-size-base;
+  }
+}
+
+@media (min-width: @screen-lg) {
+  html {
+    font-size: @font-size-lg;
+  }
+}
+
+body {
+  margin: 0; // 1
+  color: @text-color;
+  font-size: @font-size-base;
+  font-family: @font-family;
+  font-variant: normal;
+  line-height: @line-height-base;
+  background-color: @white; // 2
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+a {
+  color: @link-color;
+  text-decoration: @link-decoration;
+  background-color: transparent; // remove the gray background on active links in IE 10.
+  outline: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  -webkit-text-decoration-skip: objects; // remove gaps in links underline in iOS 8+ and Safari 8+.
+
+  &:focus {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+  }
+
+  &:hover {
+    color: @link-hover-color;
+  }
+
+  &:active {
+    color: @link-active-color;
+  }
+
+  &:active,
+  &:hover {
+    text-decoration: @link-hover-decoration;
+    outline: 0;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  color: @heading-color;
+  font-weight: @font-weight-weight;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none; // remove the border on images inside links in IE 10-.
+}
+
+a,
+area,
+button,
+label,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+input,
+button,
+select,
+textarea {
+  margin: 0; // remove the margin in Firefox and Safari
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+}
+
+input {
+  border: 1px solid @border-color-base;
+  outline: none;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: @text-color-secondary;
+}
+
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: @text-color-secondary;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: @text-color-secondary;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: @text-color-secondary;
+}

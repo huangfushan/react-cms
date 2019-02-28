@@ -124,37 +124,35 @@ export default class Register extends React.Component {
   render() {
 
     return (
-      <div>
-        <div className="captcha">
-          <div className="flex-center form-row">
-            <p className="title">手机</p>
-            <input
-              type="text"
-              maxLength={11}
-              className="phone"
-              placeholder="请输入您的手机号"
-              onChange={this.handleChangePhone} />
-          </div>
-          <div className="status-warning form-hint">{this.state.phoneHint}</div>
-          <div className="flex-center form-row">
-            <p className="title">验证码</p>
-            <input
-              type="text"
-              maxLength={6}
-              placeholder="请输入您的验证码"
-              name="code"
-              value={this.state.captcha}
-              onChange={this.handleChangeCaptcha} />
-            <span
-              className={`code code-${this.state.time}`}
-              onClick={this.fetchCaptcha}>{this.state.captchaText}</span>
-          </div>
-          <div className="status-warning form-hint">{this.state.captchaHint}</div>
-          <div className="captcha-footer flex-center form-row">
-            <Button className="btn-login" type="primary" onClick={this.handleSubmit}>{this.props.text || '确定'}</Button>
-          </div>
-          <div className="status-warning form-hint">{`${this.state.errorHint}`}</div>
+      <div className="register">
+        <div className="flex-center form-row">
+          <p className="title">手机</p>
+          <input
+            type="text"
+            maxLength={11}
+            className="phone"
+            placeholder="请输入您的手机号"
+            onChange={this.handleChangePhone} />
         </div>
+        <div className="error-color form-hint">{this.state.phoneHint}</div>
+        <div className="flex-center form-row">
+          <p className="title">验证码</p>
+          <input
+            type="text"
+            maxLength={6}
+            placeholder="请输入您的验证码"
+            name="code"
+            value={this.state.captcha}
+            onChange={this.handleChangeCaptcha} />
+          <span
+            className={`code code-${this.state.time}`}
+            onClick={this.fetchCaptcha}>{this.state.captchaText}</span>
+        </div>
+        <div className="error-color form-hint">{this.state.captchaHint}</div>
+        <div className="captcha-footer flex-center form-row">
+          <Button className="btn-login" type="primary" onClick={this.handleSubmit}>{this.props.text || '确定'}</Button>
+        </div>
+        <div className="error-color form-hint">{`${this.state.errorHint}`}</div>
       </div>
     );
   }
