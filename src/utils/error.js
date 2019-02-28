@@ -16,7 +16,7 @@ export const error = (err) => {
     message.error(err.notice);
   }
   if (err.status === 401) {
-    removeStorage(C_STORAGE.KEY_SESSION);
+    removeStorage(C_STORAGE.SESSION);
     const errorMessage = '登录失效，请重新登录';
     console.error(errorMessage);
     return;

@@ -27,7 +27,7 @@ const Actions = createActions({
       isAuthenticated: !isEmpty(auth)
     }),
     clearAuth: () => {
-      removeStorage(C_STORAGE.KEY_AUTH);
+      removeStorage(C_STORAGE.AUTH);
       return {
         session: null,
         isAuthenticated: false
@@ -51,8 +51,8 @@ const AsyncActions = {
       }
     };
     if (res.status === C_RESP.OK) {
-      http.setHeader(C_STORAGE.KEY_SESSION, res.data.session);
-      setStorage(C_STORAGE.KEY_AUTH, res.data); //session
+      http.setHeader(C_STORAGE.SESSION, res.data.session);
+      setStorage(C_STORAGE.AUTH, res.data); //session
       dispatch(Actions.auth.updateAuth(res.data));
     } else {
       error(res);

@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Checkbox, Icon } from 'antd';
 import md5 from 'md5';
 import PropTypes from 'prop-types';
-import { C_PROJECT_NAME, C_RESP } from '../../common/constants';
-import { common } from '../../images/images';
+import { C_RESP, C_STORAGE } from '../../common/constants';
 import { Actions, AsyncActions } from '../../redux/actions';
 import './login.less';
+import { getStorage, removeStorage, setStorage } from '../../utils';
 
 const FormItem = Form.Item;
 
@@ -22,15 +22,27 @@ const FormItem = Form.Item;
 )
 @Form.create()
 export default class Login extends React.Component {
+
+  static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
+  };
+
   state = {
     username: '',
     password: '',
     isFetching: false
   };
 
-  static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
-  };
+  componentWillMount() {
+
+    const username = getStorage(C_STORAGE.USERNAME);
+    const password = getStorage(C_STORAGE.PASSWORD);
+
+    this.setState({
+      username,
+      password
+    });
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +57,15 @@ export default class Login extends React.Component {
         password: md5(values.password)
       };
       this.setState({ isFetching: true });
+
+      if (values.remember === true) {
+        setStorage(C_STORAGE.USERNAME, values.username);
+        setStorage(C_STORAGE.PASSWORD, values.password);
+      } else {
+        removeStorage(C_STORAGE.USERNAME, values.username);
+        removeStorage(C_STORAGE.PASSWORD, values.password);
+      }
+
       this.props.signIn(params).then(resp => {
           if (resp.status !== C_RESP.OK) {
             this.setState({ isFetching: false });
@@ -59,20 +80,17 @@ export default class Login extends React.Component {
     const { getFieldDecorator } = form;
     const { username, password } = this.state;
     return this.props.isAuthenticated ? <Redirect to='/' /> : (
-      <div className="page page-login vertical-align">
-        <div className="page-content vertical-align-middle">
-          <div className="brand">
-            <img src={common.logo} alt="logos" />
-            <h2 className="brand-text">{C_PROJECT_NAME}</h2>
-          </div>
-          <Form style={{ textAlign: 'left' }} onSubmit={this.handleSubmit}>
+      <div className="page-login">
+        <div className="page-content">
+          <h1>登录</h1>
+          <Form onSubmit={this.handleSubmit}>
             <FormItem>
               {
                 getFieldDecorator('username', {
                   initialValue: username,
                   rules: [{ required: true, message: '请输入您的账号!' }]
                 })(
-                  <Input placeholder="账号" />
+                  <Input placeholder="账号" prefix={<Icon type="user" />} />
                 )
               }
             </FormItem>
@@ -82,9 +100,22 @@ export default class Login extends React.Component {
                   initialValue: password,
                   rules: [{ required: true, message: '请输入密码!' }]
                 })(
-                  <Input type="password" placeholder="密码" />
+                  <Input type="password" placeholder="密码" prefix={<Icon type="lock" />} />
                 )
               }
+            </FormItem>
+            <FormItem>
+              <div className="flex-between">
+                {
+                  getFieldDecorator('remember', {
+                    valuePropName: 'checked',
+                    initialValue: true
+                  })(
+                    <Checkbox>记住密码</Checkbox>
+                  )
+                }
+                <a style={{textAlign: 'right'}}>忘记密码</a>
+              </div>
             </FormItem>
             <FormItem>
               <Button className="btn-login" type="primary" htmlType="submit">
@@ -94,6 +125,9 @@ export default class Login extends React.Component {
               </Button>
             </FormItem>
           </Form>
+        </div>
+        <div className="page-footer">
+          <a className="normal-color">立即注册</a>
         </div>
       </div>
     );

@@ -31,9 +31,9 @@ export default class Routers extends React.Component {
 
   // 需要获取网络请求，拿到badge
   componentWillMount() {
-    const auth = JSON.parse(getStorage(C_STORAGE.KEY_AUTH));
+    const auth = JSON.parse(getStorage(C_STORAGE.AUTH));
     if (auth && auth.session) {
-      http.setHeader(C_STORAGE.KEY_SESSION, auth.session);
+      http.setHeader(C_STORAGE.SESSION, auth.session);
       this.props.updateAuth(auth);
     }
   }

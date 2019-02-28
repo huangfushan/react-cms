@@ -51,11 +51,13 @@ export const C_TIME = {
 
 /**
  * 存入storage缓存
- * @type {{KEY_SESSION: string, KEY_USER: string}}
+ * @type {{SESSION: string, KEY_USER: string}}
  */
 export const C_STORAGE = {
-  KEY_AUTH: 'auth', //账户信息，是对象
-  KEY_SESSION: 'session', //session
+  AUTH: 'auth', //账户信息，存下来内容是个对象
+  SESSION: 'session', //session
+  USERNAME: 'username', //登录账号
+  PASSWORD: 'password', //登录密码
 };
 
 /**
