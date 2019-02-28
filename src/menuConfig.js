@@ -10,9 +10,9 @@
 // 导航支持多层嵌套
 // 可用的图标见这里: https://ant.design/components/icon-cn/
 
-// 定义siderbar菜单
+// 定义sidebar菜单
 const sidebarMenus = [
-  { path: '/', name: '统计', icon: 'global' },
+  { path: '/home', name: '统计', icon: 'global' },
   {
     path: '',
     name: '管理',

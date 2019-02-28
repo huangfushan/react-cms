@@ -29,9 +29,8 @@ import './themes/index.less';
 )
 export default class Routers extends React.Component {
 
-  // 需要获取网络请求，拿到badge
   componentWillMount() {
-    const auth = JSON.parse(getStorage(C_STORAGE.AUTH));
+    const auth = getStorage(C_STORAGE.AUTH) && JSON.parse(getStorage(C_STORAGE.AUTH));
     if (auth && auth.session) {
       http.setHeader(C_STORAGE.SESSION, auth.session);
       this.props.updateAuth(auth);
@@ -54,8 +53,6 @@ export default class Routers extends React.Component {
                 <Route key={index} path={item.path} component={item.layout} />
               ) : null;
             })}
-            {/* 根路由默认重定向到 /dashboard */}
-            {/*<Redirect exact from="/" to="/dashboard" />*/}
           </Switch>
         </Router>
       </LocaleProvider>

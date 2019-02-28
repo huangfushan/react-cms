@@ -11,6 +11,7 @@ import CenterLayout from './layouts/CenterLayout';
 import AsideLayout from './layouts/AsideLayout';
 import NormalLayout from './layouts/NormalLayout';
 import HeaderAsideLayout from './layouts/HeaderAsideLayout';
+import BlankLayout from './layouts/BlankLayout';
 
 const Login = Loadable({
   loader: () => import('./pages/login'),
@@ -31,41 +32,47 @@ const NotFound = Loadable({
  * breadcrumbs：面包屑
  * isAuthenticated：是否需要登录
  * layout：布局
+ * redirect：重定向的页面，只在 path='/' 时奇效
  */
 const routerConfig = [
   {
-    path: '/goods',
-    component: NotFound,
-    exact: true,
-    breadcrumb: '商品',
-    layout: NormalLayout
-  }, {
     path: '/login',
     component: Login,
     exact: true,
     breadcrumb: '未找到',
     layout: CenterLayout
   }, {
-    path: '/setting',
+    path: '/order',
     component: NotFound,
     exact: true,
     breadcrumb: '首页',
     isAuthenticated: true,
-    layout: HeaderAsideLayout
+    layout: NormalLayout
   }, {
-    path: '/home',
+    path: '/goods',
     component: NotFound,
     exact: true,
     breadcrumb: '首页',
     isAuthenticated: true,
     layout: AsideLayout
-  },{
-    path: '/',
+  }, {
+    path: '/category',
+    component: NotFound,
+    exact: true,
+    breadcrumb: '首页',
+    isAuthenticated: true,
+    layout: BlankLayout
+  }, {
+    path: '/setting',
     component: NotFound,
     exact: true,
     breadcrumb: '404',
     isAuthenticated: true,
-    layout: CenterLayout
+    layout: HeaderAsideLayout
+  }, {
+    path: '/',
+    redirect: '/home',
+    layout: AsideLayout
   },
 ];
 

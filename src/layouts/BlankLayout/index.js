@@ -1,16 +1,15 @@
 /**
- * 通用的布局（头部 + 内容 + 底部）
+ * 居中布局 （内容 + 底部）
  * @Author: huangfs
  * @Date: 2019-02-26
  * @Project: cms
  */
 
-import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import React, { Component } from 'react';
 import Loadable from 'react-loadable';
-import Footer from './Footer';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import Copyright from '../../components/common/Copyright';
 import routerConfig from '../../routerConfig';
-import Header from './Header';
 import PrivateRoute from '../../components/common/PrivateRoute';
 import LoadingComponent from '../../components/common/LoadingComponent';
 import './index.less';
@@ -20,18 +19,19 @@ const NotFound = Loadable({
   loading: LoadingComponent,
   delay: 100
 });
-export default class NormalLayout extends React.Component {
+
+export default class CenterLayout extends Component {
 
   render() {
     return (
-      <div className="normal-layout">
-        <Header />
-        <div className="normal-layout-content">
+      <div className="blank-layout">
+        <div className="blank-layout-content">
           <Switch>
             {routerConfig.map((item, index) => {
               if (item.path === '/' && item.redirect) {
                 return <Redirect key={index} exact from="/" to={item.redirect} />;
               }
+
               if (item.component && item.isAuthenticated) {
                 return <PrivateRoute key={index} path={item.path} component={item.component} exact={item.exact} />;
               }
@@ -44,7 +44,7 @@ export default class NormalLayout extends React.Component {
           </Switch>
         </div>
         <footer>
-          <Footer />
+          <Copyright />
         </footer>
       </div>
     );

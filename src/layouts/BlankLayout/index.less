@@ -1,0 +1,23 @@
+@import "../../themes/default/variables";
+
+.blank-layout {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+
+  &-content {
+    min-height: calc(100% - 3rem);
+    border-bottom: @border;
+    background: @background-color-light;
+  }
+
+  footer {
+    .copyright, .copyright a {
+      text-align: center;
+      font-size: .75rem;
+      color: @text-color-secondary;
+      height: 3rem;
+      line-height: 3rem;
+    }
+  }
+}

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import Header from './Header';
 import SideBar from './Sidebar';
@@ -43,6 +43,10 @@ export default class HeaderAsideLayout extends React.Component {
             <div className="body-content">
               <Switch>
                 {routerConfig.map((item, index) => {
+                  if (item.path === '/' && item.redirect) {
+                    return <Redirect key={index} exact from="/" to={item.redirect} />;
+                  }
+
                   if (item.component && item.isAuthenticated) {
                     return <PrivateRoute key={index} path={item.path} component={item.component} exact={item.exact} />;
                   }
@@ -50,6 +54,7 @@ export default class HeaderAsideLayout extends React.Component {
                     <Route key={index} path={item.path} component={item.component} exact={item.exact} />
                   ) : null;
                 })}
+
                 <Route component={NotFound} />
               </Switch>
             </div>
