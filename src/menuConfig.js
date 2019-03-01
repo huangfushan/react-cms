@@ -45,6 +45,11 @@ const sidebarMenus = [
   }
 ];
 
-export { sidebarMenus };
+const headerMenus = [
+  { path: '/home', name: '统计' },
+  { path: '/setting', name: '设置' },
+];
+
+export { sidebarMenus, headerMenus };
 
 

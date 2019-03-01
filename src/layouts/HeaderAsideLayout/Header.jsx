@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { C_PROJECT_NAME } from '../../common/constants';
-import { Tag } from 'antd';
+import { withRouter, Link } from 'react-router-dom';
+import { Tag, Menu } from 'antd';
 import { AsyncActions } from '../../redux/actions';
 import { common } from '../../images/images';
+import { headerMenus } from '../../menuConfig';
 
 @connect(
   state => ({
@@ -39,14 +39,31 @@ export default class Header extends React.Component {
   };
 
   render() {
+    const { location } = this.props;
+    const { pathname } = location;
     return (
       <header>
-        <div>
+        <div className="logo">
           <img src={common.logo} alt="logo" />
-          <span>{C_PROJECT_NAME}</span>
         </div>
-        <div>
-          <span style={{ marginRight: 20 }}>{this.props.isAuthenticated ? (this.props.username || 'Admin') : '未登录'}</span>
+        <div className="menu-left">
+          <Menu
+            selectedKeys={[pathname]}
+            mode="horizontal"
+          >
+            {
+              headerMenus && headerMenus.map(item =>
+                <Menu.Item key={item.path}>
+                  <Link to={item.path}>{item.name}</Link>
+                </Menu.Item>
+              )
+            }
+          </Menu>
+        </div>
+
+        <div className="nav-right">
+          <span
+            style={{ marginRight: 20 }}>{this.props.isAuthenticated ? (this.props.username || 'Admin') : '未登录'}</span>
           <Tag color='red' onClick={this.handleLogout}>{this.props.isAuthenticated ? '退出' : '登录'}</Tag>
         </div>
       </header>

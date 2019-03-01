@@ -46,8 +46,8 @@ const routerConfig = [
     isAuthenticated: true,
     layout: HeaderAsideLayout
   },
-  { path: '/setting', component: NotFound, exact: true, name: '404', isAuthenticated: true, layout: AsideLayout },
-  { path: '/home', component: NotFound, exact: true, name: '404', isAuthenticated: true, layout: AsideLayout },
+  { path: '/setting', component: NotFound, exact: true, name: '404', isAuthenticated: true, layout: HeaderAsideLayout },
+  { path: '/home', component: NotFound, exact: true, name: '404', isAuthenticated: true, layout: HeaderAsideLayout },
   //最后一项比较特殊，只会有以下三个字段，代表只有在根目录会重定向到指定页面，layout是指其默认页面布局，用于无效资源的页面布局
   { path: '/', redirect: '/home', layout: BlankLayout },
 ];

@@ -8,6 +8,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
+import { Icon } from 'antd';
 import Header from './Header';
 import SideBar from './Sidebar';
 import Copyright from '../../components/common/Copyright';
@@ -21,6 +22,7 @@ const NotFound = Loadable({
   loading: LoadingComponent,
   delay: 100
 });
+
 export default class HeaderAsideLayout extends React.Component {
 
   state = {
@@ -36,10 +38,16 @@ export default class HeaderAsideLayout extends React.Component {
   render() {
     return (
       <div className="header-aside-layout">
-        <Header collapsed={this.state.collapsed} handleClick={this.toggleCollapse} />
+        <Header />
         <div className="header-aside-layout-content">
           <SideBar collapsed={this.state.collapsed} />
           <div className="body">
+            <div className="body-header">
+              <Icon
+                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                onClick={this.toggleCollapse}
+              />
+            </div>
             <div className="body-content">
               <Switch>
                 {routerConfig.map((item, index) => {

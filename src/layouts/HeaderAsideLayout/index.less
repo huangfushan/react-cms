@@ -9,10 +9,9 @@
   background: @background-color-base;
 
   header {
-    .flex-between;
+    .flex;
     background: @white;
     height: 4rem;
-    padding: 0 2rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -20,9 +19,42 @@
     z-index: 1000;
     box-shadow: @box-shadow-base;
 
-    img {
-      height: 3rem;
-      margin: .5rem;
+    .logo {
+      width: 200px;
+      text-align: center;
+      img {
+        height: 3rem;
+        margin: .5rem;
+      }
+    }
+
+    .menu-left {
+      //margin-left: 1rem;
+      .ant-menu {
+        border-bottom: 0;
+        a {
+          color: @text-color-secondary;
+        }
+      }
+
+      .ant-menu-horizontal > .ant-menu-item, .ant-menu-horizontal > .ant-menu-submenu {
+        border-bottom: 0;
+        padding: 0 1rem;
+      }
+
+      .ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected {
+        border-bottom: 0;
+        color: @background-color-base;
+
+        a {
+          color: @text-color;
+        }
+      }
+    }
+
+    .nav-right {
+      margin-left: auto;
+      margin-right: 1rem;
     }
   }
 
@@ -37,13 +69,20 @@
 
     .body {
       width: 100%;
-      padding: .625rem .625rem 0 .625rem;
       position: relative;
 
+      &-header {
+        //background: @background-color-light;
+        height: 3rem;
+        padding: 1rem;
+        margin-bottom: .625rem;
+      }
+
       &-content {
+        margin: .625rem .625rem 0 .625rem;
         background: @background-color-light;
         padding: .625rem;
-        min-height: calc(100% - 3rem);
+        min-height: calc(100% - 6rem - .625rem);
       }
 
       footer {
