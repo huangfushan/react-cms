@@ -28,18 +28,20 @@ export default class CenterLayout extends Component {
         <div className="blank-layout-content">
           <Switch>
             {routerConfig.map((item, index) => {
+              // 首页重定向
               if (item.path === '/' && item.redirect) {
                 return <Redirect key={index} exact from="/" to={item.redirect} />;
               }
 
-              if (item.component && item.isAuthenticated) {
+              if (!item.component) return null;
+
+              if (item.isAuthenticated) {
                 return <PrivateRoute key={index} path={item.path} component={item.component} exact={item.exact} />;
               }
-              return item.component ? (
-                <Route key={index} path={item.path} component={item.component} exact={item.exact} />
-              ) : null;
-            })}
 
+              return <Route key={index} path={item.path} component={item.component} exact={item.exact} />;
+
+            })}
             <Route component={NotFound} />
           </Switch>
         </div>

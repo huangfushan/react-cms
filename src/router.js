@@ -49,9 +49,8 @@ export default class Routers extends React.Component {
         <Router>
           <Switch>
             {routerConfig.map((item, index) => {
-              return item.layout ? (
-                <Route key={index} path={item.path} component={item.layout} />
-              ) : null;
+              if (!item.layout) return null;
+              return <Route key={index} path={item.path} component={item.layout} />;
             })}
           </Switch>
         </Router>
