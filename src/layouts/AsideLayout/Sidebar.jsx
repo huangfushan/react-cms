@@ -18,9 +18,9 @@ export default class Sidebar extends React.Component {
   /**
    * 遍历bav栏
    */
-  menuRender = () => {
-    return sidebarMenus.map(item => {
-      const path = item.path;
+  menuRender = (data, url) => {
+    return data.map(item => {
+      const path = url ? (url + item.path) : item.path;
       if (item.children && item.children.length > 0) {
         return (
           <SubMenu
@@ -31,7 +31,7 @@ export default class Sidebar extends React.Component {
                 <span>{item.name}</span>
               </span>}>
             {
-              this.childMenu(path, item.children)
+              this.menuRender(item.children, path)
             }
           </SubMenu>
         );
@@ -45,42 +45,6 @@ export default class Sidebar extends React.Component {
           </Item>
         );
       }
-    });
-  };
-
-  /**
-   * 遍历子bar栏
-   * @param parents
-   * @param childMenu
-   * @returns {*}
-   */
-  childMenu = (parents, childMenu) => {
-    return childMenu.map(item => {
-      const path = parents + item.path;
-      if (item.children && item.children.length > 0) {
-        return (
-          <SubMenu
-            key={path}
-            title={
-              <span>
-              {!!item.icon && <Icon type={item.icon} />}
-                <span>{item.name}</span>
-              </span>
-            }>
-            {
-              this.childMenu(path, item.children)
-            }
-          </SubMenu>
-        );
-      }
-      return (
-        <Item key={path}>
-          <Link to={path}>
-            {!!item.icon && <Icon type={item.icon} />}
-            <span>{item.name}</span>
-          </Link>
-        </Item>
-      );
     });
   };
 
@@ -100,7 +64,7 @@ export default class Sidebar extends React.Component {
         </div>
         <div className="dt-sidebar-body">
           <Menu theme="light" mode="inline" selectedKeys={[pathname]}>
-            {this.menuRender()}
+            {this.menuRender(sidebarMenus)}
           </Menu>
         </div>
       </Layout.Sider>

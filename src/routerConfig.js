@@ -35,52 +35,21 @@ const NotFound = Loadable({
  * redirect：重定向的页面，只在 path='/' 时有效
  */
 const routerConfig = [
+  { path: '/login', component: Login, exact: true, name: '未找到', layout: CenterLayout },
+  { path: '/order', component: NotFound, exact: true, name: '首页', isAuthenticated: true, layout: NormalLayout },
+  { path: '/goods', component: NotFound, exact: true, name: '首页', isAuthenticated: true, layout: AsideLayout },
   {
-    path: '/login',
-    component: Login,
-    exact: true,
-    breadcrumb: '未找到',
-    layout: CenterLayout
-  }, {
-    path: '/order',
-    component: NotFound,
-    exact: true,
-    breadcrumb: '首页',
-    isAuthenticated: true,
-    layout: NormalLayout
-  }, {
-    path: '/goods',
-    component: NotFound,
-    exact: true,
-    breadcrumb: '首页',
-    isAuthenticated: true,
-    layout: AsideLayout
-  }, {
     path: '/category',
     component: NotFound,
     exact: true,
     breadcrumb: '首页',
     isAuthenticated: true,
     layout: HeaderAsideLayout
-  }, {
-    path: '/setting',
-    component: NotFound,
-    exact: true,
-    breadcrumb: '404',
-    isAuthenticated: true,
-    layout: AsideLayout
-  }, {
-    path: '/home',
-    component: NotFound,
-    exact: true,
-    breadcrumb: '404',
-    isAuthenticated: true,
-    layout: AsideLayout
-  }, { //最后一项比较特殊，只会有以下三个字段，代表只有在根目录会重定向到指定页面，layout是指其默认页面布局，用于无效资源的页面布局
-    path: '/',
-    redirect: '/home',
-    layout: BlankLayout,
   },
+  { path: '/setting', component: NotFound, exact: true, name: '404', isAuthenticated: true, layout: AsideLayout },
+  { path: '/home', component: NotFound, exact: true, name: '404', isAuthenticated: true, layout: AsideLayout },
+  //最后一项比较特殊，只会有以下三个字段，代表只有在根目录会重定向到指定页面，layout是指其默认页面布局，用于无效资源的页面布局
+  { path: '/', redirect: '/home', layout: BlankLayout },
 ];
 
 export default routerConfig;
