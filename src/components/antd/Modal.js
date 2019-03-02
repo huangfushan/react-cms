@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal as AliModal, Form, Button } from 'antd';
+import { Modal as AliModal, Form } from 'antd';
 
 @Form.create()
 export default class Modal extends React.Component {

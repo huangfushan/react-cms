@@ -11,7 +11,7 @@ import React from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import commonApi from "../../../api/commonApi";
-import {beforeUpload} from "../../../utils/image";
+import {imageBeforeUpload} from "../../../utils/image";
 import { C_RESP } from "../../../common/constants";
 import {error} from "../../../utils";
 import './index.less';
@@ -59,7 +59,7 @@ export default class Index extends React.Component {
       input.click();
       input.onchange = () => {
         const file = input.files[0];
-        let bool = beforeUpload(file);
+        let bool = imageBeforeUpload(file);
         if (bool) {
           this.saveToServer(file);
         }

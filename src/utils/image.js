@@ -5,7 +5,7 @@
 import { message } from 'antd';
 
 //图片上传前判断大小和类型
-export const beforeUpload = (file, allType = ['jpg', 'png', 'jpeg', 'gif'], maxSize = 5, type) => {
+export const imageBeforeUpload = (file, allType = ['jpg', 'png', 'jpeg', 'gif'], maxSize = 5, type) => {
   let fileType = file.type;
   let { name } = file;
   if (!fileType) {
