@@ -39,8 +39,7 @@ export default class Header extends React.Component {
   };
 
   render() {
-    const { location } = this.props;
-    const { pathname } = location;
+    const { pathname } = this.props;
     return (
       <header>
         <div className="logo">

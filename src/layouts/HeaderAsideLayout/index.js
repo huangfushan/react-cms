@@ -36,9 +36,11 @@ export default class HeaderAsideLayout extends React.Component {
   };
 
   render() {
+    const { location } = this.props;
+    const { pathname } = location;
     return (
       <div className="header-aside-layout">
-        <Header />
+        <Header pathname={pathname}/>
         <div className="header-aside-layout-content">
           <SideBar collapsed={this.state.collapsed} />
           <div className="body">
