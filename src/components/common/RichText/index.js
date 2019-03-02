@@ -10,15 +10,16 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import commonApi from "../../../api/commonApi";
-import {imageBeforeUpload} from "../../../utils/image";
-import { C_RESP } from "../../../common/constants";
-import {error} from "../../../utils";
+import commonApi from '../../../api/commonApi';
+import { imageBeforeUpload } from '../../../utils/image';
+import { C_RESP } from '../../../common/constants';
+import { error } from '../../../utils';
 import './index.less';
+import { pushAliOss } from '../../../utils/aliOSS';
 
-export default class Index extends React.Component {
+export default class RichText extends React.Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       value: '',
@@ -31,9 +32,9 @@ export default class Index extends React.Component {
             // [{ 'color': [] }, { 'background': [] }],          // 字体颜色，字体背景
             // [{ 'font': [] }],                                 // 字体类型
             // [{ 'size': ['small', false, 'large', 'huge'] }],  // 字体大小
-            // [{ 'header': 1 },{ 'header': 2 }, { 'header': [1, 2, 3, 4, 5, 6, false] }],        // 标题
-            [{ 'header': [1, 2, 3, 4, false] }],        // 标题
-            [{ 'list': 'ordered'}, { 'list': 'bullet' }],     // 清单，类似ul，li
+            [{ 'header': 1 }, { 'header': 2 }],        // 标题
+            // [{ 'header': [1, 2, 3, 4, false] }],        // 标题
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],     // 清单，类似ul，li
             // [{ 'indent': '-1'}, { 'indent': '+1' }],          // 缩进，不过是整体锁进
             // [{ 'direction': 'rtl' }],                         // 文字方向
             // ['blockquote', 'code-block'],                     // 代码块
@@ -52,36 +53,52 @@ export default class Index extends React.Component {
     };
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.value !== prevState.value) {
+      return nextProps;
+    }
+    return null;
+  }
+
+  shouldComponentUpdate(prevProps, prevState) {
+    if (prevProps.value !== this.props.value) {
+      return true;
+    }
+    return false;
+  }
+
   imageHandler = (image) => {
     if (image) {
-      const input = document.createElement('input');
-      input.setAttribute('type', 'file');
+      const input = document.getElementById('rich-text-input');
       input.click();
       input.onchange = () => {
         const file = input.files[0];
         let bool = imageBeforeUpload(file);
         if (bool) {
-          this.saveToServer(file);
+          this.pushAliOss(file, 'image');
         }
       };
     }
   };
 
-  // 上传到服务端
-  saveToServer = (file) =>{
-    commonApi.pushFile({file}).then(resp => {
-      if (resp.status === C_RESP.OK) {
-        this.insertToEditor(resp.data[0] && resp.data[0].webPath)
-      }else {
-        error(resp)
-      }
+  pushAliOss = (file, type) => {
+    this.setState({ confirmLoading: true });
+    commonApi.fetchOssAccessKey().then(resp => {
+      pushAliOss(resp, type, file).then((resp) => {
+        this.setState({ confirmLoading: false });
+        if (resp.status === C_RESP.OK) {
+          this.insertToEditor(resp.url);//上传成功后的逻辑
+        } else {
+          error(resp);
+        }
+      });
     });
   };
 
   // 替换文件
-  insertToEditor(url){
-    if (!url){
-      return
+  insertToEditor(url) {
+    if (!url) {
+      return;
     }
     const range = this.quillRef.getEditor().getSelection();
     this.quillRef.getEditor().insertEmbed(range.index, 'image', url);
@@ -90,24 +107,30 @@ export default class Index extends React.Component {
   handleChange = (value) => {
     this.setState({
       value
+    }, () => {
+      const onChange = this.props.onChange;
+      if (onChange) {
+        onChange(value);
+        const input = document.getElementById('rich-text-input');
+        input.value='';
+      }
     });
-    const onChange = this.props.onChange;
-    if (onChange) {
-      onChange(value)
-    }
   };
 
   render() {
     return (
-      <ReactQuill
-        onChange={this.handleChange}
-        modules={this.state.MODULES}
-        placeholder={this.props.placeholder || ''}
-        theme='snow'
-        style={{minHeight:200}}
-        value={this.state.value}
-        ref={(el) => this.quillRef = el}
-      />
-    )
+      <div>
+        <ReactQuill
+          onChange={this.handleChange}
+          modules={this.state.MODULES}
+          placeholder={this.props.placeholder || ''}
+          theme='snow'
+          style={{ minHeight: 200 }}
+          value={this.state.value}
+          ref={(el) => this.quillRef = el}
+        />
+        <input type='file' accept='image/png,image/gif,image/jpg,image/jpeg' id='rich-text-input' style={{display: 'none'}}/>
+      </div>
+    );
   }
 }
