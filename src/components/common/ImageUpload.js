@@ -63,7 +63,7 @@ export default class ImageUpload extends React.Component {
         const file = input.files[0];
         if (imageBeforeUpload(file)) {
           if (!this.props.aspectRatio) { //如果不裁剪，直接上传
-            this.fetchOssAccessKey(file);
+            this.pushAliOss(file, 'image');
             return;
           }
           //获取base64
