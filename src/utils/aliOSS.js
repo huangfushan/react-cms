@@ -57,7 +57,7 @@ export const pushAliOss = (ossKey, type = 'file', file, onProgress) => {
           msg: '上传到alioss失败',
         });
       }
-      const ossUrl = `http://${resp.bucket}.${ossKey.data.region}.aliyuncs.com/${resp.name}`;
+      const ossUrl = `https://${resp.bucket}.${ossKey.data.region}.aliyuncs.com/${resp.name}`;
       resolve({
         status: 0,
         url: ossUrl,
