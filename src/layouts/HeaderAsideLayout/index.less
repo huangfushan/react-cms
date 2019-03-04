@@ -2,7 +2,6 @@
 @import "../../themes/style/flex";
 
 .header-aside-layout {
-  display: flex;
   position: relative;
   width: 100%;
   min-height: 100vh;
@@ -12,7 +11,7 @@
     .flex;
     background: @white;
     height: 4rem;
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -58,18 +57,23 @@
     }
   }
 
-  .dt-sidebar {
-    padding: 1.5rem 0;
-  }
+
 
   &-content {
     width: 100%;
     display: flex;
-    padding-top: 4rem;
+
+    .dt-sidebar {
+      padding: 1.5rem 0;
+      height: calc(100vh - 4rem);
+      overflow-x: hidden;
+    }
 
     .body {
       width: 100%;
       position: relative;
+      height: calc(100vh - 4rem);
+      overflow-x: hidden;
 
       &-header {
         //background: @background-color-light;
