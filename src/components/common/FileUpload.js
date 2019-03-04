@@ -110,7 +110,7 @@ export default class FileUpload extends React.Component {
     return (
       <div>
         <Button onClick={this.handleChooseFile} style={{ width: 160 }}>
-          <Icon type="upload" />{progress === 100 ? '已上传' : (uploading ? `上传中${progress}%` : '选择文件')}
+          <Icon type="upload" />{progress === 100 ? '已上传' : (uploading ? `上传中${progress || 0}%` : '选择文件')}
         </Button>
         {value && this.handleShow(filePath)}
       </div>
