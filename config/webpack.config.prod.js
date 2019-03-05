@@ -28,7 +28,7 @@ const cssFilename = 'static/css/[name].[contenthash:8].css';
 
 const extractTextPluginOptions = shouldUseRelativeAssetPaths
   ? // Making sure that the publicPath goes back to to build folder.
-    { publicPath: Array(cssFilename.split('/').length).join('../') }
+  { publicPath: Array(cssFilename.split('/').length).join('../') }
   : {};
 
 module.exports = {
@@ -112,84 +112,40 @@ module.exports = {
               compact: true,
             },
           },
-          // {
-          //   test: /\.css$/,
-          //   loader: ExtractTextPlugin.extract(
-          //     Object.assign(
-          //       {
-          //         fallback: {
-          //           loader: require.resolve('style-loader'),
-          //           options: {
-          //             hmr: false,
-          //           },
-          //         },
-          //         use: [
-          //           {
-          //             loader: require.resolve('css-loader'),
-          //             options: {
-          //               importLoaders: 1,
-          //               minimize: true,
-          //               sourceMap: shouldUseSourceMap,
-          //             },
-          //           },
-          //           {
-          //             loader: require.resolve('postcss-loader'),
-          //             options: {
-          //               ident: 'postcss',
-          //               plugins: () => [
-          //                 require('postcss-flexbugs-fixes'),
-          //                 autoprefixer({
-          //                   browsers: [
-          //                     '>1%',
-          //                     'last 4 versions',
-          //                     'Firefox ESR',
-          //                     'not ie < 9', // React doesn't support IE8 anyway
-          //                   ],
-          //                   flexbox: 'no-2009',
-          //                 }),
-          //               ],
-          //             },
-          //           },
-          //         ],
-          //       },
-          //       extractTextPluginOptions
-          //     )
-          //   ),
-          // },
-          // {
-          //   test: /\.css|less$/,
-          //   use: ExtractTextPlugin.extract({
-          //     fallback: 'style-loader',
-          //     use: ['css-loader', 'less-loader']
-          //   }),
-          // },
           {
             test: /(\.css)$/,
-            use: ExtractTextPlugin.extract({
-              fallback: [{
-                loader: 'style-loader',
-              }],
-              use: [
+            use: ExtractTextPlugin.extract(
+              Object.assign(
                 {
-                  loader: 'css-loader',
-                  options: {
-                    minimize: true,
-                  },
+                  fallback: [{
+                    loader: 'style-loader',
+                  }],
+                  use: [
+                    {
+                      loader: 'css-loader',
+                      options: {
+                        minimize: true,
+                      },
+                    },
+                  ],
                 },
-              ],
-            }),
+                extractTextPluginOptions
+              )
+            ),
           },
           {
             test: /(\.less)$/,
-            use: ExtractTextPlugin.extract({
-              fallback: [{
-                loader: 'style-loader',
-              }],
-              use: [
-                'css-loader',
-                'less-loader',
-              ],
-            }),
+            use: ExtractTextPlugin.extract(
+              Object.assign({
+                fallback: [{
+                  loader: 'style-loader',
+                }],
+                use: [
+                  'css-loader',
+                  'less-loader',
+                ],
+              }, extractTextPluginOptions)
+            ),
           },
           {
             loader: require.resolve('file-loader'),
