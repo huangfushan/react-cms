@@ -114,7 +114,7 @@ export default class Login extends React.Component {
                     <Checkbox>记住密码</Checkbox>
                   )
                 }
-                <a style={{textAlign: 'right'}}>忘记密码</a>
+                <Link  to="/password/forget">忘记密码</Link>
               </div>
             </FormItem>
             <FormItem>

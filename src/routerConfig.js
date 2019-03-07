@@ -13,11 +13,21 @@ import NormalLayout from './layouts/NormalLayout';
 import HeaderAsideLayout from './layouts/HeaderAsideLayout';
 import BlankLayout from './layouts/BlankLayout';
 
+//登录
 const Login = Loadable({
-  loader: () => import('./pages/login'),
+  loader: () => import('./pages/Login'),
   loading: LoadingComponent,
   delay: 100
 });
+
+//忘记密码
+const ForgetPassword = Loadable({
+  loader: () => import('./pages/ForgetPassword'),
+  loading: LoadingComponent,
+  delay: 100
+});
+
+//404
 const NotFound = Loadable({
   loader: () => import('./components/common/NotFound'),
   loading: LoadingComponent,
@@ -36,6 +46,7 @@ const NotFound = Loadable({
  */
 const routerConfig = [
   { path: '/login', component: Login, exact: true, name: '未找到', layout: CenterLayout },
+  { path: '/password/forget', component: ForgetPassword, exact: true, name: '忘记密码', layout: CenterLayout },
   { path: '/order', component: NotFound, exact: true, name: '首页', isAuthenticated: true, layout: NormalLayout },
   { path: '/goods', component: NotFound, exact: true, name: '首页', isAuthenticated: true, layout: AsideLayout },
   {
