@@ -193,10 +193,10 @@ export default class Register extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="password-forget-header">
+        <div className="page-register-header">
           <h1>注册</h1>
         </div>
-        <div className="password-forget-content">
+        <div className="page-register-content">
           <div className="form-row">
             <div className="flex">
               <p className="title">手机</p>
@@ -249,7 +249,7 @@ export default class Register extends React.Component {
             {this.state.isConfirmPasswordHint && <div className="error-color form-hint">{this.state.confirmPasswordHint}</div>}
           </div>
           <div className="form-row error-color">{this.state.errorHint}</div>
-          <div className="flex-center form-row password-forget-footer">
+          <div className="flex-center form-row page-register-footer">
             <Button className="btn-login" onClick={this.goBack}>返回登录</Button>
             <Divider type="vertical" />
             <Button className="btn-login" type="primary" onClick={this.handleSubmit}>注册</Button>

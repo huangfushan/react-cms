@@ -148,10 +148,10 @@ export default class ForgetPassword extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="password-forget-header">
+        <div className="page-password-forget-header">
           <h1>忘记密码</h1>
         </div>
-        <div className="password-forget-content">
+        <div className="page-password-forget-content">
           <div className="form-row">
             <div className="flex">
               <p className="title">手机</p>
@@ -192,7 +192,7 @@ export default class ForgetPassword extends React.Component {
             {this.state.isPasswordHint && <div className="error-color form-hint">请输入由英文、数字或下划线组成的6-16位数密码</div>}
           </div>
           <div className="form-row error-color">{this.state.errorHint}</div>
-          <div className="flex-center form-row password-forget-footer">
+          <div className="flex-center form-row page-password-forget-footer">
             <Button className="btn-login" onClick={this.goBack}>返回登录</Button>
             <Divider type="vertical" />
             <Button className="btn-login" type="primary" onClick={this.handleSubmit}>修改</Button>
