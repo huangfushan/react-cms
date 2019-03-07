@@ -20,6 +20,13 @@ const Login = Loadable({
   delay: 100
 });
 
+//注册
+const Register = Loadable({
+  loader: () => import('./pages/Register'),
+  loading: LoadingComponent,
+  delay: 100
+});
+
 //忘记密码
 const ForgetPassword = Loadable({
   loader: () => import('./pages/ForgetPassword'),
@@ -45,7 +52,8 @@ const NotFound = Loadable({
  * redirect：重定向的页面，只在 path='/' 时有效
  */
 const routerConfig = [
-  { path: '/login', component: Login, exact: true, name: '未找到', layout: CenterLayout },
+  { path: '/login', component: Login, exact: true, name: '登录', layout: CenterLayout },
+  { path: '/register', component: Register, exact: true, name: '注册', layout: CenterLayout },
   { path: '/password/forget', component: ForgetPassword, exact: true, name: '忘记密码', layout: CenterLayout },
   { path: '/order', component: NotFound, exact: true, name: '首页', isAuthenticated: true, layout: NormalLayout },
   { path: '/goods', component: NotFound, exact: true, name: '首页', isAuthenticated: true, layout: AsideLayout },

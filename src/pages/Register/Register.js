@@ -1,5 +1,5 @@
 /**
- *
+ * 注册
  * @Author: huangfushan
  * @Date: 2019-03-07 09:44
  * @Project: react-cms
@@ -12,9 +12,9 @@ import { C_SCENE, C_RESP } from '../../common/constants';
 import authApi from '../../api/authApi';
 import { error, RegExp } from '../../utils';
 import commonApi from '../../api/commonApi';
-import './forgetPassword.less';
+import './register.less';
 
-export default class ForgetPassword extends React.Component {
+export default class Register extends React.Component {
 
   state = {
     errorHint: '',
@@ -61,7 +61,7 @@ export default class ForgetPassword extends React.Component {
     authApi.changePassword({ captcha, phone, password }).then(resp => {
       switch (resp.status) {
         case C_RESP.OK:
-          message.success('修改成功，请使用新密码重新登录', 6);
+          message.success('注册成功', 6);
           this.goBack();
           break;
         default:
@@ -132,7 +132,7 @@ export default class ForgetPassword extends React.Component {
       return;
     }
     this.setState({ captchaFetching: true });
-    commonApi.fetchCaptcha(phone, C_SCENE.FORGET_PASSWORD).then(resp => {
+    commonApi.fetchCaptcha(phone, C_SCENE.REGISTER).then(resp => {
       if (resp.status === C_RESP.OK) {
         message.success('发送成功');
         this.sendCaptcha();
@@ -149,7 +149,7 @@ export default class ForgetPassword extends React.Component {
     return (
       <React.Fragment>
         <div className="password-forget-header">
-          <h1>忘记密码</h1>
+          <h1>注册</h1>
         </div>
         <div className="password-forget-content">
           <div className="form-row">
@@ -181,7 +181,7 @@ export default class ForgetPassword extends React.Component {
           </div>
           <div className="form-row">
             <div className="flex">
-              <p className="title">新密码</p>
+              <p className="title">密码</p>
               <input
                 type="text"
                 maxLength={16}
@@ -195,7 +195,7 @@ export default class ForgetPassword extends React.Component {
           <div className="flex-center form-row password-forget-footer">
             <Button className="btn-login" onClick={this.goBack}>返回登录</Button>
             <Divider type="vertical" />
-            <Button className="btn-login" type="primary" onClick={this.handleSubmit}>修改</Button>
+            <Button className="btn-login" type="primary" onClick={this.handleSubmit}>注册</Button>
           </div>
         </div>
       </React.Fragment>

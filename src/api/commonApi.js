@@ -32,6 +32,7 @@ export const postData = (data) => {
 };
 
 export default {
+  fetchCaptcha: (phone, scene) => http.get(`/${phone}/captcha`, { scene }), //获取验证吗，scene代表场景
   pushFile: params => http.post(`/common/file`, postData(params)), //上传文件
   pushBase64: params => http.post(`/common/file/base64`, params), //上传base64格式
   downloadFile: uri => { //下载文件

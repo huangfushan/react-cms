@@ -1,0 +1,66 @@
+@import '../../themes/default/variables';
+@import '../../themes/style/flex';
+
+.password-forget-header {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  text-align: center;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.password-forget-content {
+  margin: auto;
+  width: 500px;
+
+  .form-row {
+    margin: auto;
+    width: 25rem;
+    padding-bottom: 1rem;
+
+    .title {
+      width: 4rem;
+      color: @text-color;
+    }
+
+    input {
+      flex: 1;
+      border: 0;
+      background: @background-color-base;
+      height: 2.5rem;
+      padding: 0 .5rem;
+      font-size: .875rem;
+
+    }
+
+    .code {
+      cursor: pointer;
+      background: @text-color-secondary;
+      height: 2.5rem;
+      color: @text-color-secondary-light;
+      text-align: center;
+      line-height: 2.5rem;
+      width: 6rem;
+      font-size: .875rem;
+
+      &-59 {
+        background-color: @primary-color;
+      }
+    }
+
+    .code:hover {
+      color: @text-color-light;
+    }
+
+    .form-hint {
+      font-size: .875rem;
+      margin-left: 4rem;
+    }
+  }
+}
+
+.password-forget-footer{
+  margin-top: 2rem;
+}
