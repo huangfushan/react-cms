@@ -30,6 +30,11 @@ export default class Register extends React.Component {
 
     password: '', //密码
     isPasswordHint: false, //密码提示
+    passwordHint: '请输入由英文、数字或下划线组成的6-16位数密码', //提示语
+
+    confirmPassword: '', //新密码
+    isConfirmPasswordHint: false, //新密码
+    confirmPasswordHint: '请输入由英文、数字或下划线组成的6-16位数密码', //提示语
   };
 
   componentWillUnmount() {
@@ -38,7 +43,7 @@ export default class Register extends React.Component {
 
   //提交表单
   handleSubmit = () => {
-    const { phone, captcha, password } = this.state;
+    const { phone, captcha, password, confirmPassword } = this.state;
     if (!RegExp.phone.test(phone)) {
       this.setState({
         isPhoneHint: true,
@@ -54,6 +59,13 @@ export default class Register extends React.Component {
     if (!RegExp.password.test(password)) {
       this.setState({
         isPasswordHint: true,
+      });
+      return;
+    }
+
+    if (!RegExp.password.test(confirmPassword) || password !== confirmPassword) {
+      this.setState({
+        isConfirmPasswordHint: true,
       });
       return;
     }
@@ -93,10 +105,43 @@ export default class Register extends React.Component {
 
   //密码
   handleChangePassword = (e) => {
-    this.setState({
-      password: e.target.value,
-      isPasswordHint: false
-    });
+    if (!this.state.confirmPassword){
+      this.setState({
+        password: e.target.value,
+        isPasswordHint: false,
+      })
+    }else {
+      if (e.target.value !== this.state.confirmPassword){
+        this.setState({
+          password: e.target.value,
+          isConfirmPasswordHint: true,
+          isPasswordHint: false,
+          confirmPasswordHint: '两次密码不一致',
+        });
+        return;
+      }
+      this.setState({
+        password: e.target.value,
+        isPasswordHint: false,
+        isConfirmPasswordHint: false,
+      })
+    }
+  };
+
+  //确认密码
+  handleChangeConfirmPassword = e => {
+    if (this.state.password && e.target.value !== this.state.password) {
+        this.setState({
+          confirmPassword: e.target.value,
+          isConfirmPasswordHint: true,
+          confirmPasswordHint: '两次密码不一致',
+        })
+    }else {
+      this.setState({
+        confirmPassword: e.target.value,
+        isConfirmPasswordHint: false,
+      })
+    }
   };
 
   //验证码倒计时
@@ -189,7 +234,19 @@ export default class Register extends React.Component {
                 placeholder="请输入由英文、数字或下划线组成的6-16位数密码"
                 onChange={this.handleChangePassword} />
             </div>
-            {this.state.isPasswordHint && <div className="error-color form-hint">请输入由英文、数字或下划线组成的6-16位数密码</div>}
+            {this.state.isPasswordHint && <div className="error-color form-hint">{this.state.passwordHint}</div>}
+          </div>
+          <div className="form-row">
+            <div className="flex">
+              <p className="title">确认密码</p>
+              <input
+                type="text"
+                maxLength={16}
+                className="confirmPassword"
+                placeholder="请输入由英文、数字或下划线组成的6-16位数密码"
+                onChange={this.handleChangeConfirmPassword} />
+            </div>
+            {this.state.isConfirmPasswordHint && <div className="error-color form-hint">{this.state.confirmPasswordHint}</div>}
           </div>
           <div className="form-row error-color">{this.state.errorHint}</div>
           <div className="flex-center form-row password-forget-footer">
