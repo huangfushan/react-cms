@@ -12,7 +12,7 @@ import { Icon } from 'antd';
 import Header from './Header';
 import SideBar from './Sidebar';
 import Copyright from '../../components/common/Copyright';
-import routerConfig from '../../routerConfig';
+import routerConfig, { redirectPath } from '../../routerConfig';
 import PrivateRoute from '../../components/common/PrivateRoute';
 import LoadingComponent from '../../components/common/LoadingComponent';
 import './index.less';
@@ -40,7 +40,7 @@ export default class HeaderAsideLayout extends React.Component {
     const { pathname } = location;
     return (
       <div className="header-aside-layout">
-        <Header pathname={pathname}/>
+        <Header pathname={pathname} />
         <div className="header-aside-layout-content">
           <SideBar collapsed={this.state.collapsed} />
           <div className="body">
@@ -53,10 +53,6 @@ export default class HeaderAsideLayout extends React.Component {
             <div className="body-content">
               <Switch>
                 {routerConfig.map((item, index) => {
-                  // 首页重定向
-                  if (item.path === '/' && item.redirect) {
-                    return <Redirect key={index} exact from="/" to={item.redirect} />;
-                  }
 
                   if (!item.component) return null;
 
@@ -67,6 +63,9 @@ export default class HeaderAsideLayout extends React.Component {
                   return <Route key={index} path={item.path} component={item.component} exact={item.exact} />;
 
                 })}
+
+                <Redirect from="/" to={redirectPath} />
+
                 <Route component={NotFound} />
               </Switch>
             </div>

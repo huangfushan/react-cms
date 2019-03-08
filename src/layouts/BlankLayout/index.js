@@ -5,11 +5,11 @@
  * @Project: cms
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import Loadable from 'react-loadable';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Copyright from '../../components/common/Copyright';
-import routerConfig from '../../routerConfig';
+import routerConfig, { redirectPath } from '../../routerConfig';
 import PrivateRoute from '../../components/common/PrivateRoute';
 import LoadingComponent from '../../components/common/LoadingComponent';
 import './index.less';
@@ -20,7 +20,7 @@ const NotFound = Loadable({
   delay: 100
 });
 
-export default class CenterLayout extends Component {
+export default class BlankLayout extends React.Component {
 
   render() {
     return (
@@ -28,10 +28,6 @@ export default class CenterLayout extends Component {
         <div className="blank-layout-content">
           <Switch>
             {routerConfig.map((item, index) => {
-              // 首页重定向
-              if (item.path === '/' && item.redirect) {
-                return <Redirect key={index} exact from="/" to={item.redirect} />;
-              }
 
               if (!item.component) return null;
 
@@ -42,6 +38,9 @@ export default class CenterLayout extends Component {
               return <Route key={index} path={item.path} component={item.component} exact={item.exact} />;
 
             })}
+
+            <Redirect from="/" to={redirectPath} />
+
             <Route component={NotFound} />
           </Switch>
         </div>

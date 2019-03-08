@@ -9,14 +9,27 @@ import React from 'react';
 import { Route, Switch, HashRouter as Router } from 'react-router-dom';
 import { LocaleProvider } from 'antd';
 import { connect } from 'react-redux';
+import LoadingComponent from './components/common/LoadingComponent';
+import Loadable from 'react-loadable';
 import { getStorage } from './utils';
 import { C_STORAGE } from './common/constants';
 import http from './api/http';
 import { Actions } from './redux/actions';
-import routerConfig from './routerConfig';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import 'normalize.css';
 import './themes/index.less';
+
+const CenterLayout = Loadable({
+  loader: () => import('./layouts/CenterLayout'),
+  loading: LoadingComponent,
+  delay: 100
+});
+
+const HeaderAsideLayout = Loadable({
+  loader: () => import('./layouts/HeaderAsideLayout'),
+  loading: LoadingComponent,
+  delay: 100
+});
 
 @connect(
   state => ({
@@ -48,10 +61,10 @@ export default class Routers extends React.Component {
       <LocaleProvider locale={zhCN}>
         <Router>
           <Switch>
-            {routerConfig.map((item, index) => {
-              if (!item.layout) return null;
-              return <Route key={index} path={item.path} component={item.layout} />;
-            })}
+            <Route path='/login' component={CenterLayout} />
+            <Route path='/password/forget' component={CenterLayout} />
+            <Route path='/register' component={CenterLayout} />
+            <Route path='/' component={HeaderAsideLayout} />
           </Switch>
         </Router>
       </LocaleProvider>

@@ -9,7 +9,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import Footer from './Footer';
-import routerConfig from '../../routerConfig';
+import routerConfig, { redirectPath } from '../../routerConfig';
 import Header from './Header';
 import PrivateRoute from '../../components/common/PrivateRoute';
 import LoadingComponent from '../../components/common/LoadingComponent';
@@ -29,16 +29,18 @@ export default class NormalLayout extends React.Component {
         <div className="normal-layout-content">
           <Switch>
             {routerConfig.map((item, index) => {
-              if (item.path === '/' && item.redirect) {
-                return <Redirect key={index} exact from="/" to={item.redirect} />;
-              }
-              if (item.component && item.isAuthenticated) {
+
+              if (!item.component) return null;
+
+              if (item.isAuthenticated) {
                 return <PrivateRoute key={index} path={item.path} component={item.component} exact={item.exact} />;
               }
-              return item.component ? (
-                <Route key={index} path={item.path} component={item.component} exact={item.exact} />
-              ) : null;
+
+              return <Route key={index} path={item.path} component={item.component} exact={item.exact} />;
+
             })}
+
+            <Redirect from="/" to={redirectPath} />
 
             <Route component={NotFound} />
           </Switch>
