@@ -37,7 +37,7 @@ module.exports = {
   //如果是本地，则返回当前环境映射路径
   debug: () => {
     if (process.env.NODE_ENV === 'production') {
-      return null;
+      return '';
     }
     return DEBUG.postman;
   }

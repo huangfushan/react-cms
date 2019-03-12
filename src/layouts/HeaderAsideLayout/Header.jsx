@@ -7,6 +7,8 @@ import { AsyncActions } from '../../redux/actions';
 import { common } from '../../images/images';
 import { headerMenus } from '../../menuConfig';
 
+const { Item } = Menu;
+
 @connect(
   state => ({
     isAuthenticated: state.auth.isAuthenticated,
@@ -38,6 +40,30 @@ export default class Header extends React.Component {
     }
   };
 
+  /**
+   * 遍历bav栏
+   */
+  menuRender = (data, url) => {
+    return data.map(item => {
+      const path = url ? (url + item.path) : item.path;
+      if (item.children && item.children.length > 0) {
+        return (
+          <Menu.SubMenu key={path} title={item.name}>
+            {
+              this.menuRender(item.children, path)
+            }
+          </Menu.SubMenu>
+        );
+      } else {
+        return (
+          <Item key={path}>
+            <Link to={path}>{item.name}</Link>
+          </Item>
+        );
+      }
+    });
+  };
+
   render() {
     const { pathname } = this.props;
     return (
@@ -46,17 +72,8 @@ export default class Header extends React.Component {
           <img src={common.logo} alt="logo" />
         </div>
         <div className="menu-left">
-          <Menu
-            selectedKeys={[pathname]}
-            mode="horizontal"
-          >
-            {
-              headerMenus && headerMenus.map(item =>
-                <Menu.Item key={item.path}>
-                  <Link to={item.path}>{item.name}</Link>
-                </Menu.Item>
-              )
-            }
+          <Menu selectedKeys={[pathname]} mode="horizontal">
+            {this.menuRender(headerMenus || [])}
           </Menu>
         </div>
 

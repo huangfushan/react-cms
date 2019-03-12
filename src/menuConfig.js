@@ -18,36 +18,25 @@ const sidebarMenus = [
     name: '管理',
     icon: 'share-alt',
     children: [
-      {
-        path: '/order',
-        name: '订单管理'
-      }, {
-        path: '/goods',
-        name: '商品管理'
-      }, {
-        path: '/category',
-        name: '分类管理',
-      }, {
-        path: '/merchant',
-        name: '店铺管理',
+      { path: '/order', name: '订单管理' },
+      { path: '/goods', name: '商品管理' },
+      { path: '/category', name: '分类管理' },
+      { path: '/merchant', name: '店铺管理',
         children: [
-          {
-            path: '/order',
-            name: '订单管理'
-          }
+          { path: '/order', name: '订单管理' }
         ]
       }
     ]
-  }, {
-    path: '/setting',
-    name: '设置',
-    icon: 'trophy'
-  }
+  },
+  { path: '/setting', name: '设置', icon: 'trophy' }
 ];
 
 const headerMenus = [
   { path: '/home', name: '统计' },
   { path: '/setting', name: '设置' },
+  { path: '', name: '设置', children: [
+      { path: '/order', name: '订单管理' }
+    ] },
 ];
 
 export { sidebarMenus, headerMenus };
