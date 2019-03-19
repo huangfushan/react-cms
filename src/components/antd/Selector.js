@@ -26,21 +26,21 @@ export default class Selector extends React.Component {
   };
 
   handleChange = (value) => {
-    const {onChange} = this.props;
+    const { onChange } = this.props;
     if (onChange) {
-      onChange(value)
+      onChange(value);
     }
   };
 
   render() {
-    const { keyExtractor, data, valueExtractor, mode, notFoundContent } = this.props;
+    const { data, mode, notFoundContent, keyExtractor, valueExtractor } = this.props;
     return (
       <Select
         mode={mode}
         showSearch
-        notFoundContent={notFoundContent || '无匹配内容'}
-        style={{ width: this.props.width || '100%' }}
-        placeholder={this.props.placeholder || '请选择'}
+        notFoundContent={notFoundContent}
+        style={{ width: this.props.width }}
+        placeholder={this.props.placeholder || '请选择内容'}
         value={this.props.value}
         optionFilterProp="children"
         onChange={this.handleChange}
@@ -48,12 +48,12 @@ export default class Selector extends React.Component {
       >
         {
           data && data.map((item, index) => (
-            <Option key={index} value={mode && mode === 'tags' ? `${keyExtractor(item)}` : keyExtractor(item)}>
+            <Option key={index} value={mode && mode === 'tags' ? keyExtractor(item).toString() : keyExtractor(item)}>
               {valueExtractor(item)}
             </Option>
           ))
         }
       </Select>
-    )
+    );
   }
 }

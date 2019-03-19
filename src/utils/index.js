@@ -10,8 +10,9 @@ import { timeFmt, timeFmtNext } from './time';
 import { checkBankNo } from './bankno';
 import { imageBeforeUpload } from './image';
 import { error } from './error';
-import { getDiffObj, Converter, objToArr } from './data';
+import { getDiffObj, Converter, objToArr, getUrlParams } from './data';
 import { RegExp } from './regExp';
+import { pushAliOss } from './aliOSS';
 
 export {
   timeFmt,
@@ -25,5 +26,7 @@ export {
   getDiffObj,
   RegExp,
   Converter,
-  objToArr
+  objToArr,
+  getUrlParams,
+  pushAliOss
 };

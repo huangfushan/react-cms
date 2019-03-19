@@ -10,6 +10,7 @@ import ReactEcharts from 'echarts-for-react';
 import service from './service';
 import merge from 'lodash.merge';
 import './index.less';
+import NoData from '../common/NoData';
 
 /**
  * 数据处理
@@ -87,12 +88,12 @@ const getOption = (props) => {
   return result;
 };
 
-const Bar = (props) => {
-  return (
+const Bar = ({ title, option }) => {
+  return (option && option.value && option.value.length) ? (
     <ReactEcharts
-      option={getOption(props)}
+      option={getOption({ title, option })}
     />
-  );
+  ) : NoData();
 };
 
 export default Bar;

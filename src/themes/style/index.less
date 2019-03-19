@@ -2,10 +2,6 @@
 @import "./overflow";
 @import "./flex";
 
-.text-align-center {
-  text-align: center;
-}
-
 .primary-color {
   color: @primary-color;
 }
@@ -22,20 +18,24 @@
   color: @text-color-secondary
 }
 
-.vertical-align {
-  font-size: 0;
+.text-align-center {
+  text-align: center;
+}
 
-  &::before {
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    content: "";
+.white-space {
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.post-form{
+  .ant-form-item {
+    //width: 320px;
+    margin-bottom: .625rem;
   }
-
-  &-middle {
-    display: inline-block;
-    font-size: 1rem;
-    max-width: 100%;
-    vertical-align: middle;
+  .ant-form-item-with-help{
+    margin-bottom: 0;
+  }
+  .ant-form-explain{
+    font-size: .875rem;
   }
 }

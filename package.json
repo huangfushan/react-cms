@@ -15,7 +15,7 @@
   ],
   "author": "huangfushan",
   "dependencies": {
-    "antd": "^3.1.0",
+    "antd": "^3.15.1",
     "apisauce": "^1.0.0",
     "babel-polyfill": "^6.26.0",
     "dotenv": "4.0.0",
@@ -77,7 +77,7 @@
     "start": "node scripts/start.js",
     "dev": "node scripts/build.js dev",
     "test": "node scripts/build.js test",
-    "prod": "node scripts/build.js prod",
+    "prod": "node scripts/build.js production",
     "clean": "rimraf build/*"
   },
   "proxy": {
@@ -90,7 +90,7 @@
       }
     },
     "/test": {
-      "target": "https://tst.dayukeji.xin/p10000/api",
+      "target": "https://test.dayukeji.xin/p10000/api",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {
@@ -98,7 +98,7 @@
       }
     },
     "/prod": {
-      "target": "https://production.dayukeji.xin/p10000/api",
+      "target": "https://api.dayukeji.xin/p10000/api",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {

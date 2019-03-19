@@ -10,6 +10,7 @@ import ReactEcharts from 'echarts-for-react';
 import merge from 'lodash.merge';
 import service from './service';
 import './index.less';
+import NoData from '../common/NoData';
 
 /**
  * 数据处理
@@ -23,7 +24,7 @@ const getSeriesData = (option) => {
       name: option.legend[index],
     });
   });
-  return seriesData
+  return seriesData;
 };
 
 const getOption = (props) => {
@@ -40,7 +41,7 @@ const getOption = (props) => {
     },
     toolbox: {
       feature: {
-        magicType: {type: ['line', 'bar']}, // 切换直方图/线性图
+        magicType: { type: ['line', 'bar'] }, // 切换直方图/线性图
         saveAsImage: {
           title: '保存',
           pixelRatio: 2
@@ -61,12 +62,12 @@ const getOption = (props) => {
 };
 
 
-const Line = (props) => {
-  return (
+const Line = ({ title, option }) => {
+  return (option && option.value && option.value.length) ? (
     <ReactEcharts
-      option={getOption(props)}
+      option={getOption({ title, option })}
     />
-  );
+  ) : NoData();
 };
 
 export default Line;

@@ -7,6 +7,7 @@
 
 /**
  * type: 文件类型， image图片， video视频，audio音频，file文件，如果不传，默认是file
+ * accept: 接受类型
  */
 import React from 'react';
 import { connect } from 'react-redux';
@@ -40,20 +41,25 @@ export default class FileUpload extends React.Component {
   };
 
   handleChooseFile = () => {
-    const { type, multiple } = this.props;
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
+    const { type, multiple, accept } = this.props;
+    // const input = document.createElement('input');
+    const input = document.getElementById('image-input');
+    let acceptType = accept;
     switch (type) {
       case 'image':
-        input.setAttribute('accept', 'image/png,image/gif,image/jpg,image/jpeg');
+        acceptType = accept || 'image/png,image/gif,image/jpg,image/jpeg';
+        input.setAttribute('accept', acceptType);
         break;
       case 'video':
-        input.setAttribute('accept', 'video/mp4');
+        acceptType = accept || 'video/mp4';
+        input.setAttribute('accept', acceptType);
         break;
       case 'audio':
-        input.setAttribute('accept', 'audio/mp3');
+        acceptType = accept || 'audio/mp3';
+        input.setAttribute('accept', acceptType);
         break;
       default:
+        input.setAttribute('accept', accept);
         break;
     }
     if (multiple) {
@@ -62,6 +68,7 @@ export default class FileUpload extends React.Component {
     input.click();
     input.onchange = () => {
       let file = input.files;
+      input.value = '';
       if (!multiple) {
         file = input.files[0];
         let beforeUpload = true;
@@ -96,11 +103,12 @@ export default class FileUpload extends React.Component {
   handleShow = (filePath) => {
     const { url, filename } = this.state;
     const { type } = this.props;
+    const name = filename || filePath;
     return (type === 'image' ? (
       <Popover placement="top" content={<img alt='' src={url} style={{ height: 40 }} />}>
-        <a href={url} target='_blank'>{filename || filePath}</a>
+        <a href={url} target='_blank' style={{ display: 'inline-block' }}>{name}</a>
       </Popover>
-    ) : (filename || filePath));
+    ) : <span style={{ display: 'inline-block' }}>{name}</span>);
   };
 
   render() {
@@ -108,12 +116,13 @@ export default class FileUpload extends React.Component {
     const filePath = value && value.split('/') && value.split('/')[value.split('/').length - 1];
     const { progress, uploading } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <Button onClick={this.handleChooseFile} style={{ width: 160 }}>
           <Icon type="upload" />{progress === 100 ? '已上传' : (uploading ? `上传中${progress || 0}%` : '选择文件')}
+          <input id="file-input" type="file" style={{ display: 'none' }} />
         </Button>
         {value && this.handleShow(filePath)}
-      </div>
+      </React.Fragment>
     );
   }
 }

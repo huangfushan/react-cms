@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import LoadingComponent from './components/common/LoadingComponent';
 import Loadable from 'react-loadable';
 import { getStorage } from './utils';
-import { C_STORAGE } from './common/constants';
+import { C_SESSION, C_STORAGE } from './common/constants';
 import http from './api/http';
 import { Actions } from './redux/actions';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
@@ -45,7 +45,7 @@ export default class Routers extends React.Component {
   componentWillMount() {
     const auth = getStorage(C_STORAGE.AUTH) && JSON.parse(getStorage(C_STORAGE.AUTH));
     if (auth && auth.session) {
-      http.setHeader(C_STORAGE.SESSION, auth.session);
+      http.setHeader(C_SESSION, auth.session);
       this.props.updateAuth(auth);
     }
   }

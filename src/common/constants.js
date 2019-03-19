@@ -2,6 +2,7 @@ const path = require('./config');
 
 export const C_PROJECT_NAME = path.PROJECT_NAME; //项目名称
 export const C_X_CLIENT_TOKEN = path.X_CLIENT_TOKEN; //x-client-token
+export const C_SESSION = 'session'; //session
 
 /**
  * 技术支持
@@ -54,10 +55,9 @@ export const C_TIME = {
  * @type {{SESSION: string, KEY_USER: string}}
  */
 export const C_STORAGE = {
-  AUTH: 'auth', //账户信息，存下来内容是个对象
-  SESSION: 'session', //session
-  USERNAME: 'username', //登录账号
-  PASSWORD: 'password', //登录密码
+  AUTH: `${process.env.PRODUCTION_ENV}_${path.PROJECT_CODE}_auth`, //账户信息，是对象
+  USERNAME: `${process.env.PRODUCTION_ENV}_${path.PROJECT_CODE}_username`, //登录账号
+  PASSWORD: `${process.env.PRODUCTION_ENV}_${path.PROJECT_CODE}_password`, //登录密码
 };
 
 /**

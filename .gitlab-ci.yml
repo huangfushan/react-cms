@@ -1,10 +1,10 @@
 variables:
   PROJECT_CODE: p18888
-  PROJECT_NAME: manager
+  PROJECT_NAME: cms
   PROJECT_VERSION: "0.0.0"
   TEST_HOST: test.dayukeji.xin
   DEV_HOST: tst.dayukeji.xin
-  PROD_HOST: ''
+  PROD_HOST: api.dayukeji.xin
 
 stages:
  - depo

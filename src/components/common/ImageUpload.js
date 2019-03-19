@@ -55,25 +55,24 @@ export default class ImageUpload extends React.Component {
   //选中图片
   selectImage = (image) => {
     if (image) {
-      const input = document.createElement('input');
-      input.setAttribute('type', 'file');
-      input.setAttribute('accept', 'image/png,image/gif,image/jpg,image/jpeg');
+      // const input = document.createElement('input');
+      const input = document.getElementById('image-input');
+      // input.setAttribute('type', 'file');
+      // input.setAttribute('accept', 'image/png,image/gif,image/jpg,image/jpeg');
       input.click();
       input.onchange = () => {
         const file = input.files[0];
-        if (imageBeforeUpload(file)) {
-          if (!this.props.aspectRatio) { //如果不裁剪，直接上传
-            this.pushAliOss(file, 'image');
-            return;
-          }
-          //获取base64
-          getBase64(file, base64 => {
-            this.setState({ currentValue: base64 });
-          });
-          this.handleOpenModal();
-        } else {
-          alert('图片错误，请重新添加，图片仅支持jpg，png，gif，jpeg格式');
+        input.value = '';
+        if (!imageBeforeUpload(file)) return;
+        if (!this.props.aspectRatio) { //如果不裁剪，直接上传
+          this.pushAliOss(file, 'image');
+          return;
         }
+        //获取base64
+        getBase64(file, base64 => {
+          this.setState({ currentValue: base64 });
+        });
+        this.handleOpenModal();
       };
     }
   };
@@ -127,19 +126,22 @@ export default class ImageUpload extends React.Component {
   };
 
   render() {
-    const { aspectRatio } = this.props;
+    const { aspectRatio, aspectRatioHint } = this.props;
     return (
-      <div>
+      <React.Fragment>
         {
           this.props.value ? (
-            <img src={this.state.base64 || this.props.value} alt='' style={style.image} onClick={this.selectImage} />
+            <img src={this.state.base64 || this.props.value} alt='' style={{ ...style.image, ...this.props.style }}
+                 onClick={this.selectImage} />
           ) : (
-            <div style={style.image} className="column" onClick={this.selectImage}>
+            <div style={{ ...style.image, ...this.props.style }} className="column" onClick={this.selectImage}>
               <Icon type={this.state.confirmLoading ? 'loading' : 'plus'} />
               <span>上传</span>
             </div>
           )
         }
+        <input id="image-input" type="file" accept="image/png,image/gif,image/jpg,image/jpeg"
+               style={{ display: 'none' }} />
         <Modal
           mode={false}
           title="裁剪"
@@ -162,21 +164,25 @@ export default class ImageUpload extends React.Component {
             }}
           />
         </Modal>
-      </div>
+        {
+          (aspectRatioHint) &&
+          <p style={{ fontSize: '.875rem', lineHeight: '1.5' }} className="normal-color">{`注：图片裁剪比例为 ${aspectRatioHint}`}</p>
+        }
+      </React.Fragment>
     );
   }
 }
 
 const style = {
   image: {
-    margin: '0 .625rem .625rem 0',
-    minWidth: 100,
-    minHeight: 100,
-    height: 100,
+    // margin: '0 .5rem .5rem 0',
+    minWidth: '6rem',
+    minHeight: '6rem',
+    height: '6rem',
     borderRadius: 4,
     border: '1px solid #eee',
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: '1rem',
     cursor: 'pointer'
   }
 };

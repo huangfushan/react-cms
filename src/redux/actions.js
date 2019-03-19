@@ -7,7 +7,7 @@
 import isEmpty from 'lodash.isempty';
 import { createActions } from 'redux-actions';
 import authApi from '../api/authApi';
-import { C_RESP, C_STORAGE } from '../common/constants';
+import { C_RESP, C_SESSION, C_STORAGE } from '../common/constants';
 import { error, removeStorage, setStorage } from '../utils';
 import http from '../api/http';
 
@@ -51,7 +51,7 @@ const AsyncActions = {
       }
     };
     if (res.status === C_RESP.OK) {
-      http.setHeader(C_STORAGE.SESSION, res.data.session);
+      http.setHeader(C_SESSION, res.data.session);
       setStorage(C_STORAGE.AUTH, res.data); //session
       dispatch(Actions.auth.updateAuth(res.data));
     } else {

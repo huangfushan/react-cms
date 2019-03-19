@@ -1,0 +1,36 @@
+/**
+ * @Author: huangfushan
+ * @Date: 2019-03-15 09:36
+ * @Project: web-manager-admin
+ */
+@import '../../../themes/default/variables';
+
+.tab-single-radio{
+
+  .tab-item {
+    //height: 2rem;
+    line-height: 2rem;
+    position: relative;
+    display: inline-block;
+    margin: 0 .5rem .5rem 0;
+    padding: 0 1rem;
+    background: @background-color-light;
+    border: @border;
+    border-radius: @border-radius-base;
+    cursor: pointer;
+    -webkit-transition: color 0.3s, background 0.3s, border-color 0.3s;
+    -o-transition: color 0.3s, background 0.3s, border-color 0.3s;
+    transition: color 0.3s, background 0.3s, border-color 0.3s;
+
+    &-active {
+      background: @primary-color;
+      border: @border;
+      box-sizing: border-box;
+      color: @text-color-light;
+    }
+
+    &-active:hover{
+      background-color: darken(@primary-color,-10%);
+    }
+  }
+}

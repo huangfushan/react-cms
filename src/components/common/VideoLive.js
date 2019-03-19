@@ -8,7 +8,7 @@
 import React from 'react';
 import ReactPlayer from 'react-player'
 
-export default class VideoPlay extends React.Component {
+export default class VideoLive extends React.Component {
     render () {
         return (
             <ReactPlayer

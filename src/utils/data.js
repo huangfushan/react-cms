@@ -56,8 +56,20 @@ const objToArr = (obj) => {
   return newArr;
 };
 
+//获取url中某个字段的值
+const getUrlParams = (name, url = window.location.href) => {
+  const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+  const results = regex.exec(url);
+  if (!results)
+    return null;
+  if (!results[2])
+    return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
+
 export {
   getDiffObj,
   Converter,
-  objToArr
+  objToArr,
+  getUrlParams
 };

@@ -10,6 +10,7 @@ import ReactEcharts from 'echarts-for-react';
 import merge from 'lodash.merge';
 import service from './service';
 import './index.less';
+import NoData from '../common/NoData';
 
 /**
  * 数据处理
@@ -24,16 +25,17 @@ const getSeriesData = (option) => {
       center: [`${(2 * index + 1) / (2 * option.value.length) * 100}%`, `${(1 / 2) * 100}%`],
       label: {
         normal: {
-          formatter: '{b|{b}：}{c}\n  {per|{d}%}',
+          formatter: '{b|{b}：}{c}  {per|{d}%}',
           rich: {
             b: {
-              fontSize: 16,
+              fontSize: '775rem',
               lineHeight: 33
             },
             per: {
               color: '#eee',
+              fontSize: '75rem',
               backgroundColor: '#334455',
-              padding: [2, 4],
+              padding: [2, 2],
               borderRadius: 2
             }
           }
@@ -78,12 +80,12 @@ const getOption = (props) => {
   return result;
 };
 
-const Pie = (props) => {
-  return (
+const Pie = ({title, option}) => {
+  return (option && option.value && option.value.length) ? (
     <ReactEcharts
-      option={getOption(props)}
+      option={getOption({ title, option})}
     />
-  );
+  ) : NoData();
 };
 
 export default Pie;

@@ -6,7 +6,7 @@
  */
 import { message } from 'antd';
 import { removeStorage } from './storage';
-import { C_STORAGE } from '../common/constants';
+import { C_SESSION } from '../common/constants';
 
 /**
  * 后端返回状态码错误处理
@@ -16,7 +16,7 @@ export const error = (err) => {
     message.error(err.notice);
   }
   if (err.status === 401) {
-    removeStorage(C_STORAGE.SESSION);
+    removeStorage(C_SESSION);
     const errorMessage = '登录失效，请重新登录';
     console.error(errorMessage);
     return;
