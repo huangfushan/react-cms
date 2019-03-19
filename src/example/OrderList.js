@@ -89,7 +89,7 @@ export default class orderList extends React.Component {
     return (
       <div>
         <Selector
-          data={['1', 2, { key: 3, value: '苹果' }, { id: 4, name: '栗子' }]}
+          data={[{ key: 3, value: '苹果' }, { id: 4, value: '栗子' }]}
           onChange={this.handleChangeSelect}
         />
         <SearchHeader handleSearchChange={this.handleChange} />
