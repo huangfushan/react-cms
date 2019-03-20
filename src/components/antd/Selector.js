@@ -54,7 +54,7 @@ export default class Selector extends React.Component {
   };
 
   render() {
-    const { placeholder, mode, value, data, allowClear } = this.props;
+    const { placeholder, mode, value, data, allowClear, style } = this.props;
     //不传 mode 的时候，代表单选，value为key，
     //如果mode为 multiple 代表多选，那么value对应是key的数组
     //如果mode为 tags 代表多选，那么value对应是key的数组,并且key需要为字符串，不能为int
@@ -68,6 +68,7 @@ export default class Selector extends React.Component {
         placeholder={placeholder}
         loading={this.state.isFetching}
         value={value}
+        style={style}
         showArrow={true}
         onSearch={this.handleSearch}
         onChange={this.handleChange}
