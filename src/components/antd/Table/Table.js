@@ -76,11 +76,12 @@ export default class Table extends React.Component {
 
   render() {
     const { isFetching, list, total } = this.props;
+    let { _page } = this.state;
+
     const dataSource = [];
     [...list].forEach((item, index) => {
-      dataSource.push({ ...item, key: index + 1 });
+      dataSource.push({ ...item, key: ((_page || 1) - 1) * C_PAGE_NUMBER.COUNT + index + 1 });
     });
-    let { _page } = this.state;
     const pagination = {
       // hideOnSinglePage: total ? false : true,
       showQuickJumper: true,

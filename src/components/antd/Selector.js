@@ -15,9 +15,9 @@ let timeout;
 export default class Selector extends React.Component {
   static propTypes = {
     data: PropTypes.array.isRequired,
-    filterData: PropTypes.func,
+    filterData: PropTypes.func, //有这个方法代表提供检索功能
     onChange: PropTypes.func,
-    allowClear: PropTypes.bool,
+    allowClear: PropTypes.bool,//是否有删除按钮
   };
 
   static defaultProps = {

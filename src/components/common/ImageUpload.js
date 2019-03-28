@@ -39,6 +39,8 @@ export default class ImageUpload extends React.Component {
   static propTypes = {
     onChange: PropTypes.func,
     value: PropTypes.string,
+    accept: PropTypes.string, //文件接受类型
+    size: PropTypes.number, //文件大小，M
   };
 
   constructor(props) {
@@ -63,7 +65,7 @@ export default class ImageUpload extends React.Component {
       input.onchange = () => {
         const file = input.files[0];
         input.value = '';
-        if (!imageBeforeUpload(file)) return;
+        if (!imageBeforeUpload(file, this.props.accept, this.props.size)) return;
         if (!this.props.aspectRatio) { //如果不裁剪，直接上传
           this.pushAliOss(file, 'image');
           return;
@@ -126,7 +128,7 @@ export default class ImageUpload extends React.Component {
   };
 
   render() {
-    const { aspectRatio, aspectRatioHint } = this.props;
+    const { aspectRatio, aspectRatioHint, accept, size } = this.props;
     return (
       <React.Fragment>
         {
@@ -140,7 +142,9 @@ export default class ImageUpload extends React.Component {
             </div>
           )
         }
-        <input id="image-input" type="file" accept="image/png,image/gif,image/jpg,image/jpeg"
+        <input id="image-input"
+               type="file"
+               accept={this.props.accept || 'image/png,image/gif,image/jpg,image/jpeg'}
                style={{ display: 'none' }} />
         <Modal
           mode={false}
@@ -165,8 +169,15 @@ export default class ImageUpload extends React.Component {
           />
         </Modal>
         {
-          (aspectRatioHint) &&
-          <p style={{ fontSize: '.875rem', lineHeight: '1.5' }} className="normal-color">{`注：图片裁剪比例为 ${aspectRatioHint}`}</p>
+          (aspectRatioHint || accept || size) && (
+            <p style={{ fontSize: '.875rem', lineHeight: '1.5' }} className="normal-color">
+              注：
+              {aspectRatioHint && `图片裁剪比例为 ${aspectRatioHint}，`}
+              {/*{accept && `支持 png、gif、jpg、jpeg 格式，`}*/}
+              支持 png、gif、jpg、jpeg 格式，
+              {size ? `大小不超过 ${size}M` : '大小不超过 5M'}
+            </p>
+          )
         }
       </React.Fragment>
     );
