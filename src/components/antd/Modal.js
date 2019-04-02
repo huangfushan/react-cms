@@ -38,6 +38,7 @@ export default class Modal extends React.Component {
     return (
       <AliModal
         maskClosable={false}
+        destroyOnClose={true}
         visible={this.props.visible}
         title={
           <span>{this.props.title || '编辑'}</span>
@@ -48,6 +49,7 @@ export default class Modal extends React.Component {
         confirmLoading={this.props.confirmLoading}
         onCancel={this.handleCancel}
         onOk={this.handleSubmit}
+        footer={this.props.footer}
       >
         {this.props.children}
       </AliModal>
