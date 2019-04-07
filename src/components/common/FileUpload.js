@@ -43,7 +43,7 @@ export default class FileUpload extends React.Component {
   handleChooseFile = () => {
     const { type, multiple, accept } = this.props;
     // const input = document.createElement('input');
-    const input = document.getElementById('image-input');
+    const input = document.getElementById('file-input');
     let acceptType = accept;
     switch (type) {
       case 'image':
