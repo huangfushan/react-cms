@@ -169,15 +169,13 @@ export default class ImageUpload extends React.Component {
           />
         </Modal>
         {
-          (aspectRatioHint || accept || size) && (
-            <p style={{ fontSize: '.875rem', lineHeight: '1.5' }} className="normal-color">
-              注：
-              {aspectRatioHint && `图片裁剪比例为 ${aspectRatioHint}，`}
-              {/*{accept && `支持 png、gif、jpg、jpeg 格式，`}*/}
-              支持 png、gif、jpg、jpeg 格式，
-              {size ? `大小不超过 ${size}M` : '大小不超过 5M'}
-            </p>
-          )
+          <p style={{ fontSize: '.875rem', lineHeight: '1.5' }} className="normal-color">
+            注：
+            {aspectRatioHint && `图片裁剪比例为 ${aspectRatioHint}，`}
+            {/*{accept && `支持 png、gif、jpg、jpeg 格式，`}*/}
+            支持 png、gif、jpg、jpeg 格式，
+            {size ? `大小不超过 ${size}M` : '大小不超过 5M'}
+          </p>
         }
       </React.Fragment>
     );
