@@ -87,7 +87,7 @@
   },
   "proxy": {
     "/dev": {
-      "target": "https://tst.dayukeji.xin/p18001/api",
+      "target": "https://tst.dayukeji.xin/p10000/api",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {
