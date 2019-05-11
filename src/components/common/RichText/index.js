@@ -8,16 +8,22 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import commonApi from '../../../api/commonApi';
-import { imageBeforeUpload } from '../../../utils/image';
-import { C_RESP } from '../../../common/constants';
-import { error } from '../../../utils';
+import { checkFile } from '../../../utils/file';
+import { C_FILE, C_RESP } from '../../../common/constants';
+import { error, PushAliOss } from '../../../utils';
 import './index.less';
-import { pushAliOss } from '../../../utils/aliOSS';
 
 export default class RichText extends React.Component {
+  static propTypes = {
+    size: PropTypes.number, //文件大小，单位为MB，目前只有 image 生效
+    accept: PropTypes.string, //支持的文件类型,默认全部
+    placeholder: PropTypes.string,
+    onChange: PropTypes.func,
+    value: PropTypes.string,
+  };
 
   constructor(props) {
     super(props);
@@ -73,8 +79,7 @@ export default class RichText extends React.Component {
       input.click();
       input.onchange = () => {
         const file = input.files[0];
-        let bool = imageBeforeUpload(file);
-        if (bool) {
+        if (checkFile(file, this.props.accept, this.props.size)) {
           this.pushAliOss(file, 'image');
         }
       };
@@ -83,15 +88,13 @@ export default class RichText extends React.Component {
 
   pushAliOss = (file, type) => {
     this.setState({ confirmLoading: true });
-    commonApi.fetchOssAccessKey().then(resp => {
-      pushAliOss(resp, type, file).then((resp) => {
-        this.setState({ confirmLoading: false });
-        if (resp.status === C_RESP.OK) {
-          this.insertToEditor(resp.url);//上传成功后的逻辑
-        } else {
-          error(resp);
-        }
-      });
+    new PushAliOss(file, type).uploader().then((resp) => {
+      this.setState({ confirmLoading: false });
+      if (resp.status === C_RESP.OK) {
+        this.insertToEditor(resp.url);//上传成功后的逻辑
+      } else {
+        error(resp);
+      }
     });
   };
 
@@ -112,14 +115,14 @@ export default class RichText extends React.Component {
       if (onChange) {
         onChange(value);
         const input = document.getElementById('rich-text-input');
-        input.value='';
+        input.value = '';
       }
     });
   };
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <ReactQuill
           onChange={this.handleChange}
           modules={this.state.MODULES}
@@ -129,8 +132,8 @@ export default class RichText extends React.Component {
           value={this.state.value}
           ref={(el) => this.quillRef = el}
         />
-        <input type='file' accept='image/png,image/gif,image/jpg,image/jpeg' id='rich-text-input' style={{display: 'none'}}/>
-      </div>
+        <input type='file' accept={C_FILE.IMAGE_ACCEPT} id='rich-text-input' style={{ display: 'none' }} />
+      </React.Fragment>
     );
   }
 }

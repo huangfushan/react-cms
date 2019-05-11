@@ -1,0 +1,44 @@
+/**
+ * @Author: huangfushan
+ * @Date: 2019-03-12 19:09
+ * @Project: web-manager-admin
+ */
+@import "../../../../../themes/default/variables";
+@import "../../../../../themes/style/flex";
+
+.comment-title {
+  border-bottom: @border;
+  padding: .5rem;
+  margin: 2rem 1rem 0 1rem;
+}
+
+.comment-item {
+  .flex-start;
+  padding: 0.5rem 1rem;
+  margin: 0 1rem;
+  border-bottom: @border;
+  color: @text-color-secondary;
+
+  img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+    border: @border;
+    align-items: start;
+  }
+
+  &-content {
+    margin-right: auto;
+
+    .delete {
+      white-space: nowrap;
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+
+
+}

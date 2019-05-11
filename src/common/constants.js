@@ -26,13 +26,15 @@ export const C_API = {
 
 /**
  * 网络请求后端返回状态吗
- * @type {{OK: number, ERR_INVALID: number, ERR_NO_FOUND: number, ERR_UNKNOWN: number}}
+ * @type {{ERR_FAIL: number, ERR_401: number, ERR_500: number, ERR_404: number, OK: number}}
  */
 export const C_RESP = {
   OK: 0,
-  ERR_INVALID: 401,
-  ERR_NO_FOUND: 404,
-  ERR_UNKNOWN: -999,
+  SUCCESS: 200,
+  ERR_401: 401,
+  ERR_404: 404,
+  ERR_500: 500,
+  ERR_FAIL: -1000,
 };
 
 /**
@@ -52,7 +54,7 @@ export const C_TIME = {
 
 /**
  * 存入storage缓存
- * @type {{SESSION: string, KEY_USER: string}}
+ * @type {{PASSWORD: string, AUTH: string, USERNAME: string}}
  */
 export const C_STORAGE = {
   AUTH: `${process.env.PRODUCTION_ENV}_${path.PROJECT_CODE}_auth`, //账户信息，是对象
@@ -79,6 +81,10 @@ export const C_GENDER = {
   UNKNOWN: '未知'
 };
 
+/**
+ * 学历
+ * @type {{JUNIOR: string, MASTER: string, SENIOR: string, COLLEGE: string, UNIVERSITY: string, DOCTOR: string}}
+ */
 export const C_EDUCATION = {
   JUNIOR: '初中',
   SENIOR: '高中/中专',
@@ -115,13 +121,16 @@ export const C_PAY = {
   ALI_APP: 'ALI_APP', //支付宝app
 };
 
-/**
- * oss存储路径
- * @type {{VIDEO: string, AUDIO: string, IMAGE: string, FILE: string}}
- */
-export const C_OSS = {
-  VIDEO: `${path.PROJECT_CODE}/${process.env.PRODUCTION_ENV || 'dev'}/${path.PROJECT_PORT}/video`,
-  AUDIO: `${path.PROJECT_CODE}/${process.env.PRODUCTION_ENV || 'dev'}/${path.PROJECT_PORT}/audio`,
-  IMAGE: `${path.PROJECT_CODE}/${process.env.PRODUCTION_ENV || 'dev'}/${path.PROJECT_PORT}/image`,
-  FILE: `${path.PROJECT_CODE}/${process.env.PRODUCTION_ENV || 'dev'}/${path.PROJECT_PORT}/file`,
+//文件接受类型
+export const C_FILE = {
+  IMAGE_ACCEPT: 'image/png,image/gif,image/jpg,image/jpeg',
+  VIDEO_ACCEPT: 'video/mp4',
+  AUDIO_ACCEPT: 'audio/mp3',
+};
+
+//各种审核状态
+export const C_STATE = {
+  IN_CERTIFICATION: 'IN_CERTIFICATION', //审核中，
+  CERTIFICATION_PASS: 'CERTIFICATION_PASS', // 通过
+  CERTIFICATION_FAIL: 'CERTIFICATION_FAIL'// /未通过
 };

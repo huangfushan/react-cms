@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Dnd from '../components/common/Dnd/index';
+import Dnd from '../../components/common/Dnd';
 
 const cardList= [{ //定义卡片内容
   title: 'first Card',

@@ -1,5 +1,5 @@
 const PROJECT_NAME = 'CMS框架'; //项目名称
-const PROJECT_CODE = 'p18888'; //项目code
+const PROJECT_CODE = 'p10000'; //项目code
 const PROJECT_PORT = 'cms'; //端
 const PROJECT_HOST_PROD = 'https://api.dayukeji.xin'; //正式服
 const PROJECT_HOST_TEST = 'https://test.dayukeji.xin'; //正式服
@@ -39,6 +39,6 @@ module.exports = {
     if (process.env.NODE_ENV === 'production') {
       return '';
     }
-    return DEBUG.postman;
+    return DEBUG.dev;
   }
 };

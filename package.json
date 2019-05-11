@@ -15,6 +15,7 @@
   ],
   "author": "huangfushan",
   "dependencies": {
+    "ali-oss": "^6.1.0",
     "antd": "^3.15.1",
     "apisauce": "^1.0.0",
     "babel-polyfill": "^6.26.0",
@@ -26,10 +27,14 @@
     "normalize.css": "^8.0.0",
     "prop-types": "^15.6.0",
     "react": "^16.4.0",
+    "react-cropper": "^1.2.0",
     "react-dev-utils": "^4.2.1",
     "react-dom": "^16.4.0",
+    "react-breadcrumbs-hoc": "https://github.com/huangfushan/react-breadcrumbs-hoc.git",
     "react-loadable": "^5.5.0",
+    "react-quill": "^1.3.3",
     "react-redux": "^5.0.6",
+    "react-router-breadcrumbs-hoc": "^2.3.1",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-actions": "^2.6.4",
@@ -82,7 +87,7 @@
   },
   "proxy": {
     "/dev": {
-      "target": "https://tst.dayukeji.xin/p10000/api",
+      "target": "https://tst.dayukeji.xin/p18001/api",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Error from './Error';
+import Error from './PageError';
 import Loading from './Loading';
 
 const LoadingComponent = (props) => {

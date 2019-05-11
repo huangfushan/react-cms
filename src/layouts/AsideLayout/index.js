@@ -16,8 +16,8 @@ import PrivateRoute from '../../components/common/PrivateRoute';
 import LoadingComponent from '../../components/common/LoadingComponent';
 import './index.less';
 
-const NotFound = Loadable({
-  loader: () => import('../../components/common/NotFound'),
+const Page404 = Loadable({
+  loader: () => import('../../components/common/Page404'),
   loading: LoadingComponent,
   delay: 100
 });
@@ -53,9 +53,9 @@ export default class AsideLayout extends React.Component {
 
               })}
 
-              <Redirect from="/" to={redirectPath} />
+              {!!redirectPath && <Redirect from="/" to={redirectPath} />}
 
-              <Route component={NotFound} />
+              <Route component={Page404} />
             </Switch>
           </div>
           <footer>

@@ -22,17 +22,7 @@ export default class Tabs extends React.Component {
 
   static defaultProps = {
     data: [],
-    keyExtractor: item => (typeof item === 'string' || typeof item === 'number') ? item : (item.id || item.key),
-    valueExtractor: item => (typeof item === 'string' || typeof item === 'number') ? item : (item.name || item.value)
   };
-  //
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps._page) {
-  //     this.setState({
-  //       _page: nextProps._page
-  //     });
-  //   }
-  // }
 
   handleChange = (key) => {
     const { onChange } = this.props;
@@ -42,7 +32,7 @@ export default class Tabs extends React.Component {
   };
 
   render() {
-    const { data, keyExtractor, valueExtractor } = this.props;
+    const { data} = this.props;
     return (
       <AliTabs
         // defaultActiveKey={null}
@@ -52,8 +42,8 @@ export default class Tabs extends React.Component {
         {
           data && data.map(item => (
             <TabPane
-              tab={valueExtractor(item)}
-              key={keyExtractor(item)}>
+              tab={item.value}
+              key={item.key}>
               {this.props.children}
             </TabPane>
           ))

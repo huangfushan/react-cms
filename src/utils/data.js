@@ -16,35 +16,6 @@ const getDiffObj = (oldValue, newValue) => {
   return value;
 };
 
-const Converter = {
-  replay: key => (value, dest) => {
-    dest[key] = value;
-    return dest;
-  },
-  exposure: (key) => (value, dest) => {
-    dest[key] = value[key];
-    return dest;
-  },
-  detail: key => (value, dest) => {
-    dest.detail.push({ key, value });
-    return dest;
-  },
-  enum: (key, map) => (value, dest) => {
-    dest.detail.push({ key, value: map[value] });
-    return dest;
-  },
-  map: (src, map) => {
-    return Object.entries(map).reduce((dest, [k, fn]) => {
-      if (fn) {
-        return fn(src[k], dest);
-      } else {
-        dest[k] = src[k];
-      }
-      return dest;
-    }, { detail: [] });
-  }
-};
-
 const objToArr = (obj) => {
   let newArr = [];
   Object.keys(obj).forEach(item => {
@@ -69,7 +40,6 @@ const getUrlParams = (name, url = window.location.href) => {
 
 export {
   getDiffObj,
-  Converter,
   objToArr,
   getUrlParams
 };

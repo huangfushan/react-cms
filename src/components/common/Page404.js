@@ -11,7 +11,7 @@ import { icon } from '../../images/images';
 export default () => {
   return (
     <div style={style}>
-      <img src={icon['404']} alt='' style={{width: '50%'}}/>
+      <img src={icon['404']} alt='' style={{ width: '30rem' }} />
       <p>未找到页面！</p>
     </div>
   );
@@ -19,5 +19,5 @@ export default () => {
 
 const style = {
   textAlign: 'center',
-  paddingTop: 100
+  paddingTop: '1rem'
 };

@@ -15,15 +15,15 @@ export default class Modal extends React.Component {
     handleCancel: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     width: PropTypes.number.isRequired,
-    visible: PropTypes.bool.isRequired,
-    confirmLoading: PropTypes.bool.isRequired,
+    isVisible: PropTypes.bool.isRequired,
+    isConfirmLoading: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
     title: '',
-    visible: false,
+    isVisible: false,
     width: 0,
-    confirmLoading: false,
+    isConfirmLoading: false,
   };
 
   handleCancel = () => {
@@ -39,14 +39,14 @@ export default class Modal extends React.Component {
       <AliModal
         maskClosable={false}
         destroyOnClose={true}
-        visible={this.props.visible}
+        visible={this.props.isVisible}
         title={
           <span>{this.props.title || '编辑'}</span>
         }
         okText="确定"
         cancelText="取消"
         width={this.props.width || 800}
-        confirmLoading={this.props.confirmLoading}
+        confirmLoading={this.props.isConfirmLoading}
         onCancel={this.handleCancel}
         onOk={this.handleSubmit}
         footer={this.props.footer}

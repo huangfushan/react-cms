@@ -9,7 +9,7 @@ React后台项目：react + react-router4 + apisauce + less + redux + prop-types
 5. less
 6. es6 + babel ( 配了babel-plugin-transform-decorator-legacy 装饰器)
 7. webpack 3.8.1
-7. antd 3.1.0
+7. antd 3.15.1
 8. react-dnd 7.0.2
 
 ### 环境

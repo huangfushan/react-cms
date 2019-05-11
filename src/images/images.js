@@ -8,10 +8,9 @@
 const icon = {
   nothing: require('./icon/no-data.png'),
   404: require('./icon/404.png'),
-  loading: require('./icon/loading.png')
+  loading: require('./icon/loading.png'),
+  error: require('./icon/error.png'),
 };
-
-const bg = {};
 
 const common = {
   logo: require('./common/logo.png'),
@@ -20,6 +19,5 @@ const common = {
 
 export {
   icon,
-  bg,
   common,
 };

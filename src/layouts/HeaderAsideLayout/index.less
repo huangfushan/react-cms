@@ -45,17 +45,18 @@
 
     .dt-sidebar {
       padding: 1.5rem 0;
-      height: calc(100vh - 4rem);
+      min-height: calc(100vh - 4rem);
       overflow-x: hidden;
     }
 
     .body {
       width: 100%;
       position: relative;
-      height: calc(100vh - 4rem);
+      min-height: calc(100vh - 4rem);
       overflow-x: hidden;
 
       &-header {
+        .flex;
         //background: @background-color-light;
         height: 3rem;
         padding: 1rem;

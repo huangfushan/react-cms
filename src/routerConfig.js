@@ -30,8 +30,33 @@ const ForgetPassword = Loadable({
 });
 
 //404
-const NotFound = Loadable({
-  loader: () => import('./components/common/NotFound'),
+const Page404 = Loadable({
+  loader: () => import('./components/common/Page404'),
+  loading: LoadingComponent,
+  delay: 0
+});
+const PageError = Loadable({
+  loader: () => import('./components/common/PageError'),
+  loading: LoadingComponent,
+  delay: 0
+});
+//ArticleEdit
+const ArticleEdit = Loadable({
+  loader: () => import('./example/pages/Article/ArticleEdit'),
+  loading: LoadingComponent,
+  delay: 0
+});
+
+//ArticleEdit
+const ArticleInfo = Loadable({
+  loader: () => import('./example/pages/Article/ArticleInfo'),
+  loading: LoadingComponent,
+  delay: 0
+});
+
+//ArticleList
+const ArticleList = Loadable({
+  loader: () => import('./example/pages/Article'),
   loading: LoadingComponent,
   delay: 0
 });
@@ -51,11 +76,11 @@ const NotFound = Loadable({
 //   { path: '/login', component: Login, exact: true, name: '登录', layout: CenterLayout },
 //   { path: '/register', component: Register, exact: true, name: '注册', layout: CenterLayout },
 //   { path: '/password/forget', component: ForgetPassword, exact: true, name: '忘记密码', layout: CenterLayout },
-//   { path: '/order', component: NotFound, exact: true, name: '首页', isAuthenticated: true, layout: HeaderAsideLayout },
-//   { path: '/goods', component: NotFound, exact: true, name: '首页', isAuthenticated: true, layout: AsideLayout },
-//   { path: '/category', component: NotFound,exact: true,breadcrumb: '首页',isAuthenticated: true,layout: BlankLayout,},
-//   { path: '/setting', component: NotFound, exact: true, name: '404', isAuthenticated: true, layout: NormalLayout },
-//   { path: '/home', component: NotFound, exact: true, name: '404', isAuthenticated: true, layout: HeaderAsideLayout },
+//   { path: '/order', component: Page404, exact: true, name: '首页', isAuthenticated: true, layout: HeaderAsideLayout },
+//   { path: '/goods', component: Page404, exact: true, name: '首页', isAuthenticated: true, layout: AsideLayout },
+//   { path: '/category', component: Page404,exact: true,breadcrumb: '首页',isAuthenticated: true,layout: BlankLayout,},
+//   { path: '/setting', component: Page404, exact: true, name: '404', isAuthenticated: true, layout: NormalLayout },
+//   { path: '/home', component: Page404, exact: true, name: '404', isAuthenticated: true, layout: HeaderAsideLayout },
 // ];
 
 /**
@@ -70,13 +95,17 @@ const routerConfig = [
   { path: '/login', component: Login, exact: true, name: '登录' },
   { path: '/register', component: Register, exact: true, name: '注册' },
   { path: '/password/forget', component: ForgetPassword, exact: true, name: '忘记密码' },
-  { path: '/order', component: NotFound, exact: true, name: '订单', isAuthenticated: true },
-  { path: '/goods', component: NotFound, exact: true, name: '商品', isAuthenticated: true },
-  { path: '/category', component: NotFound, exact: true, breadcrumb: '首页', isAuthenticated: true },
-  { path: '/setting', component: NotFound, exact: true, name: '设置', isAuthenticated: true },
-  { path: '/home', component: NotFound, exact: true, name: '首页', isAuthenticated: true },
+  { path: '/', component: Page404, exact: true, name: '首页', isAuthenticated: true },
+  { path: '/home', component: Page404, exact: true, name: '统计', isAuthenticated: true },
+  { path: '/order', component: Page404, exact: true, name: '订单', isAuthenticated: true },
+  { path: '/goods', component: Page404, exact: true, name: '商品', isAuthenticated: true },
+  { path: '/article', component: ArticleList, exact: true, name: '文章管理', isAuthenticated: true },
+  { path: '/article/add', component: ArticleEdit, exact: true, name: '添加', isAuthenticated: true },
+  { path: '/article/:id', component: ArticleInfo, exact: true, name: '', isAuthenticated: true },
+  { path: '/article/:id/update', component: ArticleEdit, exact: true, name: '编辑', isAuthenticated: true },
+  { path: '/setting', component: PageError, exact: true, name: '设置', isAuthenticated: true },
 ];
-export const redirectPath = '/home'; //重定向地址
+export const redirectPath = ''; //重定向地址
 export default routerConfig;
 
 

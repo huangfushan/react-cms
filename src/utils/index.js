@@ -5,14 +5,14 @@
  * @Project: cms
  */
 
-import { getStorage, setStorage, removeStorage } from './storage';
-import { timeFmt, timeFmtNext } from './time';
-import { checkBankNo } from './bankno';
-import { imageBeforeUpload } from './image';
+import { getStorage, setStorage, removeStorage } from './storage'; //缓存
+import { timeFmt, timeFmtNext } from './time'; //时间相关
+import { checkBankNo } from './bankno'; //银行卡相关
+import { checkFile } from './file'; //文件相关
 import { error } from './error';
-import { getDiffObj, Converter, objToArr, getUrlParams } from './data';
-import { RegExp } from './regExp';
-import { pushAliOss } from './aliOSS';
+import { getDiffObj, objToArr, getUrlParams } from './data'; //关于数据的处理
+import { RegExp } from './regExp'; //正则
+import { PushAliOss } from './ali'; //阿里相关
 
 export {
   timeFmt,
@@ -21,12 +21,11 @@ export {
   setStorage,
   removeStorage,
   checkBankNo,
-  imageBeforeUpload,
+  checkFile,
   error,
   getDiffObj,
   RegExp,
-  Converter,
   objToArr,
   getUrlParams,
-  pushAliOss
+  PushAliOss
 };

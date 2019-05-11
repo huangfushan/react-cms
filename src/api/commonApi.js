@@ -52,8 +52,25 @@ export default {
       });
     });
   },
+  fetchCountryList: () => http.get(`/static/country.json`), //获取国家列表
+  fetchAddress: (type, value) => {
+    switch (type) {
+      case 'province':
+        return http.get(`/static/address/${type}.json`);
+      case 'city':
+        return http.get(`/static/address/${type}/${value}.json`);
+      case 'county':
+        return http.get(`/static/address/${type}/${value}00.json`);
+      default:
+        return Promise.resolve({
+          status: 1000,
+          notice: '',
+          msg: '缺少获取三级联动的类型: province，city,county三者之一',
+        });
+    }
+  },
 
-  //TODO，获取osskey
+//TODO，获取osskey
   /**
    * @params accessKeyId：通过阿里云控制台创建的access key。
    * @params accessKeySecret：通过阿里云控制台创建的access secret。

@@ -9,26 +9,36 @@ import ApiSauce from 'apisauce';
 import { message } from 'antd';
 import { C_API, C_X_CLIENT_TOKEN } from '../common/constants';
 
-const filterResponse = (resp) => {
+const httpResponse = (resp) => {
   if (resp.ok) {
     return resp.data;
-  }
-  else {
+  } else {
     const data = {
       status: resp.status,
-      message: 'have some error happened?',
+      problem: resp.problem,
+      message: 'have some error happened',
     };
+
     switch (resp.problem) {
-      case ApiSauce.NETWORK_ERROR:
+      case ApiSauce.CLIENT_ERROR:
+        data.message = `http：客户端错误400-499`;
+        break;
       case ApiSauce.TIMEOUT_ERROR:
-        data.message = '网络请求超时';
-        message.warn(data.message);
+        data.message = `http：网络请求超时`;
+        message.warn('网络请求超时');
         break;
       case ApiSauce.CONNECTION_ERROR:
-      case ApiSauce.CLIENT_ERROR:
+        data.message = `http：连接错误`;
+        break;
+      case ApiSauce.NETWORK_ERROR:
+        data.message = `http：网络错误`;
+        break;
       case ApiSauce.SERVER_ERROR:
+        data.message = `http：服务错误`;
+        break;
       default:
         console.log(resp);
+        break;
     }
     return data;
   }
@@ -55,23 +65,23 @@ class HTTP {
   };
 
   get = (url, params = {}) => {
-    return this._agent.get(url, params).then(filterResponse);
+    return this._agent.get(url, params).then(httpResponse);
   };
 
   post = (uri, params) => {
-    return this._agent.post(uri, params).then(filterResponse);
+    return this._agent.post(uri, params).then(httpResponse);
   };
 
   put = (uri, params) => {
-    return this._agent.put(uri, params).then(filterResponse);
+    return this._agent.put(uri, params).then(httpResponse);
   };
 
   patch = (uri, params) => {
-    return this._agent.patch(uri, params).then(filterResponse);
+    return this._agent.patch(uri, params).then(httpResponse);
   };
 
   delete = (uri, params) => {
-    return this._agent.delete(uri, params).then(filterResponse);
+    return this._agent.delete(uri, params).then(httpResponse);
   };
 }
 

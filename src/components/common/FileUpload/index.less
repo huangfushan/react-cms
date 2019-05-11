@@ -1,0 +1,74 @@
+/**
+ * @Author: huangfushan
+ * @Date: 2019-04-23 16:37
+ * @Project: web-manage
+ */
+@import "../../../themes/default/variables";
+
+
+.file-upload-hint {
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+.file-upload-item {
+  line-height: 2;
+
+  a {
+    width: 10rem;
+    font-size: .875rem;
+  }
+
+  span {
+    font-size: .875rem;
+    width: 4rem;
+    margin: 0 .5rem;
+  }
+
+  .anticon {
+    cursor: pointer;
+  }
+
+  .anticon:hover {
+    color: @primary-color;
+  }
+}
+
+.file-upload-item:hover {
+  background: fade(@primary-color, 5%);
+}
+
+.file-upload-show {
+  font-size: .875rem;
+
+  &-item {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+
+    &-box {
+      position: relative;
+      border: @border;
+
+      img {
+        height: 100%;
+      }
+
+      .file-upload-progress {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        line-height: 1.5;
+        text-align: center;
+        background-color: rgba(0, 0, 0, .1);
+      }
+    }
+
+    &-delete {
+      font-size: .875rem;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+
+}

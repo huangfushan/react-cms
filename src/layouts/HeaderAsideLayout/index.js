@@ -8,6 +8,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
+import { BreadcrumbsCom } from 'react-breadcrumbs-hoc';
 import { Icon } from 'antd';
 import Header from './Header';
 import SideBar from './Sidebar';
@@ -17,8 +18,8 @@ import PrivateRoute from '../../components/common/PrivateRoute';
 import LoadingComponent from '../../components/common/LoadingComponent';
 import './index.less';
 
-const NotFound = Loadable({
-  loader: () => import('../../components/common/NotFound'),
+const Page404 = Loadable({
+  loader: () => import('../../components/common/Page404'),
   loading: LoadingComponent,
   delay: 100
 });
@@ -48,7 +49,9 @@ export default class HeaderAsideLayout extends React.Component {
               <Icon
                 type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                 onClick={this.toggleCollapse}
+                style={{ marginRight: '1rem' }}
               />
+              <BreadcrumbsCom routers={routerConfig} />
             </div>
             <div className="body-content">
               <Switch>
@@ -64,9 +67,9 @@ export default class HeaderAsideLayout extends React.Component {
 
                 })}
 
-                <Redirect from="/" to={redirectPath} />
+                {!!redirectPath && <Redirect from="/" to={redirectPath} />}
 
-                <Route component={NotFound} />
+                <Route component={Page404} />
               </Switch>
             </div>
             <footer>
