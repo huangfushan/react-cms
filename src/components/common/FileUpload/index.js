@@ -129,7 +129,7 @@ export default class FileUpload extends React.Component {
           const url = URL.createObjectURL(item);
           const audioElement = new Audio(url);
           audioElement.addEventListener('loadedmetadata', () => {
-            n.duration = Math.ceil(audioElement.duration % 60);
+            n.duration = Math.ceil(audioElement.duration * 1000); //音视频时长精确到毫秒，因为这里拿到到是秒，所以需要乘以1000
           });
         }
         return n;

@@ -132,10 +132,18 @@ export default class ArticleEdit extends React.Component {
         serviceId: !params.id ? serviceId : undefined, //id存在是修改数据，serviceId无法修改。不存在说明是新加数据，需要传serviceId，
       };
       if (values.type === 'AUDIO') {
-        newValue.media = values.audio && values.audio[0] && values.audio[0].url;
+        if (values.audio && values.audio.some(n => n.status !== 0)) return;
+        newValue.media = values.audio && values.audio[0] && {
+          duration: values.audio[0].duration,
+          url: values.audio[0].url
+        };
       }
       if (values.type === 'VIDEO') {
-        newValue.media = values.video && values.video[0] && values.video[0].url;
+        if (values.video && values.video.some(n => n.status !== 0)) return;
+        newValue.media = values.video && values.video[0] && {
+          duration: Math.ceil(values.video[0].duration / 1000),
+          url: values.video[0].url
+        };
       }
 
       this.pushData(params.id, newValue);
