@@ -7,15 +7,15 @@
 import React from 'react';
 import './index.less';
 
-export default ({ url }) => {
+export default ({ url, loop }) => {
 
   return (
-    <div className="media-video" >
+    <div className="media-video">
       <audio
         src={url} //音频地址
         controls="controls" //允许用户播放
         preload="metadata" //抓取元数据（比如：长度）
-        loop //循环播放
+        loop={loop} //循环播放
         width='100%'
         height='100%'
       >

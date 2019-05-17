@@ -15,9 +15,8 @@ export default class Tabs extends React.Component {
 
   static propTypes = {
     data: PropTypes.array.isRequired,
-    keyExtractor: PropTypes.func,
-    valueExtractor: PropTypes.func,
     onChange: PropTypes.func,
+    activeKey: PropTypes.string,
   };
 
   static defaultProps = {
@@ -26,18 +25,24 @@ export default class Tabs extends React.Component {
 
   handleChange = (key) => {
     const { onChange } = this.props;
-    if (onChange){
+    if (onChange) {
       this.props.onChange(key);
     }
   };
 
   render() {
-    const { data} = this.props;
+    const { data, activeKey, animated } = this.props;
+    const option = {
+      onChange: this.handleChange,
+      animated: animated || false
+    };
+    if (activeKey) {
+      option.activeKey = activeKey;
+    }
+
     return (
       <AliTabs
-        // defaultActiveKey={null}
-        onChange={this.handleChange}
-        animated={this.props.animated || false}
+        {...option}
       >
         {
           data && data.map(item => (

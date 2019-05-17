@@ -45,13 +45,13 @@ const Actions = createActions({
 });
 
 const AsyncActions = {
-  signIn: params => dispatch => authApi.signIn(params).then(() => {
-    const resp = {
-      status: 0,
-      data: {
-        session: '写死session，只能用于开发用'
-      }
-    };
+  signIn: params => dispatch => authApi.signIn(params).then(resp => {
+    // const resp = {
+    //   status: 0,
+    //   data: {
+    //     session: '写死session，只能用于开发用'
+    //   }
+    // };
     if (resp.status === C_RESP.OK) {
       http.setHeader(C_SESSION, resp.data.session);
       setStorage(C_STORAGE.AUTH, resp.data); //session

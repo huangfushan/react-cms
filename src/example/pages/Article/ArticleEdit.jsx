@@ -11,13 +11,13 @@ import { Form, Input, Button, Spin, message, Divider } from 'antd';
 import { error, getUrlParams } from '../../../utils';
 import TabSingleBox from '../../../components/common/TabSingleRadio';
 import ImageUpload from '../../../components/common/ImageUpload';
-import RichText from '../../../components/common/RichText';
 import articleApi from '../../api/articleApi';
 import { Actions } from '../../../redux/actions';
 import { C_RESP } from '../../../common/constants';
 import FileUpload from '../../../components/common/FileUpload';
 import Selector from '../../../components/antd/Selector';
 import AddressSelector from '../../../components/common/AddressSelector';
+import ReactQuill from '../../../components/common/RichText';
 
 @Form.create()
 @connect(
@@ -201,7 +201,7 @@ export default class ArticleEdit extends React.Component {
     const group = service && service.group.map(item => ({ key: item.id, value: item.name }));
     return (
       <Spin spinning={this.state.isFetching}>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} className="post-form">
           <Form.Item label="请选择投稿类型" {...formItemLayout}>
             {
               (!params.id || data.isPlatform === 1) ? getFieldDecorator('groupId', {
@@ -279,7 +279,7 @@ export default class ArticleEdit extends React.Component {
                       { required: true, message: '请输入正文' },
                     ]
                   })(
-                    <RichText />
+                    <ReactQuill />
                   )}
                 </Form.Item>
               </React.Fragment>
@@ -305,7 +305,7 @@ export default class ArticleEdit extends React.Component {
                       { required: true, message: '请输入标题' },
                     ]
                   })(
-                    <RichText />
+                    <ReactQuill size={0.1} />
                   )}
                 </Form.Item>
               </React.Fragment>
@@ -321,7 +321,7 @@ export default class ArticleEdit extends React.Component {
                       { required: true, message: '请输入标题' },
                     ]
                   })(
-                    <RichText size={0.1} />
+                    <ReactQuill placeholder="请输入标题" />
                   )}
                 </Form.Item>
               </React.Fragment>
