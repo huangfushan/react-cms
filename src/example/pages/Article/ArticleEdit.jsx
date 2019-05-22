@@ -17,7 +17,7 @@ import { C_RESP } from '../../../common/constants';
 import FileUpload from '../../../components/common/FileUpload';
 import Selector from '../../../components/antd/Selector';
 import AddressSelector from '../../../components/common/AddressSelector';
-import ReactQuill from '../../../components/common/RichText';
+import RichText from '../../../components/common/RichText';
 
 @Form.create()
 @connect(
@@ -279,7 +279,7 @@ export default class ArticleEdit extends React.Component {
                       { required: true, message: '请输入正文' },
                     ]
                   })(
-                    <ReactQuill />
+                    <RichText placeholder="请输入标题" />
                   )}
                 </Form.Item>
               </React.Fragment>
@@ -305,7 +305,7 @@ export default class ArticleEdit extends React.Component {
                       { required: true, message: '请输入标题' },
                     ]
                   })(
-                    <ReactQuill size={0.1} />
+                    <RichText size={0.1} placeholder="请输入标题" />
                   )}
                 </Form.Item>
               </React.Fragment>
@@ -321,7 +321,7 @@ export default class ArticleEdit extends React.Component {
                       { required: true, message: '请输入标题' },
                     ]
                   })(
-                    <ReactQuill placeholder="请输入标题" />
+                    <RichText placeholder="请输入标题" />
                   )}
                 </Form.Item>
               </React.Fragment>

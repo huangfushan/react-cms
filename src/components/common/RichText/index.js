@@ -73,24 +73,38 @@ export default class RichText extends React.Component {
     if (value) this.editor.clipboard.dangerouslyPasteHTML(value);
     // 设置事件，change事件，
     this.editor.on('text-change', this.handleChange);
+    this.editor.blur();
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.value !== prevState.value) {
-      return nextProps;
+      return {
+        value: nextProps.value
+      };
     }
     return null;
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.value !== nextProps.value) {
+      if (!this.state.value && !this.editor.hasFocus()) {
+        this.editor.clipboard.dangerouslyPasteHTML(nextProps.value);
+        this.editor.blur();
+        return true;
+      }
+      return false;
+    }
+    return false;
+  }
+
   handleChange = () => {
-    // change 事件将HTML字符串更新到state里面，
-    const html = this.editor.root.innerHTML !== '<p><br></p>' ? this.editor.root.innerHTML : '';
+    const html = this.editor.root.innerHTML;
     this.setState({
       value: html,
     });
     const { onChange } = this.props;
     if (onChange) {
-      onChange(html);
+      onChange(html === '<p><br></p>' ? undefined : html);
     }
   };
 
@@ -102,7 +116,6 @@ export default class RichText extends React.Component {
       const input = document.getElementById('dt-react-quill-input');
       input.click();
       input.onchange = () => {
-        this.editor.blur();
         const file = input.files[0];
         if (checkFile(file, this.props.accept, this.props.size)) {
           this.pushAliOss(file, 'image', range.index);
@@ -130,6 +143,7 @@ export default class RichText extends React.Component {
       return;
     }
     this.editor.insertEmbed(index, 'image', url);
+    this.editor.setSelection(index + 1);
   }
 
   render() {
