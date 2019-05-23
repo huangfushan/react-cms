@@ -49,6 +49,11 @@ export default {
         aTag.setAttribute('href', resp.data.url);
         aTag.setAttribute('download', resp.data.filename || filename[filename.length - 1]);
         aTag.click();
+        document.body.appendChild(aTag);
+        aTag.click();
+        setTimeout(function () {
+          document.body.removeChild(aTag);
+        }, 1000);
       });
     });
   },
