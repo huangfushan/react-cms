@@ -29,8 +29,8 @@
 // };
 
 export default {
-  fetchArticleList: () => Promise.resolve(
-    {
+  fetchArticleList: () => new Promise(resolve => {
+    setTimeout(() => resolve({
       'data': {
         'list': [
           {
@@ -177,8 +177,8 @@ export default {
       'msg': '成功',
       'notice': '成功',
       'status': 0
-    }
-  ),
+    }), 1000);
+  }),
   fetchArticle: () => Promise.resolve({
     'data': {
       'author': '漂洋过海',
