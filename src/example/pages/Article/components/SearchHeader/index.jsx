@@ -34,7 +34,7 @@ export default class SearchHeader extends React.Component {
   static defaultProps = {
     category: [],
     selectData: [],
-    fetchAllArticleCategoryList: () => console.warn('获取发现分类列表，这个方法会放在redux里面')
+    fetchAllArticleCategoryList: () => console.info('获取发现分类列表fetchAllArticleCategoryList()，这个方法会放在redux里面')
   };
 
   componentDidMount() {

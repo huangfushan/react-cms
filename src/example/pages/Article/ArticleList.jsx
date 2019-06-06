@@ -16,7 +16,7 @@ import { Popconfirm, message, Button, Dropdown, Menu, Modal, Tag } from 'antd';
 import { C_PAGE_NUMBER, C_RESP, C_SERVICE, C_STATE, C_TIME } from '../../../common/constants';
 import Tabs from '../../../components/antd/Tabs';
 import Table from '../../../components/antd/Table';
-import { error, objToArr, timeFmt } from '../../../utils';
+import { error, getUrlParams, objToArr, timeFmt } from '../../../utils';
 import SearchHeader from './components/SearchHeader';
 import { Actions } from '../../../redux/actions';
 import articleApi from '../../api/articleApi';
@@ -57,7 +57,7 @@ export default class ArticleList extends React.Component {
       _page: C_PAGE_NUMBER.PAGE,
       _count: C_PAGE_NUMBER.COUNT,
       state: C_STATE.CERTIFICATION_PASS, // 文章状态，IN_CERTIFICATION审核中，CERTIFICATION_PASS通过，CERTIFICATION_FAIL未通过，undefined获取全部
-      isPlatform: 1, //是否平台发布， 1平台，0用户，undefined全部
+      isPlatform: getUrlParams('isPlatform') || 1, //是否平台发布， 1平台，0用户，undefined全部
       filter: undefined, //检索
       serviceId: this.props.location.pathname.split('/article/')[1] || undefined, //类型，
       isFeatured: this.props.location.pathname === '/recommend/article' ? 1 : undefined, //是否精选， 1精选，0不精选，undefined全部
@@ -96,6 +96,22 @@ export default class ArticleList extends React.Component {
     });
   };
 
+  //搜索内容
+  handleChangeSearch = value => this.handleChange(value);
+
+  //修改页码
+  handleChangeTable = value => this.handleChange(value);
+
+  //修改tab
+  handleChangeTag = value => {
+    this.props.history.replace({
+      pathname: this.props.location.pathname,
+      search: `?isPlatform=${value}`
+    });
+    this.handleChange({ isPlatform: parseInt(value, 10), _page: C_PAGE_NUMBER.PAGE });
+  };
+
+
   handleChange = value => {
     const { searchValue } = this.state;
     const newValue = Object.assign({}, searchValue, value);
@@ -103,10 +119,6 @@ export default class ArticleList extends React.Component {
         searchValue: newValue
       }, () => this.fetchData()
     );
-  };
-
-  handleChangeTag = value => {
-    this.handleChange({ isPlatform: parseInt(value, 10), _page: C_PAGE_NUMBER.PAGE });
   };
 
   handleRemove = id => articleApi.removeArticle(id).then(resp => {
@@ -433,16 +445,18 @@ export default class ArticleList extends React.Component {
           {this.addArticle()}
           <SearchHeader
             isPlatform={this.state.searchValue.isPlatform}
-            handleSearchChange={this.handleChange}
+            handleSearchChange={this.handleChangeSearch}
             selectData={objToArr(ARTICLE) || []} />
         </div>
-        <Tabs onChange={this.handleChangeTag} data={[{ key: 1, value: '平台发布' }, { key: 0, name: '用户发布' }]}>
+        <Tabs activeKey={getUrlParams('isPlatform')}
+              onChange={this.handleChangeTag}
+              data={[{ key: 1, value: '平台发布' }, { key: 0, value: '用户发布' }]}>
           <Table
             _page={this.state.searchValue._page}
             list={this.state.data.list}
             total={this.state.data.total}
             columns={columns}
-            onChange={this.handleChange}
+            onChange={this.handleChangeTable}
             isFetching={this.state.isFetching} />
         </Tabs>
         <EditCarouselModal
