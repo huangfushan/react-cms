@@ -40,9 +40,9 @@ module.exports = {
       require.resolve('./polyfills'),
       paths.appIndexJs
     ],
-    "vendor1": ['react', 'react-dom', 'react-router-dom', 'react-redux', 'redux'], //提取react模块作为公共的js文件
-    "vendor2": ["apisauce"],
-    // "vendor3": ["crypto-js"],
+    'vendor1': ['react', 'react-dom', 'react-router-dom', 'apisauce', 'md5', 'react-redux', 'redux', 'redux-thunk', 'redux-actions'], //提取react模块作为公共的js文件
+    'vendor2': ['quill', 'react-cropper'],
+    'vendor3': ['ali-oss'],
   },
   output: {
     path: paths.appBuild,
