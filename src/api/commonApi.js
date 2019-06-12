@@ -35,9 +35,9 @@ export default {
   fetchCaptcha: (phone, scene) => http.get(`/${phone}/captcha`, { scene }), //获取验证吗，scene代表场景
   pushFile: params => http.post(`/common/file`, postData(params)), //上传文件
   pushBase64: params => http.post(`/common/file/base64`, params), //上传base64格式
-  downloadFile: uri => { //下载文件
+  downloadFile: (uri, params) => { //下载文件
     return new Promise(resolve => {
-      http.get(uri).then(resp => {
+      http.get(uri, params).then(resp => {
         resolve(resp);
         if (resp.status !== C_RESP.OK) {
           error(resp);
@@ -48,7 +48,6 @@ export default {
         const filename = resp.data.url.split('/');
         aTag.setAttribute('href', resp.data.url);
         aTag.setAttribute('download', resp.data.filename || filename[filename.length - 1]);
-        aTag.click();
         document.body.appendChild(aTag);
         aTag.click();
         setTimeout(function () {
