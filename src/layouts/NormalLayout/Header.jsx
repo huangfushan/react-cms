@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { C_PROJECT_NAME } from '../../common/constants';
+import { C_PROJECT_NAME, C_STORAGE } from '../../common/constants';
 import { Tag } from 'antd';
 import { AsyncActions } from '../../redux/actions';
 import { common } from '../../images/images';
@@ -46,7 +46,7 @@ export default class Header extends React.Component {
           <span>{C_PROJECT_NAME}</span>
         </div>
         <div>
-          <span style={{ marginRight: 20 }}>{this.props.isAuthenticated ? (this.props.username || 'Admin') : '未登录'}</span>
+          <span style={{ marginRight: 20 }}>{this.props.isAuthenticated ? (this.props.username || C_STORAGE.USERNAME) : '未登录'}</span>
           <Tag color='red' onClick={this.handleLogout}>{this.props.isAuthenticated ? '退出' : '登录'}</Tag>
         </div>
       </header>

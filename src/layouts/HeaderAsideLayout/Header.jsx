@@ -6,6 +6,7 @@ import { Tag, Menu } from 'antd';
 import { AsyncActions } from '../../redux/actions';
 import { common } from '../../images/images';
 import { headerMenus } from '../../menuConfig';
+import { C_STORAGE } from '../../common/constants';
 
 const { Item } = Menu;
 
@@ -79,7 +80,7 @@ export default class Header extends React.Component {
 
         <div className="nav-right">
           <span
-            style={{ marginRight: 20 }}>{this.props.isAuthenticated ? (this.props.username || 'Admin') : '未登录'}</span>
+            style={{ marginRight: 20 }}>{this.props.isAuthenticated ? (this.props.username || C_STORAGE.USERNAME) : '未登录'}</span>
           <Tag color='red' onClick={this.handleLogout}>{this.props.isAuthenticated ? '退出' : '登录'}</Tag>
         </div>
       </header>

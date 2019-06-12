@@ -62,7 +62,6 @@ export default class Login extends React.Component {
         setStorage(C_STORAGE.USERNAME, values.username);
         setStorage(C_STORAGE.PASSWORD, values.password);
       } else {
-        removeStorage(C_STORAGE.USERNAME, values.username);
         removeStorage(C_STORAGE.PASSWORD, values.password);
       }
 
