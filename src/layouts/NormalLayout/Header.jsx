@@ -6,6 +6,7 @@ import { C_PROJECT_NAME, C_STORAGE } from '../../common/constants';
 import { Tag } from 'antd';
 import { AsyncActions } from '../../redux/actions';
 import { common } from '../../images/images';
+import { getStorage } from '../../utils';
 
 @connect(
   state => ({
@@ -46,7 +47,7 @@ export default class Header extends React.Component {
           <span>{C_PROJECT_NAME}</span>
         </div>
         <div>
-          <span style={{ marginRight: 20 }}>{this.props.isAuthenticated ? (this.props.username || C_STORAGE.USERNAME) : '未登录'}</span>
+          <span style={{ marginRight: 20 }}>{this.props.isAuthenticated ? (this.props.username || getStorage(C_STORAGE.USERNAME)) : '未登录'}</span>
           <Tag color='red' onClick={this.handleLogout}>{this.props.isAuthenticated ? '退出' : '登录'}</Tag>
         </div>
       </header>
