@@ -87,7 +87,7 @@
   },
   "proxy": {
     "/dev": {
-      "target": "https://tst.dayukeji.xin/p10000/api",
+      "target": "https://tst.dayukeji.xin",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {
@@ -95,7 +95,7 @@
       }
     },
     "/test": {
-      "target": "https://test.dayukeji.xin/p10000/api",
+      "target": "https://test.dayukeji.xin",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {
@@ -103,19 +103,19 @@
       }
     },
     "/prod": {
-      "target": "https://api.dayukeji.xin/p10000/api",
+      "target": "https://api.dayukeji.xin",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {
         "^/prod": ""
       }
     },
-    "/postman": {
+    "/postman/p10000/api": {
       "target": "https://d19e4300-a3d5-4259-adb1-7b6f25a2c82e.mock.pstmn.io",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {
-        "^/postman": ""
+        "^/postman/p10000/api": ""
       }
     }
   },

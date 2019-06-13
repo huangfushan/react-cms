@@ -4,6 +4,7 @@ const PROJECT_PORT = 'cms'; //端
 const PROJECT_HOST_PROD = 'https://api.dayukeji.xin'; //正式服
 const PROJECT_HOST_TEST = 'https://test.dayukeji.xin'; //正式服
 const PROJECT_HOST_DEV = 'https://tst.dayukeji.xin'; //测试服
+const IS_CUSTOMER_DOMAIN_NAME = false; //是否是客户提供的域名，如果是去，api请求路径将没有code
 const DEBUG = {
   postman: '/postman', //postman
   dev: '/dev', //开发服
@@ -14,21 +15,22 @@ const DEBUG = {
 module.exports = {
   PROJECT_NAME,
   PROJECT_CODE,
-  X_CLIENT_TOKEN: `${PROJECT_CODE}:${PROJECT_PORT}`,
   PROJECT_PORT,
-  PROJECT_HOST_PROD,
-  PROJECT_HOST_TEST,
-  PROJECT_HOST_DEV,
+  X_CLIENT_TOKEN: `${PROJECT_CODE}:${PROJECT_PORT}`,
+  IS_CUSTOMER_DOMAIN_NAME,
+  // PROJECT_HOST_PROD,
+  // PROJECT_HOST_TEST,
+  // PROJECT_HOST_DEV,
 
   //拿到当前环境的请求路径
   env: () => {
     switch (process.env.PRODUCTION_ENV) {
       case 'dev': //开发服
-        return `${PROJECT_HOST_DEV}/${PROJECT_CODE}/api`;
+        return PROJECT_HOST_DEV;
       case 'test': //测试服
-        return `${PROJECT_HOST_TEST}/${PROJECT_CODE}/api`;
+        return PROJECT_HOST_TEST;
       case 'production': //正式服,因为oss文件存储路径其他开发人员要求是production全拼，所以这里没有简写，对应在package.json中的打包指令
-        return `${PROJECT_HOST_PROD}/${PROJECT_CODE}/api`; //商家提供域名的话，就没有code
+        return PROJECT_HOST_PROD;
       default: //其他，如本地start
         return ``;
     }
@@ -40,5 +42,12 @@ module.exports = {
       return '';
     }
     return DEBUG.postman;
-  }
+  },
+  //是否是客户提供的域名，只有在生产环境下才有用
+  isCustomerDomainName: () => {
+    if (process.env.NODE_ENV === 'production') {
+      return IS_CUSTOMER_DOMAIN_NAME;
+    }
+    return false;
+  },
 };

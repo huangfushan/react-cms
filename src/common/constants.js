@@ -19,9 +19,10 @@ export const C_AUTHOR = {
  * @type {{HOST: string, PATH: string}}
  */
 export const C_API = {
-  HOST: path.env(), //当前运行环境对应的host
+  // HOST: path.env(), //当前运行环境对应的host,因为线上请求api是会自动添加域名，所以只要线上域名与接口请求域名一样，就可以不用配置这个属性
+  HOST_PATH: `${path.debug()}/${path.isCustomerDomainName() ? '' : path.PROJECT_CODE}/api`, // 基本请求路径/debug/code/api，线上debug是空，
   TIMEOUT: 15000, //api请求超时时间
-  DEBUG: path.debug(), // 本地环境调试需要的接口映射
+  // DEBUG: path.debug(), // 本地环境调试需要的接口映射
 };
 
 /**

@@ -87,7 +87,7 @@ class HTTP {
 
 
 const http = new HTTP(
-  `${C_API.HOST}${C_API.DEBUG}`,
+  C_API.HOST_PATH,
   C_API.TIMEOUT,
   {
     headers: {
