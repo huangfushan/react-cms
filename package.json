@@ -110,7 +110,7 @@
         "^/prod": ""
       }
     },
-    "/postman/p10000/api": {
+    "/postman": {
       "target": "https://d19e4300-a3d5-4259-adb1-7b6f25a2c82e.mock.pstmn.io",
       "secure": false,
       "changeOrigin": true,

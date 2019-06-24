@@ -1,6 +1,11 @@
 ## web端通用框架
 React后台项目：react + react-router4 + apisauce + less + redux + prop-types + babel + webpack + antd
 
+### 兼容
+* IE9+, 
+* 最好 Firefox, Chrome, Safari, Opera 这些浏览器的 last 2 versions,
+* 不建议使用IE，可能会有一些微妙的bug，如样式兼容等。如果要使用IE，需要先关闭“在兼容性视图中显示Intranet站点”。
+
 ### 技术栈
 1. react 16.4.0
 2. react-router-dom 4.2.2 (react-router 4)
@@ -26,13 +31,9 @@ React后台项目：react + react-router4 + apisauce + less + redux + prop-types
 
 * 接口映射在 `package.json中proxy`配置
 * src/common/config.js: 修改为当前项目的项目名，项目编号等
-  * `env`：项目打包时，会根据`package.json中scripts`配置，确定线上的版本调用的访问路径。
   * `debug`：在本地运行时，默认会启动本地调试，可以切换 `DEBUG` 字段来切换访问映射。具体的相关映射在`package.json中proxy`配置
   
 * .gitlab-ci.yml：修改项目配置，如项目名，编号的等，与`src/common/config.js`一致
-  * dev-***: 开发服tag
-  * test-***：测试服tag
-  * v-***：正式服tag
 
 3、***本地运行***
 ```bash
@@ -70,7 +71,7 @@ React后台项目：react + react-router4 + apisauce + less + redux + prop-types
 ```
 ###手动打包部署,生成build文件夹
 
-1、***因为开发服/测试服/正式服的请求路径不一致，而且都是在生成环境下。所以打包的时候用dev/test/prod来区分开发服/测试服/正式服***
+1、***如果做了服务器的区分。可以打包的时候用dev/test/prod来区分开发服/测试服/正式服***
 
 * ***部署开发服***
     ```bash
@@ -85,12 +86,13 @@ React后台项目：react + react-router4 + apisauce + less + redux + prop-types
     ```bash
       npm run prod
     ```
+2、***如果没有服务区区分，直接执行其中任意一条指令，手动部署即可***
 
 ###自动化脚本部署
 
-2、***利用tag构建脚本编译部署，在`package.json中scripts`进行配置，运维写好运行脚本，打包时，提交tag会自动打包编译到制定环境`***
+3、***利用tag构建脚本编译部署，在`package.json中scripts`进行配置，运维写好运行脚本，打包时，提交tag会自动打包编译到制定环境`***
 ```
-   * 开发服：dev-***
-   * 测试服：test-***
-   * 正式服：v-***
+   * 开发服：git tag dev-***
+   * 测试服：git tag test-***
+   * 正式服：git tag v-***
 ```
