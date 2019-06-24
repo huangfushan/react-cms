@@ -42,12 +42,12 @@ export default class TabCheckBox extends React.Component {
         {
           data && data.map((item, index) => {
             //被选中
-            if (value && value.find(n => n === item.key)) {
+            if (value.find(n => n === item.key)) {
               return <span key={index} className='tab-item tab-item-active'
                            onClick={() => this.selectTab(item)}>{item.value}</span>;
             }
             //默认选中
-            if (!value && defaultValue && defaultValue.find(n => n === item.key)) {
+            if (defaultValue && defaultValue.find(n => n === item.key)) {
               return <span key={index} className='tab-item tab-item-active'
                            onClick={() => this.selectTab(item)}>{item.value}</span>;
             }

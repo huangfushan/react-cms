@@ -40,12 +40,12 @@ export default class TabSingleRadio extends React.Component {
         {
           data && data.map((item, index) => {
             //被选中
-            if (value && value === item.key) {
+            if (value === item.key) {
               return <span key={index} className='tab-item tab-item-active'
                            onClick={() => this.selectTab(item)}>{item.value}</span>;
             }
             //默认选中
-            if (!value && defaultValue && defaultValue === item.key) {
+            if (defaultValue && defaultValue === item.key) {
               return <span key={index} className='tab-item tab-item-active'
                            onClick={() => this.selectTab(item)}>{item.value}</span>;
             }

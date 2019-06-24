@@ -75,12 +75,12 @@ export default class Table extends React.Component {
   // };
 
   render() {
-    const { isFetching, list, total } = this.props;
+    const { isFetching, list, total, rowSelection, renderExpanded } = this.props;
     let { _page } = this.state;
 
     const dataSource = [];
     [...list].forEach((item, index) => {
-      dataSource.push({ ...item, key: ((_page || 1) - 1) * C_PAGE_NUMBER.COUNT + index + 1 });
+      dataSource.push({ ...item, key: ((_page || 1) - 1) * C_PAGE_NUMBER.COUNT + index % C_PAGE_NUMBER.COUNT + 1 });
     });
     const pagination = {
       // hideOnSinglePage: total ? false : true,
@@ -93,6 +93,7 @@ export default class Table extends React.Component {
 
     return (
       <AliTable
+        rowSelection={rowSelection}
         defaultExpandAllRows={true}
         rowKey={record => record.id}
         dataSource={dataSource}
@@ -100,7 +101,7 @@ export default class Table extends React.Component {
         loading={isFetching}
         pagination={total ? pagination : false}
         onChange={this.handleChange}
-        // expandedRowRender={this.renderExpanded}
+        expandedRowRender={renderExpanded}
       />
     );
   }

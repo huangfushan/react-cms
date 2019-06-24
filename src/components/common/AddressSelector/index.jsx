@@ -69,7 +69,7 @@ export default class AddressSelector extends React.Component {
         break;
       case 'city':
         if (onChange) {
-          onChange({ ...value, city: code || undefined, county: undefined, });
+          onChange({ ...value, city: code || undefined, county: undefined });
         }
         if (!code) return;
         this.props.fetchCountyList(code || undefined);

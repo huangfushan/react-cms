@@ -4,10 +4,9 @@
  * @Date: 2019-01-09
  * @Project: cms
  */
-
 import React from 'react';
 import { Route, Switch, HashRouter as Router } from 'react-router-dom';
-import { LocaleProvider } from 'antd';
+import { LocaleProvider, message } from 'antd';
 import { connect } from 'react-redux';
 import LoadingComponent from './components/common/LoadingComponent';
 import Loadable from 'react-loadable';
@@ -20,6 +19,10 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'normalize.css';
 import './themes/index.less';
+
+message.config({
+  maxCount: 1,
+});
 
 moment.locale('zh-cn');
 

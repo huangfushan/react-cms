@@ -7,11 +7,11 @@
  "react-dom": "^16.4.0",
  */
 
-import React  from 'react';
+import React from 'react';
 import { findDOMNode } from 'react-dom';
 import { Card } from 'antd';
-import { DragSource, DropTarget, } from 'react-dnd';
-import ItemTypes from './ItemTypes'
+import { DragSource, DropTarget } from 'react-dnd';
+import ItemTypes from './ItemTypes';
 
 const specSource = {
   /**
