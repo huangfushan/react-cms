@@ -1,6 +1,3 @@
-## web端通用框架
-React后台项目：react + react-router4 + apisauce + less + redux + prop-types + babel + webpack + antd
-
 ### 兼容
 * IE9+, 
 * 最好 Firefox, Chrome, Safari, Opera 这些浏览器的 last 2 versions,
@@ -86,7 +83,7 @@ React后台项目：react + react-router4 + apisauce + less + redux + prop-types
     ```bash
       npm run prod
     ```
-2、***如果没有服务区区分，直接执行其中任意一条指令，手动部署即可***
+2、***如果没有服务区区分，直接执行 npm run prod，手动部署即可***
 
 ###自动化脚本部署
 
