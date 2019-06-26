@@ -38,4 +38,12 @@ export const timeFmtNext = (time, n, fmt) => {
   return timeFmt(date, fmt);
 };
 
+//时长
+export const durationFmt = (s) => {
+  if (!(s > 0)) return 0;
+  const hour = parseInt((s / 1000) / 3600, 10) ? `${parseInt((s / 1000) / 3600, 10)}小时` : '';
+  const minute = parseInt(((s / 1000) % 3600) / 60, 10) ? `${parseInt(((s / 1000) % 3600) / 60, 10)}分钟` : '';
+  const second = Math.ceil((s / 1000) % 60) ? `${Math.ceil((s / 1000) % 60)}秒` : '';
+  return hour + minute + second;
+};
 
