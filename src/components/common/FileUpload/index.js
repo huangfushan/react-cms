@@ -103,8 +103,8 @@ export default class FileUpload extends React.Component {
     }
     input.click();
 
-    //因为ege浏览器无法调用onchange方法有兼容问题，所以直接在input组件声明onchange方法
-    //实际操作下发现，IE还是存在问题，edge可以
+    //因为IE,edge浏览器无法调用onchange方法有兼容问题，所以直接在input组件声明onchange方法
+    //即使这样，仍然不一定能完全兼容IE
     // input.onchange = () => {
     //   let files = input.files;
     //   console.log('onchange', files);

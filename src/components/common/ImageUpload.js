@@ -72,38 +72,42 @@ export default class ImageUpload extends React.Component {
       const input = document.getElementById('image-input');
       input.click();
 
-      //如果是IE浏览器，onchange有兼容问题，监听不到
-      if (isIE()) {
-        const file = input.files[0];
-        input.value = '';
-        if (!checkFile(file, this.props.accept, this.props.size)) return;
-        if (!this.props.aspectRatio && this.props.aspectRatio !== 0) { //如果不裁剪，直接上传
-          this.pushAliOss(file, 'image');
-          return;
-        }
-        //获取base64
-        fileToBase64(file, base64 => {
-          this.setState({ currentValue: base64 });
-        });
-        this.handleOpenModal();
-        return;
-      }
-
-      input.onchange = () => {
-        const file = input.files[0];
-        input.value = '';
-        if (!checkFile(file, this.props.accept, this.props.size)) return;
-        if (!this.props.aspectRatio && this.props.aspectRatio !== 0) { //如果不裁剪，直接上传
-          this.pushAliOss(file, 'image');
-          return;
-        }
-        //获取base64
-        fileToBase64(file, base64 => {
-          this.setState({ currentValue: base64 });
-        });
-        this.handleOpenModal();
-      };
+      //因为IE,edge浏览器无法调用onchange方法有兼容问题，所以直接在input组件声明onchange方法
+      //即使这样，仍然不一定能完全兼容IE
+      // input.onchange = () => {
+      //   const file = input.files[0];
+      //   input.value = '';
+      //   if (!checkFile(file, this.props.accept, this.props.size)) return;
+      //   if (!this.props.aspectRatio && this.props.aspectRatio !== 0) { //如果不裁剪，直接上传
+      //     this.pushAliOss(file, 'image');
+      //     return;
+      //   }
+      //   //获取base64
+      //   fileToBase64(file, base64 => {
+      //     this.setState({ currentValue: base64 });
+      //   });
+      //   this.handleOpenModal();
+      // };
     }
+  };
+
+  handleChangeInput = e => {
+    let files = e.target.files;
+    this.inputOnChange(files[0]);
+    e.target.value = '';
+  };
+
+  inputOnChange = file => {
+    if (!checkFile(file, this.props.accept, this.props.size)) return;
+    if (!this.props.aspectRatio && this.props.aspectRatio !== 0) { //如果不裁剪，直接上传
+      this.pushAliOss(file, 'image');
+      return;
+    }
+    //获取base64
+    fileToBase64(file, base64 => {
+      this.setState({ currentValue: base64 });
+    });
+    this.handleOpenModal();
   };
 
   handleOpenModal = () => {
@@ -203,7 +207,9 @@ export default class ImageUpload extends React.Component {
         <input id="image-input"
                type="file"
                accept={accept || C_FILE.IMAGE_ACCEPT}
-               style={{ display: 'none' }} />
+               style={{ display: 'none' }}
+               onChange={this.handleChangeInput}
+        />
         <Modal
           mode={false}
           title="裁剪"

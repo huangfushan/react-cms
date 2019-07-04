@@ -10,7 +10,7 @@ import React from 'react';
 import Quill from 'quill';
 import PropTypes from 'prop-types';
 import 'quill/dist/quill.snow.css';
-import { checkFile, error, isIE, PushAliOss } from '../../../utils';
+import { checkFile, error, PushAliOss } from '../../../utils';
 import { C_FILE, C_RESP } from '../../../common/constants';
 import './index.less';
 
@@ -109,31 +109,33 @@ export default class RichText extends React.Component {
   };
 
   imageHandler = (image) => {
-    const range = this.editor.getSelection();
+
     this.editor.addContainer('dt-img');
 
     if (image) {
       const input = document.getElementById('dt-react-quill-input');
       input.click();
 
-      //如果是IE浏览器，onchange有兼容问题，监听不到
-      if (isIE()) {
-        const file = input.files[0];
-        if (checkFile(file, this.props.accept, this.props.size)) {
-          this.pushAliOss(file, 'image', range.index);
-        }
-        input.value = '';
-        return;
-      }
-
-      input.onchange = () => {
-        const file = input.files[0];
-        if (checkFile(file, this.props.accept, this.props.size)) {
-          this.pushAliOss(file, 'image', range.index);
-        }
-        input.value = '';
-      };
+      //因为IE,edge浏览器无法调用onchange方法,有兼容问题，所以直接在input组件声明onchange方法
+      //即使这样，仍然不一定能完全兼容IE
+      // input.onchange = () => {
+      //   const file = input.files[0];
+      //   if (checkFile(file, this.props.accept, this.props.size)) {
+      //     this.pushAliOss(file, 'image', range.index);
+      //   }
+      //   input.value = '';
+      // };
     }
+  };
+
+  handleChangeInput = e => {
+    let files = e.target.files;
+    if (!files.length) return;
+    const range = this.editor.getSelection();
+    if (checkFile(files[0], this.props.accept, this.props.size)) {
+      this.pushAliOss(files[0], 'image', range.index);
+    }
+    e.target.value = '';
   };
 
   pushAliOss = (file, type, index) => {
@@ -161,7 +163,8 @@ export default class RichText extends React.Component {
     return (
       <React.Fragment>
         <div ref="myQuillEditor" />
-        <input type='file' accept={C_FILE.IMAGE_ACCEPT} id='dt-react-quill-input' style={{ display: 'none' }} />
+        <input type='file' accept={C_FILE.IMAGE_ACCEPT} id='dt-react-quill-input' style={{ display: 'none' }}
+               onChange={this.handleChangeInput} />
       </React.Fragment>
     );
   }
