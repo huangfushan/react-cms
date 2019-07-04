@@ -80,7 +80,7 @@ export default class FileUpload extends React.Component {
 
   //选择文件
   handleChooseFile = () => {
-    const { type, accept, maxLength, size } = this.props;
+    const { type, accept, maxLength } = this.props;
     const fileList = this.state.fileList || [];
     if (maxLength && fileList.length >= maxLength) {
       message.error(`最多只能添加${maxLength}个${TYPE[type]}`);
@@ -102,44 +102,60 @@ export default class FileUpload extends React.Component {
         break;
     }
     input.click();
-    input.onchange = () => {
-      // const fileList = this.state.fileList || [];
-      let files = input.files;
 
-      //如果限制了文件个数，需要检验
-      if (maxLength && fileList.length + files.length > maxLength) {
-        message.error(`最多只能再添加${maxLength - fileList.length}个${TYPE[type] || '文件'}`);
-        return;
+    //因为ege浏览器无法调用onchange方法有兼容问题，所以直接在input组件声明onchange方法
+    //实际操作下发现，IE还是存在问题，edge可以
+    // input.onchange = () => {
+    //   let files = input.files;
+    //   console.log('onchange', files);
+    //   // this.inputOnChange(files, fileList);
+    //   // input.value = '';
+    // };
+  };
+
+  handleChangeInput = e => {
+    let files = e.target.files;
+    this.inputOnChange(files);
+    e.target.value = '';
+  };
+
+  inputOnChange = (files) => {
+    if (!files.length) return;
+    const fileList = this.state.fileList || [];
+    const { type, accept, maxLength, size } = this.props;
+
+    //如果限制了文件个数，需要检验
+    if (maxLength && fileList.length + files.length > maxLength) {
+      message.error(`最多只能再添加${maxLength - fileList.length}个${TYPE[type] || '文件'}`);
+      return;
+    }
+
+    //如果是图片需要先判断图片类型与文件大小
+    if (type === 'image' && Object.values(files).some(n => !!checkFile(n, accept, size) !== true)) return;
+
+    //因为files是个对象，所以需要手动去掉length属性
+    delete files.length; //删除file对象的length属性
+    //实际操作发现，IE浏览器不支持Object.values, 但是支持Object.keys，edge都可以
+    const newFiles = Object.values(files).map((item, index) => {
+      const n = {
+        id: -new Date().getTime() - index,
+        name: item.name,
+        progress: 0,
+        file: item,
+      };
+      if (type === 'audio' || type === 'video') {
+        const url = URL.createObjectURL(item);
+        const audioElement = new Audio(url);
+        audioElement.addEventListener('loadedmetadata', () => {
+          n.duration = Math.ceil(audioElement.duration * 1000); //音视频时长精确到毫秒，因为这里拿到到是秒，所以需要乘以1000
+        });
       }
+      return n;
+    });
 
-      //如果是图片需要先判断图片类型与文件大小
-      if (type === 'image' && Object.values(files).some(n => !!checkFile(n, accept, size) !== true)) return;
-
-      //因为files是个对象，所以需要手动去掉length属性
-      delete files.length; //删除file对象的length属性
-
-      const newFiles = Object.values(files).map((item, index) => {
-        const n = {
-          id: -new Date().getTime() - index,
-          name: item.name,
-          progress: 0,
-          file: item,
-        };
-        if (type === 'audio' || type === 'video') {
-          const url = URL.createObjectURL(item);
-          const audioElement = new Audio(url);
-          audioElement.addEventListener('loadedmetadata', () => {
-            n.duration = Math.ceil(audioElement.duration * 1000); //音视频时长精确到毫秒，因为这里拿到到是秒，所以需要乘以1000
-          });
-        }
-        return n;
-      });
-
-      fileList.push(...newFiles);
-      this.onChange(fileList);
-      this.handlePushFile(newFiles, type);
-      input.value = '';
-    };
+    fileList.push(...newFiles);
+    this.onChange(fileList);
+    this.handlePushFile(newFiles, type);
   };
 
   //批量上传
@@ -428,7 +444,8 @@ export default class FileUpload extends React.Component {
         </Button>
         {this.getAcceptHint()}
         {this.getFileRender()}
-        <input id="file-upload" type="file" multiple={multiple} style={{ display: 'none' }} />
+        <input id="file-upload" type="file" multiple={multiple} style={{ display: 'none' }}
+               onChange={this.handleChangeInput} />
       </React.Fragment>
     );
   }
