@@ -17,7 +17,17 @@ import { connect } from 'react-redux';
 import { Icon } from 'antd';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
-import { base64ToFile, checkFile, fileToBase64, isBase64, error, PushAliOss, blobToFile, base64ToBlob, isIE } from '../../utils';
+import {
+  base64ToFile,
+  checkFile,
+  fileToBase64,
+  isBase64,
+  error,
+  PushAliOss,
+  blobToFile,
+  base64ToBlob,
+  isIE
+} from '../../utils';
 import { C_FILE, C_RESP } from '../../common/constants';
 import Modal from '../antd/Modal';
 import { Actions } from '../../redux/actions';
@@ -61,6 +71,24 @@ export default class ImageUpload extends React.Component {
     if (image) {
       const input = document.getElementById('image-input');
       input.click();
+
+      //如果是IE浏览器，onchange有兼容问题，监听不到
+      if (isIE()) {
+        const file = input.files[0];
+        input.value = '';
+        if (!checkFile(file, this.props.accept, this.props.size)) return;
+        if (!this.props.aspectRatio && this.props.aspectRatio !== 0) { //如果不裁剪，直接上传
+          this.pushAliOss(file, 'image');
+          return;
+        }
+        //获取base64
+        fileToBase64(file, base64 => {
+          this.setState({ currentValue: base64 });
+        });
+        this.handleOpenModal();
+        return;
+      }
+
       input.onchange = () => {
         const file = input.files[0];
         input.value = '';
