@@ -17,11 +17,10 @@ import { connect } from 'react-redux';
 import { Icon } from 'antd';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
-import { base64ToFile, checkFile, fileToBase64, isBase64 } from '../../utils/file';
+import { base64ToFile, checkFile, fileToBase64, isBase64, error, PushAliOss, blobToFile, base64ToBlob, isIE } from '../../utils';
 import { C_FILE, C_RESP } from '../../common/constants';
 import Modal from '../antd/Modal';
 import { Actions } from '../../redux/actions';
-import { error, PushAliOss } from '../../utils';
 
 //https://www.npmjs.com/package/react-cropper
 //https://github.com/fengyuanchen/cropperjs#aspectratio
@@ -113,7 +112,15 @@ export default class ImageUpload extends React.Component {
     if (!canvas || !canvas.toDataURL()) return;
     const base64 = isBase64(canvas.toDataURL());
     if (!base64) return;
-    const file = base64ToFile(base64[0], `image.${base64[1]}`); //base64转文件
+    // const file = base64ToFile(base64[0], `image.${base64[1]}`); //base64转文件
+    let file;
+    // 如果是IE浏览器，单独处理
+    // 因为IE下无File对象，需要先吧base64转为blob，再转为file
+    if (isIE()) {
+      file = blobToFile(base64ToBlob(base64[0]), `image.${base64[1]}`);
+    } else {
+      file = base64ToFile(base64[0], `image.${base64[1]}`); //base64转文件
+    }
     this.pushAliOss(file, 'image', base64[0]);
   };
 

@@ -44,6 +44,7 @@ export default {
           return;
         }
         if (!resp.data.url) return;
+        //需要兼容FireFox浏览器，所以需要append到dom结构里面
         const aTag = document.createElement('a');
         const filename = resp.data.url.split('/');
         aTag.setAttribute('href', resp.data.url);

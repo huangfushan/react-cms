@@ -80,6 +80,27 @@ export const base64ToFile = (base64, filename) => { //将base64转换为文件
   return new File([u8arr], filename, { type: mime });
 };
 
+//将base64转换为blob
+export const base64ToBlob = (base64) => {
+  let arr = base64.split(','),
+    mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]),
+    n = bstr.length,
+    u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], { type: mime });
+
+};
+
+//将blob转换成file
+export const blobToFile = (theBlob, fileName) => {
+  theBlob.lastModifiedDate = new Date();
+  theBlob.name = fileName;
+  return theBlob;
+};
+
 //判断是否是base64， 是就返回截取后的base64信息数组
 export const isBase64 = (value) => {
   if (!value) {
