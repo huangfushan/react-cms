@@ -10,7 +10,7 @@ import React from 'react';
 import Quill from 'quill';
 import PropTypes from 'prop-types';
 import 'quill/dist/quill.snow.css';
-import { checkFile, error, PushAliOss } from '../../../utils';
+import { checkFile, error, isIE, PushAliOss } from '../../../utils';
 import { C_FILE, C_RESP } from '../../../common/constants';
 import './index.less';
 
@@ -115,6 +115,17 @@ export default class RichText extends React.Component {
     if (image) {
       const input = document.getElementById('dt-react-quill-input');
       input.click();
+
+      //如果是IE浏览器，onchange有兼容问题，监听不到
+      if (isIE()) {
+        const file = input.files[0];
+        if (checkFile(file, this.props.accept, this.props.size)) {
+          this.pushAliOss(file, 'image', range.index);
+        }
+        input.value = '';
+        return;
+      }
+
       input.onchange = () => {
         const file = input.files[0];
         if (checkFile(file, this.props.accept, this.props.size)) {
