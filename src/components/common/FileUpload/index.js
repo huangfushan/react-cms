@@ -86,7 +86,8 @@ export default class FileUpload extends React.Component {
       message.error(`最多只能添加${maxLength}个${TYPE[type]}`);
       return;
     }
-    const input = document.getElementById('file-upload');
+    // const input = document.getElementById('file-upload');
+    const input = this.input;
     switch (type) {
       case 'image':
         input.setAttribute('accept', accept || C_FILE.IMAGE_ACCEPT);
@@ -444,7 +445,7 @@ export default class FileUpload extends React.Component {
         </Button>
         {this.getAcceptHint()}
         {this.getFileRender()}
-        <input id="file-upload" type="file" multiple={multiple} style={{ display: 'none' }}
+        <input ref={input => this.input = input} type="file" multiple={multiple} style={{ display: 'none' }}
                onChange={this.handleChangeInput} />
       </React.Fragment>
     );
