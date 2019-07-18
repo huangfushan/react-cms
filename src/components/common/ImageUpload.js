@@ -69,7 +69,8 @@ export default class ImageUpload extends React.Component {
   //选中图片
   selectImage = (image) => {
     if (image) {
-      const input = document.getElementById('image-input');
+      // const input = document.getElementById('image-input');
+      const input = this.input;
       input.click();
 
       //因为IE,edge浏览器无法调用onchange方法有兼容问题，所以直接在input组件声明onchange方法
@@ -204,7 +205,7 @@ export default class ImageUpload extends React.Component {
             </div>
           )
         }
-        <input id="image-input"
+        <input ref={input => this.input = input}
                type="file"
                accept={accept || C_FILE.IMAGE_ACCEPT}
                style={{ display: 'none' }}
