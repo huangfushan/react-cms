@@ -113,7 +113,8 @@ export default class RichText extends React.Component {
     this.editor.addContainer('dt-img');
 
     if (image) {
-      const input = document.getElementById('dt-react-quill-input');
+      // const input = document.getElementById('dt-react-quill-input');
+      const input = this.input;
       input.click();
 
       //因为IE,edge浏览器无法调用onchange方法,有兼容问题，所以直接在input组件声明onchange方法
@@ -163,7 +164,7 @@ export default class RichText extends React.Component {
     return (
       <React.Fragment>
         <div ref="myQuillEditor" />
-        <input type='file' accept={C_FILE.IMAGE_ACCEPT} id='dt-react-quill-input' style={{ display: 'none' }}
+        <input type='file' accept={C_FILE.IMAGE_ACCEPT} ref={input => this.input = input} style={{ display: 'none' }}
                onChange={this.handleChangeInput} />
       </React.Fragment>
     );
